@@ -4,12 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ASTOM Portal Login</title>
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Font Awesome Icons CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* Custom style untuk gambar latar belakang pada panel kanan */
     .hero-bg {
       background-image: url('https://images.unsplash.com/photo-1556742049-0a67f572c9ee?auto=format&fit=crop&q=80&w=1000');
       background-size: cover;
@@ -49,7 +46,7 @@
             Klik disini untuk memulai (User Manual)
           </div>
 
-          <!-- Tabs (Public vs Personal) -->
+          <!-- Tabs -->
           <div class="flex border-b border-gray-200 mb-6 text-xs font-semibold">
             <button class="pb-2 px-1 text-[#00a8e8] border-b-2 border-[#00a8e8] mr-6">Public</button>
             <button class="pb-2 px-1 text-gray-400 hover:text-gray-600">Personal</button>
@@ -64,11 +61,11 @@
             <h1 class="text-xl font-bold text-[#002d62] mt-4">Portal Login</h1>
           </div>
 
-          <!-- Pesan Alert (Muncul jika login gagal/berhasil) -->
+          <!-- Alert Pesan Sukses / Gagal -->
           <div id="alertMessage" class="hidden mb-4 p-3 rounded text-xs"></div>
 
-          <!-- Form Input -->
-          <form id="loginForm" class="space-y-3">
+          <!-- Form Area -->
+          <div class="space-y-3">
             <!-- Username Input -->
             <div class="relative">
               <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400 text-xs">
@@ -78,7 +75,6 @@
                 type="text" 
                 id="usernameInput"
                 placeholder="Username" 
-                required
                 class="w-full pl-9 pr-3 py-2 bg-[#edf4ff] border border-[#cce0ff] rounded-md text-xs text-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500"
               >
             </div>
@@ -92,19 +88,19 @@
                 type="password" 
                 id="passwordInput"
                 placeholder="Password" 
-                required
                 class="w-full pl-9 pr-3 py-2 bg-[#edf4ff] border border-[#cce0ff] rounded-md text-xs text-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500"
               >
             </div>
 
-            <!-- Log In Button -->
+            <!-- Tombol Log In -->
             <button 
-              type="submit" 
-              class="w-full bg-[#00a8e8] hover:bg-[#0092cd] text-white font-medium py-2 rounded-md text-xs transition shadow-sm mt-1"
+              type="button" 
+              onclick="prosesLogin()"
+              class="w-full bg-[#00a8e8] hover:bg-[#0092cd] text-white font-medium py-2 rounded-md text-xs transition shadow-sm mt-1 cursor-pointer"
             >
               Log in
             </button>
-          </form>
+          </div>
 
           <!-- Divider -->
           <div class="relative my-6 text-center">
@@ -137,41 +133,41 @@
     </div>
   </main>
 
-  <!-- Script Logika Login -->
+  <!-- Script Proses Login -->
   <script>
-    // 1. Data akun valid
-    const userValid = "admin";
-    const passValid = "123";
+    function prosesLogin() {
+      // Data Login yang Benar
+      const userBenar = "admin";
+      const passBenar = "123";
 
-    // 2. Element selector
-    const loginForm = document.getElementById('loginForm');
-    const alertMessage = document.getElementById('alertMessage');
+      // Ambil nilai dari input
+      const userInput = document.getElementById('usernameInput').value.trim();
+      const passInput = document.getElementById('passwordInput').value.trim();
+      const alertBox = document.getElementById('alertMessage');
 
-    loginForm.addEventListener('submit', function(e) {
-      e.preventDefault(); // Mencegah reload halaman
-      
-      const usernameInput = document.getElementById('usernameInput').value;
-      const passwordInput = document.getElementById('passwordInput').value;
-
-      if (usernameInput === userValid && passwordInput === passValid) {
-        // Tampilkan pesan sukses
-        alertMessage.className = "mb-4 p-3 rounded text-xs bg-emerald-100 text-emerald-700 border border-emerald-300";
-        alertMessage.innerText = "Login Berhasil! Mengalihkan...";
-        alertMessage.classList.remove('hidden');
-
-        // Simulasi redirect ke halaman utama/dashboard setelah 1.5 detik
-        setTimeout(() => {
-          alert("Selamat datang di Portal ASTOM, " + usernameInput + "!");
-          // window.location.href = "dashboard.html"; // Buka komentar ini jika sudah memiliki file dashboard.html
-        }, 1500);
-
-      } else {
-        // Tampilkan pesan gagal
-        alertMessage.className = "mb-4 p-3 rounded text-xs bg-red-100 text-red-700 border border-red-300";
-        alertMessage.innerText = "Username atau Password salah!";
-        alertMessage.classList.remove('hidden');
+      // Validasi Input Kosong
+      if (userInput === "" || passInput === "") {
+        alertBox.className = "mb-4 p-3 rounded text-xs bg-amber-100 text-amber-800 border border-amber-300";
+        alertBox.innerText = "Isi username dan password terlebih dahulu!";
+        alertBox.classList.remove('hidden');
+        return;
       }
-    });
+
+      // Validasi Username & Password
+      if (userInput === userBenar && passInput === passBenar) {
+        alertBox.className = "mb-4 p-3 rounded text-xs bg-emerald-100 text-emerald-700 border border-emerald-300";
+        alertBox.innerText = "Login Berhasil! Mengalihkan...";
+        alertBox.classList.remove('hidden');
+
+        setTimeout(function() {
+          alert("Selamat datang, " + userInput + "!");
+        }, 500);
+      } else {
+        alertBox.className = "mb-4 p-3 rounded text-xs bg-red-100 text-red-700 border border-red-300";
+        alertBox.innerText = "Username atau Password salah!";
+        alertBox.classList.remove('hidden');
+      }
+    }
   </script>
 
 </body>
