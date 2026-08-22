@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASTOM - Dashboard</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100 font-sans text-gray-800 flex h-screen overflow-hidden">
+
+  <!-- Sidebar Kiri -->
+  <aside class="w-64 bg-[#1d5b96] text-white flex flex-col justify-between shrink-0 overflow-y-auto">
+    <div class="p-4">
+      <!-- Title Sidebar -->
+      <div class="text-amber-400 text-2xl font-black tracking-wide mb-6">
+        ASTOM
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="space-y-4 text-xs font-semibold">
+        <!-- Dashboard Link -->
+        <a href="#" class="flex items-center justify-between text-white hover:text-amber-300 transition">
+          <span>DASHBOARD</span>
+          <i class="fa-solid fa-house"></i>
+        </a>
+
+        <!-- Menu Register -->
+        <div>
+          <div class="text-white mb-1">REGISTER</div>
+          <div class="pl-3 space-y-1 text-amber-300 font-normal">
+            <a href="#" class="block hover:underline">INCOMING</a>
+            <a href="#" class="block hover:underline">OUTGOING</a>
+          </div>
+        </div>
+
+        <!-- Menu Pemasukan -->
+        <div>
+          <div class="text-white mb-1">PEMASUKAN</div>
+          <div class="pl-3 space-y-1 text-amber-300 font-normal">
+            <a href="#" class="block hover:underline">BC 2.7</a>
+            <a href="#" class="block hover:underline">BC 4.0</a>
+          </div>
+        </div>
+
+        <!-- Menu Pengembalian -->
+        <div>
+          <div class="text-white mb-1">PENGEMBALIAN</div>
+          <div class="pl-3 space-y-1 text-amber-300 font-normal">
+            <a href="#" class="block hover:underline">BC 2.7</a>
+            <a href="#" class="block hover:underline">BC 4.1</a>
+          </div>
+        </div>
+
+        <!-- Menu Status Aset -->
+        <div>
+          <div class="text-white mb-1">STATUS ASET</div>
+          <div class="pl-3 space-y-1 text-amber-300 font-normal">
+            <a href="#" class="block hover:underline">NEW</a>
+            <a href="#" class="block hover:underline">EXTEND</a>
+          </div>
+        </div>
+
+        <!-- Report & Pengaturan -->
+        <div>
+          <a href="#" class="block text-white hover:text-amber-300 transition mb-1">REPORT & DOWNLOAD</a>
+          <div class="text-white mb-1">PENGATURAN</div>
+          <div class="pl-3 space-y-1 text-amber-300 font-normal">
+            <a href="#" class="block hover:underline">MASTER USER</a>
+            <a href="#" class="block hover:underline">MASTER CUSTOMER</a>
+            <a href="#" class="block hover:underline">MASTER BARANG</a>
+          </div>
+        </div>
+
+        <!-- Logout -->
+        <div class="pt-4 border-t border-blue-400/30">
+          <a href="index.html" class="text-white hover:text-red-300 transition font-bold block">LOGOUT</a>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Sidebar Footer -->
+    <div class="bg-[#154675] p-3 text-[10px] leading-tight text-white font-bold border-t border-blue-400/20">
+      <p>PT MURAMOTO ELEKTRONIKA INDONESIA</p>
+      <p class="font-normal text-gray-300 text-[9px] mt-0.5">CUSTOMS OPERATIONS & COMPLIANCE</p>
+    </div>
+  </aside>
+
+  <!-- Main Content Area -->
+  <div class="flex-1 flex flex-col min-w-0 overflow-y-auto">
+    
+    <!-- Top Header Bar -->
+    <header class="bg-gray-200 border-b border-gray-300 px-6 py-2 flex justify-between items-center text-xs font-bold text-gray-700">
+      <div class="uppercase tracking-wide text-gray-800">
+        Aset Pelanggan Kontrol Manajemen
+      </div>
+      <div>
+        USER LOGIN
+      </div>
+    </header>
+
+    <!-- Content Body -->
+    <main class="p-6 space-y-6">
+
+      <!-- Top Summary Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+        <!-- Total Dokumen Card -->
+        <div class="bg-[#009bc2] text-white p-4 font-bold text-xs flex items-center h-20 shadow-sm">
+          TOTAL DOKUMEN ASET PELANGGAN
+        </div>
+        <!-- BC 2.7 Card -->
+        <div class="bg-[#59a843] text-white p-4 font-bold text-xs flex items-start h-20 shadow-sm">
+          BC 2.7
+        </div>
+        <!-- BC 4.0 Card -->
+        <div class="bg-[#e9742a] text-white p-4 font-bold text-xs flex items-start h-20 shadow-sm">
+          BC 4.0
+        </div>
+        <!-- Pengembalian Aset Card -->
+        <div class="bg-[#ff0000] text-white p-4 font-bold text-xs flex items-start h-20 shadow-sm">
+          PENGEMBALIAN ASET
+        </div>
+      </div>
+
+      <!-- Section 1: History Pemasukan & Pie Chart Aset Pelanggan -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Table History Pemasukan -->
+        <div class="lg:col-span-2 bg-white border border-gray-400 shadow-sm">
+          <div class="border-b border-gray-400 px-3 py-1.5 font-bold text-xs text-gray-800">
+            History Pemasukan
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-xs text-center border-collapse">
+              <thead>
+                <tr class="border-b border-gray-400 bg-gray-50">
+                  <th class="border-r border-gray-400 p-1 font-semibold w-12">No</th>
+                  <th class="border-r border-gray-400 p-1 font-semibold">Dokumen</th>
+                  <th class="border-r border-gray-400 p-1 font-semibold">Nama Barang</th>
+                  <th class="border-r border-gray-400 p-1 font-semibold">Kode Barang</th>
+                  <th class="border-r border-gray-400 p-1 font-semibold">BC No.</th>
+                  <th class="border-r border-gray-400 p-1 font-semibold">Tgl. BC</th>
+                  <th class="p-1 font-semibold">Aset No.</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-300">
+                <!-- Baris Kosong / Tabel Template -->
+                <tr class="h-6"><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td></td></tr>
+                <tr class="h-6"><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td></td></tr>
+                <tr class="h-6"><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td></td></tr>
+                <tr class="h-6"><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td></td></tr>
+                <tr class="h-6"><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td></td></tr>
+                <tr class="h-6"><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Chart Aset Pelanggan -->
+        <div class="bg-white border border-gray-300 p-4 flex flex-col items-center justify-center shadow-sm relative">
+          <div class="text-xs font-bold text-gray-600 mb-2">ASET PELANGGAN</div>
+          <div class="w-48 h-48 flex justify-center items-center">
+            <canvas id="chartAset"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2: Pie Chart Pengembalian & History Pengembalian -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Chart Pengembalian -->
+        <div class="bg-white border border-gray-300 p-4 flex flex-col items-center justify-center shadow-sm">
+          <div class="text-xs font-bold text-gray-600 mb-2">PENGEMBALIAN</div>
+          <div class="w-48 h-48 flex justify-center items-center">
+            <canvas id="chartPengembalian"></canvas>
+          </div>
+        </div>
+
+        <!-- Table History Pengembalian -->
+        <div class="lg:col-span-2 bg-white border border-gray-400 shadow-sm">
+          <div class="border-b border-gray-400 px-3 py-1.5 font-bold text-xs text-gray-800">
+            History Pengembalian
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-xs text-center border-collapse">
+              <thead>
+                <tr class="border-b border-gray-400 bg-gray-50">
+                  <th class="border-r border-gray-400 p-1 font-semibold w-12">No</th>
+                  <th class="border-r border-gray-400 p-1 font-semibold">Dokumen</th>
+                  <th class="border-r border-gray-400 p-1 font-semibold">Nama Barang</th>
+                  <th class="border-r border-gray-400 p-1 font-semibold">Kode Barang</th>
+                  <th class="border-r border-gray-400 p-1 font-semibold">BC No.</th>
+                  <th class="border-r border-gray-400 p-1 font-semibold">Tgl. BC</th>
+                  <th class="p-1 font-semibold">Aset No.</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-300">
+                <!-- Baris Kosong / Tabel Template -->
+                <tr class="h-6"><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td></td></tr>
+                <tr class="h-6"><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td></td></tr>
+                <tr class="h-6"><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td></td></tr>
+                <tr class="h-6"><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td></td></tr>
+                <tr class="h-6"><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td></td></tr>
+                <tr class="h-6"><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td class="border-r border-gray-400"></td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Inisialisasi Chart.js -->
+  <script>
+    // Config Chart 1: ASET PELANGGAN
+    const ctxAset = document.getElementById('chartAset').getContext('2d');
+    new Chart(ctxAset, {
+      type: 'pie',
+      data: {
+        labels: ['BC 2.7', 'BC 4.0'],
+        datasets: [{
+          data: [90, 10], // Persentase visual sesuai gambar
+          backgroundColor: ['#175d82', '#e9742a'],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              boxWidth: 10,
+              font: { size: 10 }
+            }
+          }
+        }
+      }
+    });
+
+    // Config Chart 2: PENGEMBALIAN
+    const ctxPengembalian = document.getElementById('chartPengembalian').getContext('2d');
+    new Chart(ctxPengembalian, {
+      type: 'pie',
+      data: {
+        labels: ['BC 2.7', 'BC 4.1'],
+        datasets: [{
+          data: [80, 20], // Persentase visual sesuai gambar
+          backgroundColor: ['#175d82', '#e9742a'],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              boxWidth: 10,
+              font: { size: 10 }
+            }
+          }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
