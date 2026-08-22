@@ -64,8 +64,11 @@
             <h1 class="text-xl font-bold text-[#002d62] mt-4">Portal Login</h1>
           </div>
 
+          <!-- Pesan Alert (Muncul jika login gagal/berhasil) -->
+          <div id="alertMessage" class="hidden mb-4 p-3 rounded text-xs"></div>
+
           <!-- Form Input -->
-          <form class="space-y-3" onsubmit="event.preventDefault();">
+          <form id="loginForm" class="space-y-3">
             <!-- Username Input -->
             <div class="relative">
               <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400 text-xs">
@@ -73,8 +76,9 @@
               </span>
               <input 
                 type="text" 
-                value="incoming"
+                id="usernameInput"
                 placeholder="Username" 
+                required
                 class="w-full pl-9 pr-3 py-2 bg-[#edf4ff] border border-[#cce0ff] rounded-md text-xs text-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500"
               >
             </div>
@@ -86,8 +90,9 @@
               </span>
               <input 
                 type="password" 
-                value="123456789"
+                id="passwordInput"
                 placeholder="Password" 
+                required
                 class="w-full pl-9 pr-3 py-2 bg-[#edf4ff] border border-[#cce0ff] rounded-md text-xs text-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500"
               >
             </div>
@@ -131,6 +136,43 @@
 
     </div>
   </main>
+
+  <!-- Script Logika Login -->
+  <script>
+    // 1. Data akun valid
+    const userValid = "admin";
+    const passValid = "123";
+
+    // 2. Element selector
+    const loginForm = document.getElementById('loginForm');
+    const alertMessage = document.getElementById('alertMessage');
+
+    loginForm.addEventListener('submit', function(e) {
+      e.preventDefault(); // Mencegah reload halaman
+      
+      const usernameInput = document.getElementById('usernameInput').value;
+      const passwordInput = document.getElementById('passwordInput').value;
+
+      if (usernameInput === userValid && passwordInput === passValid) {
+        // Tampilkan pesan sukses
+        alertMessage.className = "mb-4 p-3 rounded text-xs bg-emerald-100 text-emerald-700 border border-emerald-300";
+        alertMessage.innerText = "Login Berhasil! Mengalihkan...";
+        alertMessage.classList.remove('hidden');
+
+        // Simulasi redirect ke halaman utama/dashboard setelah 1.5 detik
+        setTimeout(() => {
+          alert("Selamat datang di Portal ASTOM, " + usernameInput + "!");
+          // window.location.href = "dashboard.html"; // Buka komentar ini jika sudah memiliki file dashboard.html
+        }, 1500);
+
+      } else {
+        // Tampilkan pesan gagal
+        alertMessage.className = "mb-4 p-3 rounded text-xs bg-red-100 text-red-700 border border-red-300";
+        alertMessage.innerText = "Username atau Password salah!";
+        alertMessage.classList.remove('hidden');
+      }
+    });
+  </script>
 
 </body>
 </html>
