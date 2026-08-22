@@ -133,25 +133,44 @@
     </div>
   </main>
 
-  <!-- Script Proses Login -->
+  <!-- Script Proses Login & Redirect -->
   <script>
     function prosesLogin() {
-      // Data Login yang Benar
+      // Data akun yang benar
       const userBenar = "admin";
       const passBenar = "123";
 
-      // Ambil nilai dari input
+      // Ambil nilai input
       const userInput = document.getElementById('usernameInput').value.trim();
       const passInput = document.getElementById('passwordInput').value.trim();
       const alertBox = document.getElementById('alertMessage');
 
-      // Validasi Input Kosong
+      // Validasi input kosong
       if (userInput === "" || passInput === "") {
         alertBox.className = "mb-4 p-3 rounded text-xs bg-amber-100 text-amber-800 border border-amber-300";
         alertBox.innerText = "Isi username dan password terlebih dahulu!";
         alertBox.classList.remove('hidden');
         return;
       }
+
+      // Validasi Username & Password
+      if (userInput === userBenar && passInput === passBenar) {
+        alertBox.className = "mb-4 p-3 rounded text-xs bg-emerald-100 text-emerald-700 border border-emerald-300";
+        alertBox.innerText = "Login Berhasil! Mengalihkan ke Dashboard...";
+        alertBox.classList.remove('hidden');
+
+        // Langsung pindah ke halaman dashboard.html dalam 1 detik
+        setTimeout(function() {
+          window.location.href = "dashboard.html";
+        }, 1000);
+
+      } else {
+        alertBox.className = "mb-4 p-3 rounded text-xs bg-red-100 text-red-700 border border-red-300";
+        alertBox.innerText = "Username atau Password salah!";
+        alertBox.classList.remove('hidden');
+      }
+    }
+  </script>
 
       // Validasi Username & Password
       if (userInput === userBenar && passInput === passBenar) {
