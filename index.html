@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ASTOM Portal Login</title>
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome Icons CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     .hero-bg {
@@ -14,137 +16,163 @@
     }
   </style>
 </head>
-<body class="bg-gray-200 font-sans text-gray-800 antialiased min-h-screen flex flex-col">
+<body class="bg-gray-200 font-sans text-gray-800 antialiased min-h-screen flex flex-col justify-between">
 
-  <!-- Header Navigation -->
-  <header class="bg-[#002d62] text-white text-xs py-2 px-6 flex items-center justify-between">
-    <div class="flex items-center space-x-6">
-    <span>PT. MURAMOTO ELEKTRONIKA INDONESIA</span> 
+  <!-- TOP WRAPPER (Header + Main Content) -->
+  <div>
+    <!-- Header Navigation -->
+    <header class="bg-[#002d62] text-white text-xs py-2 px-6 flex items-center justify-between">
+      <div class="flex items-center space-x-6">
+        <a href="#" class="hover:underline">Beacukai.go.id</a>
+        <a href="#" class="hover:underline">Helpdesk</a>
+      </div>
+    </header>
+
+    <!-- Banner Pengumuman -->
+    <div class="bg-[#ffcb05] text-black text-xs font-semibold py-2.5 px-6 flex items-center justify-between shadow-sm">
+      <div class="flex items-center gap-2">
+        <span>Selamat Datang</span>
+      </div>
+      <button type="button" class="bg-[#00a8e8] text-white rounded-sm w-4 h-4 flex items-center justify-center text-[10px]">
+        <i class="fa-solid fa-caret-up"></i>
+      </button>
     </div>
-  </header>
 
-  <!-- Banner Pengumuman -->
-  <div class="bg-[#ffcb05] text-black text-xs font-semibold py-2.5 px-6 flex items-center justify-between shadow-sm">
-    <div class="flex items-center gap-2">
-      <span>Welcome Back</span>
-    </div>
-    <button type="button" class="bg-[#00a8e8] text-white rounded-sm w-4 h-4 flex items-center justify-center text-[10px]">
-      <i class="fa-solid fa-caret-up"></i>
-    </button>
-  </div>
-
-  <!-- Main Container -->
-  <main class="flex-1 flex items-center justify-center p-4">
-    <div class="bg-white rounded-xl shadow-xl max-w-4xl w-full flex flex-col md:flex-row overflow-hidden border border-gray-100">
-      
-      <!-- Left Panel: Form Login -->
-      <div class="w-full md:w-1/2 p-8 sm:p-10 flex flex-col justify-between">
-        <div>
-          <!-- Badge User Manual -->
-          <div class="inline-block bg-[#002b5b] text-white text-xs px-3 py-1.5 rounded-r-md font-medium mb-6 -ml-8 sm:-ml-10 shadow-sm">
-            Klik disini untuk memulai (User Manual)
-          </div>
-
-          <!-- Tabs -->
-          <div class="flex border-b border-gray-200 mb-6 text-xs font-semibold">
-            <button class="pb-2 px-1 text-[#00a8e8] border-b-2 border-[#00a8e8] mr-6">Public</button>
-            <button class="pb-2 px-1 text-gray-400 hover:text-gray-600">Personal</button>
-          </div>
-
-          <!-- Logo & Title -->
-          <div class="mb-6">
-            <div class="flex items-center gap-1.5 text-[#002d62] font-black text-2xl tracking-tighter">
-              <span>ASTOM</span>
+    <!-- Main Container -->
+    <main class="flex items-center justify-center p-4 my-6">
+      <div class="bg-white rounded-xl shadow-xl max-w-4xl w-full flex flex-col md:flex-row overflow-hidden border border-gray-100">
+        
+        <!-- Left Panel: Form Login -->
+        <div class="w-full md:w-1/2 p-8 sm:p-10 flex flex-col justify-between">
+          <div>
+            <!-- Badge User Manual -->
+            <div class="inline-block bg-[#002b5b] text-white text-xs px-3 py-1.5 rounded-r-md font-medium mb-6 -ml-8 sm:-ml-10 shadow-sm">
+              Klik disini untuk memulai (User Manual)
             </div>
-            <p class="text-[9px] text-gray-400 font-mono tracking-widest uppercase -mt-1">Aset Pelanggan Control Management</p>
-            <h1 class="text-xl font-bold text-[#002d62] mt-4">Portal Login</h1>
-          </div>
 
-          <!-- Alert Pesan Sukses / Gagal -->
-          <div id="alertMessage" class="hidden mb-4 p-3 rounded text-xs"></div>
+            <!-- Tabs -->
+            <div class="flex border-b border-gray-200 mb-6 text-xs font-semibold">
+              <button class="pb-2 px-1 text-[#00a8e8] border-b-2 border-[#00a8e8] mr-6">Public</button>
+              <button class="pb-2 px-1 text-gray-400 hover:text-gray-600">Personal</button>
+            </div>
 
-          <!-- Form Area -->
-          <div class="space-y-3">
-            <!-- Username Input -->
-            <div class="relative">
-              <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400 text-xs">
-                <i class="fa-regular fa-user"></i>
-              </span>
-              <input 
-                type="text" 
-                id="usernameInput"
-                placeholder="Username" 
-                class="w-full pl-9 pr-3 py-2 bg-[#edf4ff] border border-[#cce0ff] rounded-md text-xs text-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            <!-- Logo & Title -->
+            <div class="mb-6">
+              <div class="flex items-center gap-1.5 text-[#002d62] font-black text-2xl tracking-tighter">
+                <span>ASTOM</span>
+              </div>
+              <p class="text-[9px] text-gray-400 font-mono tracking-widest uppercase -mt-1">Aset Pelanggan Control Management</p>
+              <h1 class="text-xl font-bold text-[#002d62] mt-4">Portal Login</h1>
+            </div>
+
+            <!-- Alert Pesan Sukses / Gagal -->
+            <div id="alertMessage" class="hidden mb-4 p-3 rounded text-xs"></div>
+
+            <!-- Form Area -->
+            <div class="space-y-3">
+              <!-- Username Input -->
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400 text-xs">
+                  <i class="fa-regular fa-user"></i>
+                </span>
+                <input 
+                  type="text" 
+                  id="usernameInput"
+                  placeholder="Username" 
+                  class="w-full pl-9 pr-3 py-2 bg-[#edf4ff] border border-[#cce0ff] rounded-md text-xs text-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                >
+              </div>
+
+              <!-- Password Input -->
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400 text-xs">
+                  <i class="fa-solid fa-lock"></i>
+                </span>
+                <input 
+                  type="password" 
+                  id="passwordInput"
+                  placeholder="Password" 
+                  class="w-full pl-9 pr-3 py-2 bg-[#edf4ff] border border-[#cce0ff] rounded-md text-xs text-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                >
+              </div>
+
+              <!-- Tombol Log In -->
+              <button 
+                type="button" 
+                onclick="prosesLogin()"
+                class="w-full bg-[#00a8e8] hover:bg-[#0092cd] text-white font-medium py-2 rounded-md text-xs transition shadow-sm mt-1 cursor-pointer"
               >
+                Log in
+              </button>
             </div>
 
-            <!-- Password Input -->
-            <div class="relative">
-              <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400 text-xs">
-                <i class="fa-solid fa-lock"></i>
-              </span>
-              <input 
-                type="password" 
-                id="passwordInput"
-                placeholder="Password" 
-                class="w-full pl-9 pr-3 py-2 bg-[#edf4ff] border border-[#cce0ff] rounded-md text-xs text-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500"
-              >
+            <!-- Divider -->
+            <div class="relative my-6 text-center">
+              <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-gray-200"></div></div>
+              <span class="relative bg-white px-3 text-[11px] text-gray-400">Belum Punya Akses?</span>
             </div>
 
-            <!-- Tombol Log In -->
+            <!-- Register Button -->
             <button 
               type="button" 
-              onclick="prosesLogin()"
-              class="w-full bg-[#00a8e8] hover:bg-[#0092cd] text-white font-medium py-2 rounded-md text-xs transition shadow-sm mt-1 cursor-pointer"
+              class="w-full bg-[#2b6cb0] hover:bg-[#235893] text-white font-medium py-2 rounded-md text-xs transition shadow-sm"
             >
-              Log in
+              Daftar
             </button>
           </div>
 
-          <!-- Divider -->
-          <div class="relative my-6 text-center">
-            <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-gray-200"></div></div>
-            <span class="relative bg-white px-3 text-[11px] text-gray-400">Belum Punya Akses?</span>
+          <!-- Footer Links Login -->
+          <div class="mt-8 text-[11px] text-gray-500">
+            Tidak bisa login? 
+            <a href="#" class="font-semibold text-[#002d62] hover:underline">Reset Password</a> / 
+            <a href="#" class="font-semibold text-[#002d62] hover:underline">Belum Dapat Email Konfirmasi</a>
           </div>
-
-          <!-- Register Button -->
-          <button 
-            type="button" 
-            class="w-full bg-[#2b6cb0] hover:bg-[#235893] text-white font-medium py-2 rounded-md text-xs transition shadow-sm"
-          >
-            Daftar
-          </button>
         </div>
 
-        <!-- Footer Links -->
-        <div class="mt-8 text-[11px] text-gray-500">
-          Tidak bisa login? 
-          <a href="#" class="font-semibold text-[#002d62] hover:underline">Reset Password</a> / 
-          <a href="#" class="font-semibold text-[#002d62] hover:underline">Belum Dapat Email Konfirmasi</a>
+        <!-- Right Panel: Image Display -->
+        <div class="hidden md:block w-1/2 hero-bg relative">
+          <div class="absolute inset-0 bg-black/10"></div>
         </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- BOTTOM FOOTER (Sesuai Gambar) -->
+  <footer class="bg-[#1c2836] text-gray-300 text-center py-6 px-4 text-xs mt-8">
+    <div class="max-w-4xl mx-auto space-y-3">
+      <!-- Judul Lembaga -->
+      <p class="font-bold text-white">Direktorat Jenderal Bea dan Cukai</p>
+      
+      <!-- Keterangan Penjelasan CEISA -->
+      <p class="text-[11px] leading-relaxed text-gray-400 max-w-3xl mx-auto">
+        CEISA (Customs Excise Information System and Automation) adalah Sistem Komputer Pelayanan (SKP) dalam bentuk portal yang terintegrasi dari Direktorat Jenderal Bea dan Cukai untuk pengawasan dan pelayanan kepabeanan dan cukai.
+      </p>
+      
+      <!-- Link Laporkan Celah & Gangguan -->
+      <div class="flex justify-center items-center space-x-6 font-semibold text-white pt-1 text-[11px]">
+        <a href="#" class="hover:underline">Laporkan Celah Keamanan</a>
+        <a href="#" class="hover:underline">Lapor Gangguan</a>
       </div>
 
-      <!-- Right Panel: Image Display -->
-      <div class="hidden md:block w-1/2 hero-bg relative">
-        <div class="absolute inset-0 bg-black/10"></div>
+      <!-- Copyright & Last Updated -->
+      <div class="text-[10px] text-gray-400 pt-2 space-y-0.5">
+        <p>&copy; 2025 Direktorat Jenderal Bea dan Cukai</p>
+        <p>Last Updated on 01 Jan 2025</p>
       </div>
-
     </div>
-  </main>
+  </footer>
 
-  <!-- Script Proses Login & Redirect -->
+  <!-- Script Proses Login -->
   <script>
     function prosesLogin() {
-      // Data akun yang benar
       const userBenar = "admin";
       const passBenar = "123";
 
-      // Ambil nilai input
       const userInput = document.getElementById('usernameInput').value.trim();
       const passInput = document.getElementById('passwordInput').value.trim();
       const alertBox = document.getElementById('alertMessage');
 
-      // Validasi input kosong
       if (userInput === "" || passInput === "") {
         alertBox.className = "mb-4 p-3 rounded text-xs bg-amber-100 text-amber-800 border border-amber-300";
         alertBox.innerText = "Isi username dan password terlebih dahulu!";
@@ -152,34 +180,15 @@
         return;
       }
 
-      // Validasi Username & Password
       if (userInput === userBenar && passInput === passBenar) {
         alertBox.className = "mb-4 p-3 rounded text-xs bg-emerald-100 text-emerald-700 border border-emerald-300";
         alertBox.innerText = "Login Berhasil! Mengalihkan ke Dashboard...";
         alertBox.classList.remove('hidden');
 
-        // Langsung pindah ke halaman dashboard.html dalam 1 detik
         setTimeout(function() {
           window.location.href = "dashboard.html";
         }, 1000);
 
-      } else {
-        alertBox.className = "mb-4 p-3 rounded text-xs bg-red-100 text-red-700 border border-red-300";
-        alertBox.innerText = "Username atau Password salah!";
-        alertBox.classList.remove('hidden');
-      }
-    }
-  </script>
-
-      // Validasi Username & Password
-      if (userInput === userBenar && passInput === passBenar) {
-        alertBox.className = "mb-4 p-3 rounded text-xs bg-emerald-100 text-emerald-700 border border-emerald-300";
-        alertBox.innerText = "Login Berhasil! Mengalihkan...";
-        alertBox.classList.remove('hidden');
-
-        setTimeout(function() {
-          alert("Selamat datang, " + userInput + "!");
-        }, 500);
       } else {
         alertBox.className = "mb-4 p-3 rounded text-xs bg-red-100 text-red-700 border border-red-300";
         alertBox.innerText = "Username atau Password salah!";
