@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ASTOM - Asset Customers Control Management</title>
-  <!-- Chart.js untuk membuat diagram lingkaran (Pie Charts) -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     * {
@@ -17,75 +16,81 @@
     body {
       display: flex;
       height: 100vh;
-      background-color: #f4f4f4;
+      background-color: #eef2f5;
+      overflow: hidden;
     }
 
     /* Sidebar Navigation */
     .sidebar {
-      width: 230px;
-      background-color: #1a588c;
+      width: 220px;
+      background-color: #24588a;
       color: #ffffff;
       display: flex;
       flex-direction: column;
-      padding: 15px 10px;
-      font-size: 13px;
+      padding: 12px 10px;
+      font-size: 12px;
       flex-shrink: 0;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 10px;
-      font-size: 20px;
+      gap: 8px;
+      font-size: 18px;
       font-weight: bold;
-      color: #fca311;
-      margin-bottom: 15px;
+      color: #f7a600;
+      margin-bottom: 12px;
     }
 
     .brand-logo {
-      width: 28px;
-      height: 28px;
-      background-color: #fca311;
-      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      width: 32px;
+      height: 32px;
+      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAFn0lEQVR4nO2bW2hcVRjHf3NmJtPcxCQ2iVabWJvU2l6qaROsRerF0gcv2EKEFvRF9MWH9s2H+gqCN0EQfBARxQfBgg9++FBQROxDK/WhtQ1Nmt6TNu29TdKkM5nMe/nOv002Z+dMkjZtkpl/WBYyWcvZe+3v+75v/845R0oJQoj/yVCSx2zbFjE+n++20xU8b4Wn287Ozs7eTq9i43e2jY3Z931tbm6+z1v91219b12N/f89evTo0b6+vqW/N40N05/61vdg61v30v3y3vVw4+31e++9989X1dfXx+fz+Wvb1i+A68A+4CSwB9ihd5sCjup7A3gbWNEyq+3/sH49B/ygdVf0v4F/tO4i8LreH1T7U8BbwHfAVT0vAkeAjy3LClqWNbxt3wJ4f+tbz7a+v0a/v1/71239O9+/Ruvb2u92330f6v7j+l7S93N6Lupz7+vzc3p+Qsv8qudZfV6n5c9q21XgoLZd0TIXgU+Ab4CXbNt2g4OD+7b1LwB4w/pG097Z2flWdXX1vdbS0tISa2xsDDU2Noabmpqizc3Noebm5lB7e3vQ8t///e7g4KA/GAz6ly9f7u3p6fG3trYGW1tb/T2t6+tra+u//38A4Btr6xt7e3tv6/j/BvhQv78d2A20AJu1b12b3h/Vusva76yee9o3oe0D2t+jZT7S37a+T2rd/bqu0nLd2teuZb60bfuE53m/3dYxACqsr4f9+voN8DXwIdAH1Gvf3Tq+3bKsz3w/39bX12d93/fHff/q2u3s7PxW1gD8sL7g9er1/lA8/gTogXy8N8Cfh3wP/e8A363q+X39A3mva29l3/e1rf0/Ife3s/S8A1L3s/3/A/9726Xm/W9l10//l8A31v9sS3s/+51f5/D//7f1vAefW3q6/c73s/sN/b+s2p++pS5Xz+n6X9s1f/A+xS5w4s36O3q6v/5+j9L2A/31/31p83mN3//0S8N8f///a10s3/t/+/f9r6A+/m53+L8c/fN2f5d/c5/4/j0P/f+x//bX//a3//f9S4AAAAASUVORK5CYR==');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
     }
 
     .menu-item-main {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: bold;
-      padding: 6px 0;
+      padding: 4px 0;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .search-box {
-      margin: 10px 0 15px 0;
+      margin: 8px 0 12px 0;
     }
 
     .search-box input {
       width: 100%;
       padding: 4px 8px;
-      border-radius: 4px;
-      border: none;
-      font-size: 12px;
+      border-radius: 3px;
+      border: 1px solid #ccc;
+      font-size: 11px;
     }
 
     .menu-group {
-      margin-bottom: 15px;
+      margin-bottom: 12px;
     }
 
     .menu-title {
       font-weight: bold;
       color: #ffffff;
-      margin-bottom: 3px;
+      margin-bottom: 2px;
       text-transform: uppercase;
-      font-size: 12px;
+      font-size: 11px;
     }
 
     .menu-link {
       display: block;
-      color: #fca311;
+      color: #f7a600;
       text-decoration: none;
-      padding: 2px 0;
-      font-size: 12px;
+      padding: 1px 0;
+      font-size: 11px;
     }
 
     .menu-link:hover {
@@ -102,110 +107,126 @@
 
     /* Header */
     .header {
-      background-color: #dce6f1;
-      padding: 10px 20px;
+      background-color: #d2e1f0;
+      padding: 8px 15px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid #b0c4de;
+      border-bottom: 1px solid #a0b8d0;
     }
 
     .header-title {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: bold;
       color: #000;
+      letter-spacing: 0.5px;
     }
 
-    .user-login {
+    .user-login-container {
+      display: flex;
+      align-items: center;
+      gap: 6px;
       font-size: 11px;
       font-weight: bold;
       color: #000;
     }
 
+    .qr-icon {
+      width: 18px;
+      height: 18px;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M2 2h8v8H2V2zm2 2v4h4V4H4zm10-2h8v8h-8V2zm2 2v4h4V4h-4zM2 14h8v8H2v-8zm2 2v4h4v-4H4zm10 2h2v2h-2v-2zm4-2h2v2h-2v-2zm-4 4h4v2h-4v-2zm4 0h2v2h-2v-2zm2-4h2v4h-2v-4z"/></svg>');
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+
     /* Content Body */
     .content-body {
-      padding: 20px;
+      padding: 15px;
       flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
     }
 
     /* Summary KPI Cards */
     .cards-container {
       display: flex;
-      gap: 15px;
-      margin-bottom: 20px;
+      gap: 12px;
     }
 
     .card {
       flex: 1;
       color: #fff;
       text-align: center;
-      padding: 10px 5px;
-      border-radius: 2px;
-      box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+      padding: 8px 5px;
+      box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
     }
 
     .card-title {
-      font-size: 13px;
+      font-size: 12px;
       text-decoration: underline;
       font-weight: bold;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
     }
 
     .card-value {
-      font-size: 12px;
+      font-size: 11px;
       font-weight: bold;
     }
 
-    .card-blue { background-color: #00a8e8; }
-    .card-green { background-color: #4caf50; }
-    .card-orange { background-color: #f26419; }
-    .card-red { background-color: #e63946; }
+    .card-blue { background-color: #179bd7; }
+    .card-green { background-color: #4baf3b; }
+    .card-orange { background-color: #ee6323; }
+    .card-red { background-color: #f50000; }
 
     /* Dashboard Grid Rows */
     .dashboard-row {
       display: flex;
-      gap: 20px;
-      margin-bottom: 20px;
+      gap: 15px;
+      align-items: stretch;
     }
 
     .panel-table {
       flex: 1.6;
       border: 1px solid #000;
       background-color: #fff;
+      display: flex;
+      flex-direction: column;
     }
 
     .panel-chart {
       flex: 1;
-      border: 1px solid #ccc;
+      border: 1px solid #c0c0c0;
       background-color: #fff;
-      padding: 15px;
+      padding: 10px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+      box-shadow: 1px 1px 2px rgba(0,0,0,0.05);
     }
 
     .panel-header {
       font-weight: bold;
-      font-size: 15px;
-      padding: 6px 10px;
+      font-size: 14px;
+      padding: 4px 8px;
       border-bottom: 1px solid #000;
       background-color: #fff;
+      color: #000;
     }
 
     .chart-title {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: bold;
-      color: #666;
-      margin-bottom: 10px;
+      color: #555;
+      margin-bottom: 8px;
       text-align: center;
     }
 
     .chart-container {
       position: relative;
       width: 100%;
-      max-width: 220px;
-      height: 220px;
+      max-width: 200px;
+      height: 180px;
     }
 
     /* Custom Data Tables */
@@ -217,7 +238,7 @@
 
     th, td {
       border: 1px solid #000;
-      padding: 4px;
+      padding: 3px 2px;
       text-align: center;
     }
 
@@ -227,33 +248,33 @@
     }
 
     .empty-row {
-      height: 22px;
+      height: 20px;
     }
 
     /* Footer */
     .footer {
-      background-color: #4D90CD;
+      background-color: #24588a;
       color: #fff;
-      padding: 8px 20px;
-      font-size: 12px;
+      padding: 6px 15px;
+      font-size: 11px;
       font-weight: bold;
     }
 
     .footer-sub {
-      font-size: 10px;
+      font-size: 9px;
       font-weight: normal;
     }
   </style>
 </head>
 <body>
 
-  <!-- Sidebar -->
+  <!-- Sidebar Navigation -->
   <div class="sidebar">
     <div class="brand">
       <div class="brand-logo"></div>
       <span>ASTOM</span>
     </div>
-    <div class="menu-item-main">🏠 DASHBOARD</div>
+    <div class="menu-item-main"><span>🏠</span> DASHBOARD</div>
     
     <div class="search-box">
       <input type="text" placeholder="🔍 Cari menu">
@@ -262,6 +283,7 @@
     <div class="menu-group">
       <div class="menu-title">REGISTER</div>
       <a href="#" class="menu-link">NEW</a>
+      <a href="#" class="menu-link">RECIVING</a>
       <a href="#" class="menu-link">RETURN</a>
     </div>
 
@@ -284,19 +306,22 @@
       <a href="#" class="menu-link">MASTER BARANG</a>
     </div>
 
-    <div class="menu-group" style="margin-top: 15px;">
+    <div class="menu-group" style="margin-top: 10px;">
       <div class="menu-title">LOG HISTORY</div>
-      <div class="menu-title" style="margin-top: 5px;">LOGOUT</div>
+      <div class="menu-title" style="margin-top: 4px;">LOGOUT</div>
     </div>
   </div>
 
   <!-- Main Content -->
   <div class="main-content">
     
-    <!-- Top Header -->
+    <!-- Header -->
     <div class="header">
       <div class="header-title">ASSET CUSTOMERS CONTROL MANAGEMENT</div>
-      <div class="user-login">USER LOGIN</div>
+      <div class="user-login-container">
+        <div class="qr-icon"></div>
+        <span>USER LOGIN</span>
+      </div>
     </div>
 
     <div class="content-body">
@@ -332,13 +357,12 @@
                 <th>Dokumen</th>
                 <th>Nama Barang</th>
                 <th>Kode Barang</th>
-                <th>No. Pendaftaran</th>
-                <th>Tgl. Pendaftaran</th>
+                <th>Nomor Pendaftar</th>
+                <th>Tgl. Pendaftar</th>
                 <th>Aset No.</th>
               </tr>
             </thead>
             <tbody>
-              <!-- 8 Baris Kosong Sesuai Layout -->
               <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
               <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
               <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
@@ -383,7 +407,6 @@
               </tr>
             </thead>
             <tbody>
-              <!-- 8 Baris Kosong Sesuai Layout -->
               <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
               <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
               <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
@@ -402,14 +425,12 @@
     <!-- Footer -->
     <div class="footer">
       PT MURAMOTO ELEKTRONIKA INDONESIA
-      <div class="footer-sub">CUSTOMS OPERATIONS DAN COMPLIANCE DEPT.</div>
+      <div class="footer-sub">CUSTOMS OPERATIONS & COMPLIANCE DEPT.</div>
     </div>
 
   </div>
 
-  <!-- Script untuk Inisialisasi Chart -->
   <script>
-    // Asset Customers Pie Chart
     const ctx1 = document.getElementById('assetCustomersChart').getContext('2d');
     new Chart(ctx1, {
       type: 'pie',
@@ -417,8 +438,8 @@
         labels: ['BC 2.7', 'BC 4.0'],
         datasets: [{
           data: [93, 7],
-          backgroundColor: ['#1b638a', '#f26419'],
-          borderWidth: 1
+          backgroundColor: ['#175d84', '#e66632'],
+          borderWidth: 0
         }]
       },
       options: {
@@ -427,13 +448,12 @@
         plugins: {
           legend: {
             position: 'bottom',
-            labels: { boxWidth: 12, font: { size: 11 } }
+            labels: { boxWidth: 10, font: { size: 10 } }
           }
         }
       }
     });
 
-    // Return Asset Pie Chart
     const ctx2 = document.getElementById('returnAssetChart').getContext('2d');
     new Chart(ctx2, {
       type: 'pie',
@@ -441,8 +461,8 @@
         labels: ['BC 2.7', 'BC 4.1'],
         datasets: [{
           data: [65, 35],
-          backgroundColor: ['#1b638a', '#f26419'],
-          borderWidth: 1
+          backgroundColor: ['#e66632', '#175d84'],
+          borderWidth: 0
         }]
       },
       options: {
@@ -451,7 +471,7 @@
         plugins: {
           legend: {
             position: 'bottom',
-            labels: { boxWidth: 12, font: { size: 11 } }
+            labels: { boxWidth: 10, font: { size: 10 } }
           }
         }
       }
