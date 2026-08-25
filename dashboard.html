@@ -144,13 +144,13 @@
 
     /* Content Area Pages */
     .page-content {
-      display: none; /* Disembunyikan secara bawaan */
+      display: none;
       padding: 15px;
       flex: 1;
     }
 
     .page-content.active {
-      display: flex; /* Ditampilkan saat aktif */
+      display: flex;
       flex-direction: column;
       gap: 15px;
     }
@@ -179,12 +179,7 @@
     .empty-row { height: 20px; }
 
     /* FORM REGISTER - NEW STYLES */
-    .form-title {
-      font-size: 16px;
-      font-weight: bold;
-      color: #000;
-      margin-bottom: 20px;
-    }
+    .form-title { font-size: 16px; font-weight: bold; color: #000; margin-bottom: 20px; }
 
     .form-grid {
       display: grid;
@@ -209,9 +204,7 @@
       align-items: center;
     }
 
-    .date-input-wrapper input {
-      padding-right: 25px;
-    }
+    .date-input-wrapper input { padding-right: 25px; }
 
     .calendar-icon {
       position: absolute;
@@ -227,10 +220,7 @@
       margin-bottom: 15px;
     }
 
-    .btn-group {
-      display: flex;
-      gap: 10px;
-    }
+    .btn-group { display: flex; gap: 10px; }
 
     .btn {
       padding: 6px 14px;
@@ -243,18 +233,10 @@
     }
 
     .btn-blue { background-color: #00a0e9; }
-    .btn-red { background-color: #ff0000; }
+    .btn-red { background-color: #c00000; }
 
-    .search-table-group {
-      display: flex;
-      gap: 5px;
-    }
-
-    .search-table-group input {
-      border: 1px solid #000;
-      padding: 4px;
-      width: 120px;
-    }
+    .search-table-group { display: flex; gap: 5px; }
+    .search-table-group input { border: 1px solid #000; padding: 4px; width: 120px; }
 
     .btn-edit {
       background-color: #ffff00;
@@ -265,10 +247,87 @@
       cursor: pointer;
     }
 
-    .table-register-new th {
-      font-size: 10px;
-      padding: 6px 2px;
-      background-color: #f9f9f9;
+    .table-register-new th { font-size: 10px; padding: 6px 2px; background-color: #f9f9f9; }
+
+    /* MODAL REKAM BARANG STYLES */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.4);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .modal-overlay.active { display: flex; }
+
+    .modal-box {
+      background: #fff;
+      border: 2px solid #0e294b;
+      padding: 25px 30px;
+      width: 680px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      position: relative;
+    }
+
+    .modal-form-grid {
+      display: grid;
+      grid-template-columns: 120px 220px 120px 140px;
+      gap: 15px 10px;
+      align-items: center;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .required-label::before {
+      content: "* ";
+      color: red;
+    }
+
+    .modal-form-grid input, .modal-form-grid textarea {
+      border: 1px solid #000;
+      padding: 4px 6px;
+      font-size: 12px;
+    }
+
+    .modal-form-grid textarea {
+      grid-column: 2 / 5;
+      height: 60px;
+      resize: none;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 25px;
+      padding-left: 130px;
+    }
+
+    .btn-simpan {
+      background-color: #00a0e9;
+      color: #fff;
+      border: none;
+      padding: 6px 18px;
+      border-radius: 6px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .btn-batal {
+      background-color: #c00000;
+      color: #fff;
+      border: none;
+      padding: 6px 18px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
     }
 
     /* Footer */
@@ -280,10 +339,7 @@
       font-weight: bold;
     }
 
-    .footer-sub {
-      font-size: 9px;
-      font-weight: normal;
-    }
+    .footer-sub { font-size: 9px; font-weight: normal; }
   </style>
 </head>
 <body>
@@ -459,7 +515,8 @@
 
       <div class="action-bar">
         <div class="btn-group">
-          <button class="btn btn-blue">+ Rekam Barang</button>
+          <!-- Tombol ini memicu pembukaan modal Rekam Barang -->
+          <button class="btn btn-blue" onclick="openRekamBarangModal()">+ Rekam Barang</button>
           <button class="btn btn-red">Hapus Barang</button>
         </div>
         <div class="search-table-group">
@@ -500,6 +557,40 @@
       </table>
     </div>
 
+    <!-- MODAL POPUP: FORM REKAM BARANG -->
+    <div id="modal-rekam-barang" class="modal-overlay">
+      <div class="modal-box">
+        <div class="modal-form-grid">
+          <label class="required-label">Uraian Barang</label>
+          <textarea></textarea>
+
+          <label class="required-label">Kode Barang</label>
+          <input type="text">
+          <div style="grid-column: span 2;"></div>
+
+          <label class="required-label">Jenis Satuan</label>
+          <input type="text">
+
+          <label class="required-label" style="text-align: right; padding-right: 10px;">Jumlah Barang</label>
+          <input type="text">
+
+          <label class="required-label">Aset No</label>
+          <input type="text">
+          <div style="grid-column: span 2;"></div>
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn-simpan" onclick="closeRekamBarangModal()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+            </svg>
+            Simpan
+          </button>
+          <button class="btn-batal" onclick="closeRekamBarangModal()">X Batal</button>
+        </div>
+      </div>
+    </div>
+
     <!-- Footer -->
     <div class="footer">
       PT MURAMOTO ELEKTRONIKA INDONESIA
@@ -508,14 +599,23 @@
 
   </div>
 
-  <!-- JavaScript Navigasi & Chart -->
+  <!-- JavaScript Navigasi, Modal, & Chart -->
   <script>
-    // Fungsi untuk Berpindah Halaman
+    // Navigasi Halaman Sidebar
     function switchPage(pageId) {
       document.querySelectorAll('.page-content').forEach(page => {
         page.classList.remove('active');
       });
       document.getElementById('page-' + pageId).classList.add('active');
+    }
+
+    // Modal Rekam Barang Controller
+    function openRekamBarangModal() {
+      document.getElementById('modal-rekam-barang').classList.add('active');
+    }
+
+    function closeRekamBarangModal() {
+      document.getElementById('modal-rekam-barang').classList.remove('active');
     }
 
     // Chart Configuration
