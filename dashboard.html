@@ -59,6 +59,8 @@
       display: flex;
       align-items: center;
       gap: 6px;
+      color: #fff;
+      text-decoration: none;
     }
 
     .search-box {
@@ -89,11 +91,12 @@
       display: block;
       color: #f7a600;
       text-decoration: none;
-      padding: 1px 0;
+      padding: 2px 0;
       font-size: 11px;
+      cursor: pointer;
     }
 
-    .menu-link:hover {
+    .menu-link:hover, .menu-item-main:hover {
       text-decoration: underline;
     }
 
@@ -139,121 +142,138 @@
       background-repeat: no-repeat;
     }
 
-    /* Content Body */
-    .content-body {
+    /* Content Area Pages */
+    .page-content {
+      display: none; /* Disembunyikan secara bawaan */
       padding: 15px;
       flex: 1;
-      display: flex;
+    }
+
+    .page-content.active {
+      display: flex; /* Ditampilkan saat aktif */
       flex-direction: column;
       gap: 15px;
     }
 
-    /* Summary KPI Cards */
-    .cards-container {
-      display: flex;
-      gap: 12px;
-    }
-
-    .card {
-      flex: 1;
-      color: #fff;
-      text-align: center;
-      padding: 8px 5px;
-      box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
-    }
-
-    .card-title {
-      font-size: 12px;
-      text-decoration: underline;
-      font-weight: bold;
-      margin-bottom: 12px;
-    }
-
-    .card-value {
-      font-size: 11px;
-      font-weight: bold;
-    }
-
+    /* SUMMARY CARDS & PANELS */
+    .cards-container { display: flex; gap: 12px; }
+    .card { flex: 1; color: #fff; text-align: center; padding: 8px 5px; box-shadow: 1px 1px 3px rgba(0,0,0,0.15); }
+    .card-title { font-size: 12px; text-decoration: underline; font-weight: bold; margin-bottom: 12px; }
+    .card-value { font-size: 11px; font-weight: bold; }
     .card-blue { background-color: #179bd7; }
     .card-green { background-color: #4baf3b; }
     .card-orange { background-color: #ee6323; }
     .card-red { background-color: #f50000; }
 
-    /* Dashboard Grid Rows */
-    .dashboard-row {
-      display: flex;
-      gap: 15px;
-      align-items: stretch;
-    }
+    .dashboard-row { display: flex; gap: 15px; align-items: stretch; }
+    .panel-table { flex: 1.6; border: 1px solid #000; background-color: #fff; display: flex; flex-direction: column; }
+    .panel-chart { flex: 1; border: 1px solid #c0c0c0; background-color: #fff; padding: 10px; display: flex; flex-direction: column; align-items: center; box-shadow: 1px 1px 2px rgba(0,0,0,0.05); }
+    .panel-header { font-weight: bold; font-size: 14px; padding: 4px 8px; border-bottom: 1px solid #000; background-color: #fff; color: #000; }
+    .chart-title { font-size: 14px; font-weight: bold; color: #555; margin-bottom: 8px; text-align: center; }
+    .chart-container { position: relative; width: 100%; max-width: 200px; height: 180px; }
 
-    .panel-table {
-      flex: 1.6;
-      border: 1px solid #000;
-      background-color: #fff;
-      display: flex;
-      flex-direction: column;
-    }
+    /* TABLES */
+    table { width: 100%; border-collapse: collapse; font-size: 11px; }
+    th, td { border: 1px solid #000; padding: 4px; text-align: center; }
+    th { background-color: #fff; font-weight: bold; }
+    .empty-row { height: 20px; }
 
-    .panel-chart {
-      flex: 1;
-      border: 1px solid #c0c0c0;
-      background-color: #fff;
-      padding: 10px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      box-shadow: 1px 1px 2px rgba(0,0,0,0.05);
-    }
-
-    .panel-header {
+    /* FORM REGISTER - NEW STYLES */
+    .form-title {
+      font-size: 16px;
       font-weight: bold;
-      font-size: 14px;
-      padding: 4px 8px;
-      border-bottom: 1px solid #000;
-      background-color: #fff;
       color: #000;
+      margin-bottom: 20px;
     }
 
-    .chart-title {
-      font-size: 14px;
+    .form-grid {
+      display: grid;
+      grid-template-columns: 180px 250px 250px;
+      gap: 12px 15px;
+      align-items: center;
+      font-size: 13px;
       font-weight: bold;
-      color: #555;
-      margin-bottom: 8px;
-      text-align: center;
+      margin-bottom: 25px;
     }
 
-    .chart-container {
-      position: relative;
+    .form-grid input {
       width: 100%;
-      max-width: 200px;
-      height: 180px;
-    }
-
-    /* Custom Data Tables */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 11px;
-    }
-
-    th, td {
+      padding: 4px 6px;
       border: 1px solid #000;
-      padding: 3px 2px;
-      text-align: center;
+      font-size: 12px;
     }
 
-    th {
-      background-color: #fff;
+    .date-input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .date-input-wrapper input {
+      padding-right: 25px;
+    }
+
+    .calendar-icon {
+      position: absolute;
+      right: 5px;
+      font-size: 12px;
+      pointer-events: none;
+    }
+
+    .action-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      padding: 6px 14px;
+      border: none;
+      border-radius: 4px;
+      color: #fff;
       font-weight: bold;
+      font-size: 12px;
+      cursor: pointer;
     }
 
-    .empty-row {
-      height: 20px;
+    .btn-blue { background-color: #00a0e9; }
+    .btn-red { background-color: #ff0000; }
+
+    .search-table-group {
+      display: flex;
+      gap: 5px;
+    }
+
+    .search-table-group input {
+      border: 1px solid #000;
+      padding: 4px;
+      width: 120px;
+    }
+
+    .btn-edit {
+      background-color: #ffff00;
+      border: 1px solid #ccc;
+      padding: 2px 12px;
+      font-size: 11px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .table-register-new th {
+      font-size: 10px;
+      padding: 6px 2px;
+      background-color: #f9f9f9;
     }
 
     /* Footer */
     .footer {
-      background-color: #4D90CD;
+      background-color: #24588a;
       color: #fff;
       padding: 6px 15px;
       font-size: 11px;
@@ -268,13 +288,13 @@
 </head>
 <body>
 
-  <!-- Sidebar Navigation -->
+  <!-- Sidebar -->
   <div class="sidebar">
     <div class="brand">
       <div class="brand-logo"></div>
       <span>ASTOM</span>
     </div>
-    <div class="menu-item-main"><span>🏠</span> DASHBOARD</div>
+    <a href="#" class="menu-item-main" onclick="switchPage('dashboard')"><span>🏠</span> DASHBOARD</a>
     
     <div class="search-box">
       <input type="text" placeholder="🔍 Cari menu">
@@ -282,9 +302,9 @@
 
     <div class="menu-group">
       <div class="menu-title">REGISTER</div>
-      <a href="#" class="menu-link">NEW</a>
-      <a href="#" class="menu-link">RECIVING</a>
-      <a href="#" class="menu-link">RETURN</a>
+      <a class="menu-link" onclick="switchPage('register-new')">NEW</a>
+      <a class="menu-link">RECIVING</a>
+      <a class="menu-link">RETURN</a>
     </div>
 
     <div class="menu-group">
@@ -315,7 +335,7 @@
   <!-- Main Content -->
   <div class="main-content">
     
-    <!-- Header -->
+    <!-- Top Header -->
     <div class="header">
       <div class="header-title">ASSET CUSTOMERS CONTROL MANAGEMENT</div>
       <div class="user-login-container">
@@ -324,9 +344,8 @@
       </div>
     </div>
 
-    <div class="content-body">
-      
-      <!-- Top Cards -->
+    <!-- HALAMAN 1: DASHBOARD -->
+    <div id="page-dashboard" class="page-content active">
       <div class="cards-container">
         <div class="card card-blue">
           <div class="card-title">ASSET CUSTOMER</div>
@@ -346,7 +365,6 @@
         </div>
       </div>
 
-      <!-- Row 1: History Pemasukan & Asset Customers Chart -->
       <div class="dashboard-row">
         <div class="panel-table">
           <div class="panel-header">History Pemasukan</div>
@@ -357,14 +375,12 @@
                 <th>Dokumen</th>
                 <th>Nama Barang</th>
                 <th>Kode Barang</th>
-                <th>Nomor Pendaftaran</th>
-                <th>Tgl. Pendaftaran</th>
+                <th>Nomor Pendaftar</th>
+                <th>Tgl. Pendaftar</th>
                 <th>Aset No.</th>
               </tr>
             </thead>
             <tbody>
-              <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-              <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
               <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
               <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
               <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
@@ -383,7 +399,6 @@
         </div>
       </div>
 
-      <!-- Row 2: Return Asset Chart & History Pengembalian -->
       <div class="dashboard-row">
         <div class="panel-chart">
           <div class="chart-title">RETURN ASSET</div>
@@ -413,24 +428,97 @@
               <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
               <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
               <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-              <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-              <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
             </tbody>
           </table>
         </div>
       </div>
+    </div>
 
+    <!-- HALAMAN 2: REGISTER - NEW -->
+    <div id="page-register-new" class="page-content">
+      <div class="form-title">REGISTER - NEW</div>
+
+      <div class="form-grid">
+        <label>Nomor & Tanggal SKK</label>
+        <input type="text">
+        <div class="date-input-wrapper">
+          <input type="text">
+          <span class="calendar-icon">📅</span>
+        </div>
+
+        <label>Customer / Documen</label>
+        <input type="text">
+        <input type="text">
+
+        <label>Status Aset</label>
+        <input type="text">
+        <div></div>
+      </div>
+
+      <div style="font-weight: bold; margin-bottom: 10px; font-size: 13px;">Data Barang yang Dikirim:</div>
+
+      <div class="action-bar">
+        <div class="btn-group">
+          <button class="btn btn-blue">+ Rekam Barang</button>
+          <button class="btn btn-red">Hapus Barang</button>
+        </div>
+        <div class="search-table-group">
+          <input type="text">
+          <button class="btn btn-blue">🔍 Cari</button>
+        </div>
+      </div>
+
+      <!-- Tabel Register New -->
+      <table class="table-register-new">
+        <thead>
+          <tr>
+            <th style="width: 3%;"><input type="checkbox"></th>
+            <th>URAIAN BARANG</th>
+            <th>KODE BARANG</th>
+            <th>JUMLAH</th>
+            <th>SATUAN</th>
+            <th>ASET NO</th>
+            <th>STATUS</th>
+            <th>SKK</th>
+            <th>CUSTOMER</th>
+            <th>DOC</th>
+            <th style="width: 8%;">AKSI</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background-color: #f2f2f2;">
+            <td><input type="checkbox"></td>
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+            <td><button class="btn-edit">Edit</button></td>
+          </tr>
+          <tr style="background-color: #dcdcdc;">
+            <td><input type="checkbox"></td>
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+            <td><button class="btn-edit">Edit</button></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
     <!-- Footer -->
     <div class="footer">
       PT MURAMOTO ELEKTRONIKA INDONESIA
-      <div class="footer-sub">CUSTOMS OPERATIONS DAN COMPLIANCE DEPT.</div>
+      <div class="footer-sub">CUSTOMS OPERATIONS & COMPLIANCE DEPT.</div>
     </div>
 
   </div>
 
+  <!-- JavaScript Navigasi & Chart -->
   <script>
+    // Fungsi untuk Berpindah Halaman
+    function switchPage(pageId) {
+      document.querySelectorAll('.page-content').forEach(page => {
+        page.classList.remove('active');
+      });
+      document.getElementById('page-' + pageId).classList.add('active');
+    }
+
+    // Chart Configuration
     const ctx1 = document.getElementById('assetCustomersChart').getContext('2d');
     new Chart(ctx1, {
       type: 'pie',
@@ -446,10 +534,7 @@
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-          legend: {
-            position: 'bottom',
-            labels: { boxWidth: 10, font: { size: 10 } }
-          }
+          legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } }
         }
       }
     });
@@ -469,10 +554,7 @@
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-          legend: {
-            position: 'bottom',
-            labels: { boxWidth: 10, font: { size: 10 } }
-          }
+          legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } }
         }
       }
     });
