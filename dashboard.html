@@ -249,7 +249,7 @@
 
     .table-register-new th { font-size: 10px; padding: 6px 2px; background-color: #f9f9f9; }
 
-    /* MODAL POPUP STYLES (REKAM & EDIT) */
+    /* MODAL REKAM BARANG STYLES */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -269,9 +269,18 @@
       background: #fff;
       border: 2px solid #0e294b;
       padding: 25px 30px;
-      width: 760px;
+      width: 680px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
       position: relative;
+    }
+
+    .modal-form-grid {
+      display: grid;
+      grid-template-columns: 120px 220px 120px 140px;
+      gap: 15px 10px;
+      align-items: center;
+      font-size: 13px;
+      font-weight: bold;
     }
 
     .required-label::before {
@@ -279,25 +288,15 @@
       color: red;
     }
 
-    /* Modal Form Edit Grid Layout */
-    .edit-form-grid {
-      display: grid;
-      grid-template-columns: 110px 220px 110px 220px;
-      gap: 15px 15px;
-      align-items: center;
-      font-size: 13px;
-      font-weight: bold;
-    }
-
-    .edit-form-grid input, .edit-form-grid textarea {
+    .modal-form-grid input, .modal-form-grid textarea {
       border: 1px solid #000;
       padding: 4px 6px;
       font-size: 12px;
-      width: 100%;
     }
 
-    .edit-form-grid textarea {
-      height: 50px;
+    .modal-form-grid textarea {
+      grid-column: 2 / 5;
+      height: 60px;
       resize: none;
     }
 
@@ -305,7 +304,7 @@
       display: flex;
       gap: 12px;
       margin-top: 25px;
-      padding-left: 125px;
+      padding-left: 130px;
     }
 
     .btn-simpan {
@@ -516,6 +515,7 @@
 
       <div class="action-bar">
         <div class="btn-group">
+          <!-- Tombol ini memicu pembukaan modal Rekam Barang -->
           <button class="btn btn-blue" onclick="openRekamBarangModal()">+ Rekam Barang</button>
           <button class="btn btn-red">Hapus Barang</button>
         </div>
@@ -546,13 +546,12 @@
           <tr style="background-color: #f2f2f2;">
             <td><input type="checkbox"></td>
             <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-            <!-- Tombol Edit memicu modal Edit Barang -->
-            <td><button class="btn-edit" onclick="openEditBarangModal()">Edit</button></td>
+            <td><button class="btn-edit">Edit</button></td>
           </tr>
           <tr style="background-color: #dcdcdc;">
             <td><input type="checkbox"></td>
             <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-            <td><button class="btn-edit" onclick="openEditBarangModal()">Edit</button></td>
+            <td><button class="btn-edit">Edit</button></td>
           </tr>
         </tbody>
       </table>
@@ -561,7 +560,7 @@
     <!-- MODAL POPUP: FORM REKAM BARANG -->
     <div id="modal-rekam-barang" class="modal-overlay">
       <div class="modal-box">
-        <div class="edit-form-grid" style="grid-template-columns: 120px 220px 120px 140px;">
+        <div class="modal-form-grid">
           <label class="required-label">Uraian Barang</label>
           <textarea></textarea>
 
@@ -592,51 +591,6 @@
       </div>
     </div>
 
-    <!-- MODAL POPUP: FORM EDIT BARANG (SESUAI GAMBAR BARU) -->
-    <div id="modal-edit-barang" class="modal-overlay">
-      <div class="modal-box">
-        <div class="edit-form-grid">
-          <label class="required-label">Uraian Barang</label>
-          <textarea></textarea>
-
-          <label class="required-label">Kode Barang</label>
-          <input type="text">
-
-          <label class="required-label">Jenis Satuan</label>
-          <input type="text">
-
-          <label class="required-label">Jumlah Barang</label>
-          <input type="text">
-
-          <label class="required-label">Aset No</label>
-          <input type="text">
-          <div></div><div></div>
-
-          <label class="required-label">SKK Nomor</label>
-          <input type="text">
-
-          <label class="required-label">Customer</label>
-          <input type="text">
-
-          <label class="required-label">Status Aset</label>
-          <input type="text">
-
-          <label class="required-label">Documen</label>
-          <input type="text">
-        </div>
-
-        <div class="modal-actions">
-          <button class="btn-simpan" onclick="closeEditBarangModal()">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
-            </svg>
-            Simpan
-          </button>
-          <button class="btn-batal" onclick="closeEditBarangModal()">X Batal</button>
-        </div>
-      </div>
-    </div>
-
     <!-- Footer -->
     <div class="footer">
       PT MURAMOTO ELEKTRONIKA INDONESIA
@@ -645,7 +599,7 @@
 
   </div>
 
-  <!-- JavaScript Navigasi, Modals, & Chart -->
+  <!-- JavaScript Navigasi, Modal, & Chart -->
   <script>
     // Navigasi Halaman Sidebar
     function switchPage(pageId) {
@@ -662,15 +616,6 @@
 
     function closeRekamBarangModal() {
       document.getElementById('modal-rekam-barang').classList.remove('active');
-    }
-
-    // Modal Edit Barang Controller
-    function openEditBarangModal() {
-      document.getElementById('modal-edit-barang').classList.add('active');
-    }
-
-    function closeEditBarangModal() {
-      document.getElementById('modal-edit-barang').classList.remove('active');
     }
 
     // Chart Configuration
