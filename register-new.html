@@ -378,54 +378,67 @@
       color: red; 
     }
 
-    /* PERBAIKAN: Modal Rekam Barang Lebar & Layout Grid Presisi */
+    /* ========================================================= */
+    /* PERBAIKAN LEBAR & GRID FORM REKAM BARANG */
+    /* ========================================================= */
     .rekam-modal-box {
-      width: 750px;
+      width: 720px;
+      max-width: 90vw;
+      box-sizing: border-box;
     }
 
     .modal-form-grid {
       display: grid;
-      grid-template-columns: 110px 240px 110px 240px;
+      grid-template-columns: 100px 1fr 110px 1fr;
       gap: 12px 10px;
       align-items: center;
       font-size: 12px;
       font-weight: bold;
+      width: 100%;
+    }
+
+    .modal-form-grid label {
+      white-space: nowrap;
     }
 
     .modal-form-grid input, 
     .modal-form-grid textarea {
       width: 100%;
+      box-sizing: border-box;
       border: 2px solid #000;
-      padding: 3px 6px;
+      padding: 4px 6px;
       font-size: 11px;
     }
 
     .modal-form-grid textarea { 
       grid-column: 2 / 5; 
-      height: 45px; 
+      height: 50px; 
       resize: none; 
     }
 
-    /* Modal Edit Barang Lebar */
+    /* Edit Barang Modal Styling */
     .edit-modal-box { 
-      width: 780px; 
+      width: 750px; 
+      max-width: 90vw;
     }
 
     .edit-form-grid {
       display: grid;
-      grid-template-columns: 110px 240px 110px 240px;
+      grid-template-columns: 100px 1fr 110px 1fr;
       gap: 10px 12px;
       align-items: center;
       font-size: 12px;
       font-weight: bold;
+      width: 100%;
     }
 
     .edit-form-grid input, 
     .edit-form-grid textarea {
-      border: 2px solid #000;
-      padding: 3px 6px;
-      font-size: 11px;
       width: 100%;
+      box-sizing: border-box;
+      border: 2px solid #000;
+      padding: 4px 6px;
+      font-size: 11px;
     }
 
     .edit-form-grid textarea { 
@@ -444,7 +457,7 @@
       background-color: #179bd7;
       color: #fff;
       border: none;
-      padding: 5px 16px;
+      padding: 6px 18px;
       border-radius: 4px;
       font-weight: bold;
       font-size: 11px;
@@ -458,7 +471,7 @@
       background-color: #c00000;
       color: #fff;
       border: none;
-      padding: 5px 16px;
+      padding: 6px 18px;
       border-radius: 4px;
       font-weight: bold;
       font-size: 11px;
@@ -679,16 +692,16 @@
           </tr>
         </thead>
         <tbody id="tabel-barang-body">
-          <!-- Area Output Baris Data -->
+          <!-- Data Barang Dinamis -->
         </tbody>
       </table>
     </div>
 
-    <!-- MODAL POPUP 1: REKAM BARANG -->
+    <!-- MODAL POPUP 1: REKAM BARANG (SESUAI GAMBAR) -->
     <div id="modal-rekam-barang" class="modal-overlay">
       <div class="modal-box rekam-modal-box">
         <div style="margin-bottom: 12px;">
-          <button class="btn btn-blue" style="padding: 2px 8px;">🔍 Cari</button>
+          <button class="btn btn-blue" style="padding: 3px 10px; font-size: 11px;">🔍 Cari</button>
         </div>
 
         <div class="modal-form-grid">
@@ -696,8 +709,7 @@
           <textarea id="rekam-uraian"></textarea>
 
           <label class="required-label">Kode Barang</label>
-          <input type="text" id="rekam-kode">
-          <div></div><div></div>
+          <input type="text" id="rekam-kode" style="grid-column: 2 / 5;">
 
           <label class="required-label">Jenis Satuan</label>
           <input type="text" id="rekam-satuan">
@@ -706,8 +718,7 @@
           <input type="number" id="rekam-jumlah">
 
           <label class="required-label">Aset No</label>
-          <input type="text" id="rekam-aset">
-          <div></div><div></div>
+          <input type="text" id="rekam-aset" style="grid-column: 2 / 5;">
         </div>
 
         <div class="modal-actions">
