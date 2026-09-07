@@ -280,15 +280,12 @@
       position: relative; 
       display: flex; 
       align-items: center; 
+      width: 100%;
     }
 
-    .date-input-wrapper input { padding-right: 25px; }
-
-    .calendar-icon { 
-      position: absolute; 
-      right: 6px; 
-      font-size: 12px; 
-      pointer-events: none; 
+    .date-input-wrapper input[type="date"] {
+      width: 100%;
+      cursor: pointer;
     }
 
     .action-bar {
@@ -404,12 +401,14 @@
       resize: none; 
     }
 
-    /* Modal Edit Barang */
-    .edit-modal-box { width: 680px; }
+    /* PERBAIKAN 3: Modal Edit Barang Lebih Lebar */
+    .edit-modal-box { 
+      width: 780px; 
+    }
 
     .edit-form-grid {
       display: grid;
-      grid-template-columns: 110px 200px 110px 200px;
+      grid-template-columns: 110px 240px 110px 240px;
       gap: 10px 12px;
       align-items: center;
       font-size: 12px;
@@ -629,9 +628,9 @@
       <div class="form-grid">
         <label>Nomor & Tanggal SKK</label>
         <input type="text" id="skk-nomor-main">
+        <!-- PERBAIKAN 1: Menambahkan Kalender Native (type="date") -->
         <div class="date-input-wrapper">
-          <input type="text" id="skk-tgl-main" placeholder="DD/MM/YYYY">
-          <span class="calendar-icon">📅</span>
+          <input type="date" id="skk-tgl-main">
         </div>
 
         <label>Nama Perusahaan / Documen</label>
@@ -816,6 +815,15 @@
       currentEditIndex = null;
     }
 
+    // PERBAIKAN 2: Mengosongkan Seluruh Field Input
+    function clearMainForm() {
+      document.getElementById('skk-nomor-main').value = '';
+      document.getElementById('skk-tgl-main').value = '';
+      document.getElementById('perusahaan-main').value = '';
+      document.getElementById('documen-main').value = '';
+      document.getElementById('status-aset-main').value = '';
+    }
+
     function clearRekamForm() {
       document.getElementById('rekam-kode').value = '';
       document.getElementById('rekam-uraian').value = '';
@@ -845,6 +853,7 @@
       listBarang.push({ kode, uraian, jumlah, satuan, aset, status, skk, perusahaan, doc });
       renderTable();
       closeRekamBarangModal();
+      clearMainForm(); // Mengosongkan form utama setelah tersimpan
     }
 
     function simpanEditBarang() {
