@@ -1,1775 +1,899 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ASTOM - Receiving</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASTOM - Asset Customers Control Management</title>
+  
+  <!-- Chart.js Library -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <style>
+    /* Reset & Base Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
 
-<style>
+    body {
+      display: flex;
+      height: 100vh;
+      background-color: #e3ebf3;
+      overflow: hidden;
+    }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: Arial, Helvetica, sans-serif;
-}
+    /* Sidebar Navigation */
+    .sidebar {
+      width: 210px;
+      background-color: #24588a;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      padding: 12px 10px;
+      font-size: 11px;
+      flex-shrink: 0;
+    }
 
-body {
-  display: flex;
-  height: 100vh;
-  background-color: #e3ebf3;
-  overflow: hidden;
-}
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #f7a600;
+      margin-bottom: 8px;
+    }
 
-.sidebar {
-  width: 210px;
-  background-color: #24588a;
-  color: #fff;
-  padding: 12px 10px;
-  font-size: 11px;
-  flex-shrink: 0;
-}
+    .menu-item-main {
+      font-size: 13px;
+      font-weight: bold;
+      padding: 6px 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #fff;
+      text-decoration: none;
+    }
 
-.brand {
-  font-size: 18px;
-  font-weight: bold;
-  color: #f7a600;
-  margin-bottom: 15px;
-}
+    .search-box { margin: 8px 0 12px 0; }
+    .search-box input {
+      width: 100%;
+      padding: 3px 6px;
+      border-radius: 2px;
+      border: 1px solid #ccc;
+      font-size: 11px;
+    }
 
-.menu-title {
-  font-weight: bold;
-  margin: 12px 0 3px;
-  font-size: 11px;
-}
+    .menu-group { margin-bottom: 12px; }
+    .menu-title {
+      font-weight: bold;
+      color: #ffffff;
+      margin-bottom: 2px;
+      text-transform: uppercase;
+      font-size: 11px;
+    }
 
-.menu-link {
-  display: block;
-  color: #f7a600;
-  text-decoration: none;
-  padding: 4px 0;
-  font-size: 11px;
-}
+    .menu-link {
+      display: block;
+      color: #f7a600;
+      text-decoration: none;
+      padding: 3px 0;
+      font-size: 11px;
+      cursor: pointer;
+    }
 
-.menu-link:hover {
-  text-decoration: underline;
-}
+    .menu-link:hover, .menu-item-main:hover { text-decoration: underline; }
 
-.main-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-}
+    /* Main Content Area */
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
 
-.header {
-  background-color: #d2e1f0;
-  padding: 8px 15px;
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid #a0b8d0;
-}
+    /* Header */
+    .header {
+      background-color: #d2e1f0;
+      padding: 8px 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #a0b8d0;
+    }
 
-.header-title {
-  font-size: 14px;
-  font-weight: bold;
-}
+    .header-title {
+      font-size: 14px;
+      font-weight: bold;
+      color: #000;
+    }
 
-.user-login {
-  font-size: 11px;
-  font-weight: bold;
-}
+    .user-login-container {
+      font-size: 11px;
+      font-weight: bold;
+      color: #000;
+    }
 
-.content {
-  padding: 15px;
-}
+    /* Page Content Containers */
+    .page-content {
+      display: none;
+      padding: 15px;
+      flex: 1;
+    }
 
-.form-title {
-  font-size: 15px;
-  font-weight: bold;
-  margin-bottom: 12px;
-}
+    .page-content.active {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
 
-.receiving-filter {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 10px 0;
-}
+    .form-title { 
+      font-size: 15px; 
+      font-weight: bold; 
+      color: #000; 
+      text-transform: uppercase;
+    }
 
-.periode {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 12px;
-  font-weight: bold;
-}
+    /* Dashboard Elements */
+    .cards-container { display: flex; gap: 12px; }
+    .card { flex: 1; color: #fff; text-align: center; padding: 8px 5px; box-shadow: 1px 1px 3px rgba(0,0,0,0.15); }
+    .card-title { font-size: 11px; text-decoration: underline; font-weight: bold; margin-bottom: 12px; }
+    .card-value { font-size: 10px; font-weight: bold; }
+    .card-blue { background-color: #00a0e9; }
+    .card-green { background-color: #58b036; }
+    .card-orange { background-color: #f37023; }
+    .card-red { background-color: #ff0000; }
 
-.periode input {
-  border: 1px solid #000;
-  padding: 3px;
-}
+    .dashboard-row { display: flex; gap: 15px; align-items: stretch; }
+    .panel-table { flex: 1.6; border: 1px solid #000; background-color: #fff; display: flex; flex-direction: column; }
+    .panel-chart { flex: 1; border: 1px solid #d0d0d0; background-color: #fff; padding: 10px; display: flex; flex-direction: column; align-items: center; }
+    .panel-header { font-weight: bold; font-size: 13px; padding: 4px 8px; border-bottom: 1px solid #000; background-color: #fff; }
+    .chart-title { font-size: 13px; font-weight: bold; color: #666; margin-bottom: 8px; text-align: center; }
+    .chart-container { position: relative; width: 100%; max-width: 220px; height: 170px; }
 
-.btn {
-  padding: 5px 12px;
-  border: 1px solid #000;
-  border-radius: 3px;
-  color: #fff;
-  font-weight: bold;
-  font-size: 11px;
-  cursor: pointer;
-}
+    /* Tables */
+    table { width: 100%; border-collapse: collapse; font-size: 10px; }
+    th, td { border: 1px solid #000; padding: 4px; text-align: center; }
+    th { background-color: #eaeaea; font-weight: bold; }
+    .empty-row { height: 18px; }
+    .empty-row td { border-style: dashed solid dashed solid; }
 
-.btn-blue {
-  background-color: #179bd7;
-}
+    /* Buttons */
+    .btn {
+      padding: 4px 12px;
+      border: 1px solid #000;
+      border-radius: 3px;
+      color: #fff;
+      font-weight: bold;
+      font-size: 11px;
+      cursor: pointer;
+    }
+    .btn-blue { background-color: #179bd7; }
+    .btn-red { background-color: #ff0000; }
+    .btn-gray { background-color: #e0e0e0; color: #000; border: 1px solid #888; }
 
-.btn-red {
-  background-color: #ff0000;
-}
+    /* Register New Styles */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 160px 220px 220px;
+      gap: 10px 15px;
+      align-items: center;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .form-grid input { width: 100%; padding: 3px 6px; border: 2px solid #000; font-size: 11px; height: 24px; }
+    .action-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
 
-.btn-gray {
-  background-color: #ddd;
-  color: #000;
-}
+    /* Modal Base System */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.4);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+    .modal-overlay.active { display: flex; }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 10px;
-  background: #fff;
-}
+    .modal-box {
+      background: #fff;
+      border: 2px solid #000;
+      padding: 15px;
+      box-shadow: 2px 4px 12px rgba(0,0,0,0.3);
+      position: relative;
+    }
 
-th,
-td {
-  border: 1px solid #000;
-  padding: 5px;
-  text-align: center;
-}
+    .required-label::before { content: "* "; color: red; }
 
-th {
-  background-color: #eaeaea;
-}
+    /* Specific Modals Layout */
+    .rekam-modal-box { width: 720px; max-width: 90vw; }
+    .modal-form-grid {
+      display: grid;
+      grid-template-columns: 100px 1fr 110px 1fr;
+      gap: 10px;
+      align-items: center;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    .modal-form-grid input, .modal-form-grid textarea {
+      width: 100%; border: 2px solid #000; padding: 4px; font-size: 11px;
+    }
+    .modal-form-grid textarea { grid-column: 2 / 5; height: 50px; resize: none; }
 
-.action {
-  display: flex;
-  gap: 3px;
-  justify-content: center;
-}
+    /* Receiving Specific Layouts */
+    .receiving-filter-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+    }
 
-.action button {
-  padding: 3px 6px;
-  font-size: 9px;
-  border: 1px solid #777;
-  cursor: pointer;
-  background: #e0e0e0;
-}
+    .periode-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: bold;
+    }
 
-.footer {
-  margin-top: auto;
-  background-color: #4387c8;
-  color: #fff;
-  padding: 6px 15px;
-  font-size: 11px;
-  font-weight: bold;
-}
+    .periode-wrapper input[type="month"] {
+      border: 1px solid #000;
+      padding: 2px 4px;
+    }
 
-.footer-sub {
-  font-size: 9px;
-  font-weight: normal;
-}
+    /* Action Table Button Items */
+    .action-cell-group {
+      display: flex;
+      gap: 4px;
+      justify-content: center;
+    }
+    .btn-tbl-action {
+      padding: 2px 6px;
+      font-size: 10px;
+      font-weight: bold;
+      border: 1px solid #777;
+      background-color: #e0e0e0;
+      cursor: pointer;
+      border-radius: 2px;
+    }
 
+    /* Gate Modal Form */
+    .gate-modal-box { width: 550px; max-height: 90vh; overflow-y: auto; }
+    .gate-section-title { font-weight: bold; font-size: 12px; margin: 10px 0 5px 0; border-bottom: 1px solid #ccc; padding-bottom: 2px; }
+    .gate-grid-2 { display: grid; grid-template-columns: 80px 1fr 80px 1fr; gap: 6px; align-items: center; font-size: 11px; font-weight: bold; }
+    .gate-grid-2 input { width: 100%; border: 1px solid #000; padding: 3px; }
 
-/* MODAL */
-
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,.4);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
-
-.modal-overlay.active {
-  display: flex;
-}
-
-.modal-box {
-  background: #fff;
-  border: 2px solid #000;
-  padding: 15px;
-  width: 650px;
-  max-width: 90%;
-}
-
-.modal-title {
-  font-size: 13px;
-  font-weight: bold;
-  margin-bottom: 12px;
-}
-
-.form-modal {
-  display: grid;
-  grid-template-columns: 120px 1fr;
-  gap: 8px;
-  align-items: center;
-  font-size: 11px;
-  font-weight: bold;
-}
-
-.form-modal input,
-.form-modal textarea {
-  width: 100%;
-  border: 1px solid #000;
-  padding: 4px;
-}
-
-.form-modal textarea {
-  height: 50px;
-  resize: none;
-}
-
-.modal-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 15px;
-}
-
-</style>
+    /* Footer */
+    .footer {
+      background-color: #4387c8;
+      color: #fff;
+      padding: 6px 15px;
+      font-size: 11px;
+      font-weight: bold;
+      margin-top: auto;
+    }
+    .footer-sub { font-size: 9px; font-weight: normal; }
+  </style>
 </head>
-
-
 <body>
 
+  <!-- Sidebar Navigation -->
+  <div class="sidebar">
+    <div class="brand">ASTOM</div>
 
-<!-- SIDEBAR -->
-
-<div class="sidebar">
-
-  <div class="brand">
-    ASTOM
-  </div>
-
-
-  <div class="menu-title">
-    REGISTER
-  </div>
-
-  <a
-    class="menu-link"
-    href="register.html">
-    NEW
-  </a>
-
-  <a
-    class="menu-link"
-    href="receiving.html">
-    RECEIVING
-  </a>
-
-  <div class="menu-link">
-    RETURN
-  </div>
-
-
-  <div class="menu-title">
-    MONITORING
-  </div>
-
-  <div class="menu-link">
-    GATE
-  </div>
-
-
-  <div class="menu-title">
-    REPORT & DOWNLOAD
-  </div>
-
-  <div class="menu-link">
-    ALL ASSET
-  </div>
-
-  <div class="menu-link">
-    RETURN ASSET
-  </div>
-
-
-  <div class="menu-title">
-    SETTING
-  </div>
-
-  <div class="menu-link">
-    MASTER USER
-  </div>
-
-  <div class="menu-link">
-    MASTER CUSTOMER
-  </div>
-
-  <div class="menu-link">
-    MASTER BARANG
-  </div>
-
-</div>
-
-
-<!-- MAIN -->
-
-<div class="main-content">
-
-
-  <div class="header">
-
-    <div class="header-title">
-      ASSET CUSTOMERS CONTROL MANAGEMENT
+    <a class="menu-item-main" onclick="switchPage('dashboard')">🏠 DASHBOARD</a>
+    
+    <div class="search-box">
+      <input type="text" placeholder="🔍 Cari menu">
     </div>
 
-    <div class="user-login">
-      USER LOGIN
+    <div class="menu-group">
+      <div class="menu-title">REGISTER</div>
+      <a class="menu-link" onclick="switchPage('register-new')">NEW</a>
+      <a class="menu-link" onclick="switchPage('receiving')">RECEIVING</a>
+      <a class="menu-link">RETURN</a>
     </div>
 
+    <div class="menu-group">
+      <div class="menu-title">MONITORING</div>
+      <a class="menu-link">GATE</a>
+    </div>
+
+    <div class="menu-group">
+      <div class="menu-title">REPORT & DOWNLOAD</div>
+      <a class="menu-link">ALL ASSET</a>
+      <a class="menu-link">RETURN ASSET</a>
+    </div>
+
+    <div class="menu-group">
+      <div class="menu-title">SETTING</div>
+      <a class="menu-link">MASTER USER</a>
+      <a class="menu-link">MASTER CUSTOMER</a>
+      <a class="menu-link">MASTER BARANG</a>
+    </div>
+
+    <div class="menu-group" style="margin-top: 10px;">
+      <div class="menu-title">LOG HISTORY</div>
+      <div class="menu-title" style="margin-top: 4px;">LOGOUT</div>
+    </div>
   </div>
 
-
-  <div class="content">
-
-
-    <div class="form-title">
-      RECEIVING MOLD/DIE
+  <!-- Main Content Area -->
+  <div class="main-content">
+    
+    <!-- Top Header -->
+    <div class="header">
+      <div class="header-title">ASSET CUSTOMERS CONTROL MANAGEMENT</div>
+      <div class="user-login-container">USER LOGIN</div>
     </div>
 
-
-    <div
-      style="
-      font-weight:bold;
-      font-size:11px;
-      margin-bottom:8px;">
-      Data Barang yang Dikirim
-    </div>
-
-
-    <div class="receiving-filter">
-
-
-      <button
-        class="btn btn-blue"
-        onclick="bukaDataRegister()">
-        🔍 Cari Data Register
-      </button>
-
-
-      <div class="periode">
-
-        <label>
-          Periode Bulan
-        </label>
-
-        <input
-          type="month"
-          id="filter-bulan">
-
-        <button
-          class="btn btn-red"
-          onclick="filterData()">
-          Tampilkan
-        </button>
-
+    <!-- PAGE 1: DASHBOARD -->
+    <div id="page-dashboard" class="page-content active">
+      <div class="cards-container">
+        <div class="card card-blue"><div class="card-title">ASSET CUSTOMER</div><div class="card-value">JUMLAH</div></div>
+        <div class="card card-green"><div class="card-title">BC 2.7</div><div class="card-value">JUMLAH</div></div>
+        <div class="card card-orange"><div class="card-title">BC 4.0</div><div class="card-value">JUMLAH</div></div>
+        <div class="card card-red"><div class="card-title">RETURN ASSET</div><div class="card-value">JUMLAH</div></div>
       </div>
 
+      <div class="dashboard-row">
+        <div class="panel-table">
+          <div class="panel-header">History Pemasukan</div>
+          <table>
+            <thead><tr><th>No</th><th>Dokumen</th><th>Nama Barang</th><th>Kode Barang</th><th>Nomor Pendaftar</th><th>Tgl. Pendaftar</th><th>Aset No.</th></tr></thead>
+            <tbody>
+              <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="panel-chart">
+          <div class="chart-title">ASSET CUSTOMERS</div>
+          <div class="chart-container"><canvas id="assetCustomersChart"></canvas></div>
+        </div>
+      </div>
     </div>
 
-
-    <!-- TABLE RECEIVING -->
-
-    <table>
-
-      <thead>
-
-        <tr>
-
-          <th>
-            <input
-              type="checkbox"
-              onclick="pilihSemuaReceiving(this)">
-          </th>
-
-          <th>KODE BARANG</th>
-
-          <th>URAIAN BARANG</th>
-
-          <th>JUMLAH</th>
-
-          <th>SATUAN</th>
-
-          <th>ASET NO</th>
-
-          <th>STATUS</th>
-
-          <th>PERUSAHAAN</th>
-
-          <th>KODE DOC</th>
-
-          <th>NOMOR AJU</th>
-
-          <th>NOMOR DAFTAR</th>
-
-          <th>TGL. DAFTAR</th>
-
-          <th>AKSI</th>
-
-        </tr>
-
-      </thead>
-
-
-      <tbody id="receiving-body">
-
-      </tbody>
-
-    </table>
-
-  </div>
-
-
-  <div class="footer">
-
-    PT MURAMOTO ELEKTRONIKA INDONESIA
-
-    <div class="footer-sub">
-      CUSTOMS OPERATIONS & COMPLIANCE DEPT.
-    </div>
-
-  </div>
-
-</div>
-
-
-
-<!-- MODAL DATA REGISTER -->
-
-<div
-  id="modal-register"
-  class="modal-overlay">
-
-  <div class="modal-box">
-
-    <div class="modal-title">
-      DATA BARANG DARI REGISTER NEW
-    </div>
-
-
-    <table>
-
-      <thead>
-
-        <tr>
-
-          <th>PILIH</th>
-          <th>KODE</th>
-          <th>URAIAN</th>
-          <th>JUMLAH</th>
-          <th>SATUAN</th>
-          <th>ASET</th>
-          <th>PERUSAHAAN</th>
-
-        </tr>
-
-      </thead>
-
-
-      <tbody id="register-modal-body">
-
-      </tbody>
-
-    </table>
-
-
-    <div class="modal-buttons">
-
-      <button
-        class="btn btn-blue"
-        onclick="ambilKeReceiving()">
-        Pilih
-      </button>
-
-      <button
-        class="btn btn-red"
-        onclick="tutupDataRegister()">
-        Batal
-      </button>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-
-<!-- MODAL ADD DOKUMEN -->
-
-<div
-  id="modal-doc"
-  class="modal-overlay">
-
-  <div class="modal-box">
-
-    <div class="modal-title">
-      INPUT DOKUMEN PABEAN
-    </div>
-
-
-    <div class="form-modal">
-
-      <label>Kode Doc</label>
-
-      <input
-        id="kode-doc">
-
-
-      <label>Nomor Pengajuan</label>
-
-      <input
-        id="no-aju">
-
-
-      <label>Nomor Daftar</label>
-
-      <input
-        id="no-daftar">
-
-
-      <label>Tgl. Daftar</label>
-
-      <input
-        type="date"
-        id="tgl-daftar">
-
-    </div>
-
-
-    <div class="modal-buttons">
-
-      <button
-        class="btn btn-blue"
-        onclick="simpanDokumen()">
-        Simpan
-      </button>
-
-      <button
-        class="btn btn-red"
-        onclick="tutupDokumen()">
-        Batal
-      </button>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-
-<!-- MODAL GATE -->
-
-<div
-  id="modal-gate"
-  class="modal-overlay">
-
-  <div class="modal-box">
-
-    <div class="modal-title">
-      GATE / REKAM MASUK
-    </div>
-
-
-    <div class="form-modal">
-
-      <label>Kode Barang</label>
-      <input id="gate-kode" readonly>
-
-
-      <label>Uraian</label>
-      <input id="gate-uraian" readonly>
-
-
-      <label>Jumlah</label>
-      <input id="gate-jumlah" readonly>
-
-
-      <label>Satuan</label>
-      <input id="gate-satuan" readonly>
-
-
-      <label>Tanggal Masuk</label>
-      <input type="date" id="gate-tanggal">
-
-
-      <label>Waktu Masuk</label>
-      <input type="time" id="gate-waktu">
-
-
-      <label>Penerima</label>
-      <input id="gate-penerima">
-
-
-      <label>Lokasi</label>
-      <input id="gate-lokasi">
-
-
-      <label>Keterangan</label>
-      <textarea id="gate-keterangan"></textarea>
-
-    </div>
-
-
-    <div class="modal-buttons">
-
-      <button
-        class="btn btn-blue"
-        onclick="simpanGate()">
-        Simpan
-      </button>
-
-      <button
-        class="btn btn-red"
-        onclick="tutupGate()">
-        Batal
-      </button>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-
-<!-- MODAL PREVIEW -->
-
-<div
-  id="modal-preview"
-  class="modal-overlay">
-
-  <div class="modal-box">
-
-    <div class="modal-title">
-      PREVIEW DATA
-    </div>
-
-
-    <div
-      id="preview-data"
-      style="
-      font-size:11px;
-      line-height:1.8;">
-    </div>
-
-
-    <div class="modal-buttons">
-
-      <button
-        class="btn btn-red"
-        onclick="tutupPreview()">
-        Tutup
-      </button>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-
-<script>
-
-/*
-==================================================
-STORAGE YANG SAMA DENGAN REGISTER.HTML
-==================================================
-*/
-
-const REGISTER_STORAGE =
-  "ASTOM_REGISTER_DATA";
-
-const RECEIVING_STORAGE =
-  "ASTOM_RECEIVING_DATA";
-
-
-/*
-==================================================
-DATA
-==================================================
-*/
-
-let listRegister =
-  JSON.parse(
-    localStorage.getItem(
-      REGISTER_STORAGE
-    )
-  ) || [];
-
-
-let listReceiving =
-  JSON.parse(
-    localStorage.getItem(
-      RECEIVING_STORAGE
-    )
-  ) || [];
-
-
-let selectedIndex = null;
-
-
-/*
-==================================================
-BUKA DATA REGISTER
-==================================================
-*/
-
-function bukaDataRegister() {
-
-  /*
-  SELALU BACA ULANG REGISTER
-  SUPAYA DATA TERBARU LANGSUNG MASUK
-  */
-
-  listRegister =
-    JSON.parse(
-      localStorage.getItem(
-        REGISTER_STORAGE
-      )
-    ) || [];
-
-
-  const tbody =
-    document.getElementById(
-      "register-modal-body"
-    );
-
-
-  tbody.innerHTML = "";
-
-
-  if (listRegister.length === 0) {
-
-    tbody.innerHTML = `
-
-      <tr>
-
-        <td
-          colspan="7"
-          style="padding:15px;">
-
-          Belum ada data Register New.
-
-        </td>
-
-      </tr>
-
-    `;
-
-  } else {
-
-    listRegister.forEach(
-      (item, index) => {
-
-        /*
-        CEK APAKAH SUDAH ADA DI RECEIVING
-        */
-
-        const sudahAda =
-          listReceiving.some(
-            receiving =>
-              receiving.registerId === item.id
-          );
-
-
-        tbody.innerHTML += `
-
+    <!-- PAGE 2: REGISTER - NEW -->
+    <div id="page-register-new" class="page-content">
+      <div class="form-title">REGISTER - NEW</div>
+
+      <div class="form-grid">
+        <label>Nomor & Tanggal SKK</label>
+        <input type="text" id="skk-nomor-main">
+        <input type="date" id="skk-tgl-main">
+
+        <label>Nama Perusahaan / Documen</label>
+        <input type="text" id="perusahaan-main">
+        <input type="text" id="documen-main">
+
+        <label>Status Aset</label>
+        <input type="text" id="status-aset-main">
+        <div></div>
+      </div>
+
+      <div style="font-weight: bold; font-size: 12px;">Data Barang yang Dikirim:</div>
+
+      <div class="action-bar">
+        <div class="btn-group">
+          <button class="btn btn-blue" onclick="openRekamBarangModal()">+ Rekam</button>
+          <button class="btn btn-red" onclick="hapusBarangRegisterTerpilih()">Hapus Barang</button>
+        </div>
+      </div>
+
+      <table class="table-register-new">
+        <thead>
           <tr>
-
-            <td>
-
-              <input
-                type="checkbox"
-                class="check-register"
-                data-index="${index}"
-                ${sudahAda ? "disabled" : ""}>
-
-            </td>
-
-            <td>
-              ${item.kode}
-            </td>
-
-            <td style="text-align:left;">
-              ${item.uraian}
-            </td>
-
-            <td>
-              ${item.jumlah}
-            </td>
-
-            <td>
-              ${item.satuan}
-            </td>
-
-            <td>
-              ${item.aset}
-            </td>
-
-            <td>
-              ${item.perusahaan}
-            </td>
-
+            <th style="width: 25px;"><input type="checkbox" id="check-all-reg" onclick="toggleSelectAllReg(this)"></th>
+            <th>KODE BARANG</th>
+            <th>URAIAN BARANG</th>
+            <th>JUMLAH</th>
+            <th>SATUAN</th>
+            <th>ASET NO</th>
+            <th>STATUS</th>
+            <th>SKK</th>
+            <th>PERUSAHAAN</th>
+            <th>DOC</th>
           </tr>
+        </thead>
+        <tbody id="tabel-register-body"></tbody>
+      </table>
+    </div>
 
-        `;
+    <!-- PAGE 3: RECEIVING MOLD/DIE (SESUAI GAMBAR BARU) -->
+    <div id="page-receiving" class="page-content">
+      <div class="form-title">RECEIVING MOLD/DIE</div>
+      <div style="font-weight: bold; font-size: 11px;">Data Barang yang Dikirim</div>
 
-      }
-    );
+      <div class="receiving-filter-bar">
+        <button class="btn btn-blue" onclick="openSearchRegisterModal()">🔍 Cari</button>
 
-  }
+        <div class="periode-wrapper">
+          <label>Periode Bulan</label>
+          <input type="month" id="filter-bulan">
+          <button class="btn btn-red" style="padding: 3px 10px;">Tampilkan</button>
+        </div>
+      </div>
 
+      <!-- Tabel Receiving Master -->
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 25px;"><input type="checkbox"></th>
+            <th>KODE BARANG</th>
+            <th>URAIAN BARANG</th>
+            <th>JUMLAH</th>
+            <th>SATUAN</th>
+            <th>ASET NO</th>
+            <th>STATUS</th>
+            <th>PERUSAHAAN</th>
+            <th>KODE DOC</th>
+            <th>NOMOR AJU</th>
+            <th>NOMOR DAFTAR</th>
+            <th>TGL. DAFTAR</th>
+            <th style="width: 140px;">AKSI</th>
+          </tr>
+        </thead>
+        <tbody id="tabel-receiving-body">
+          <!-- Item terpilih dari menu Register New masuk ke sini -->
+        </tbody>
+      </table>
+    </div>
 
-  document
-    .getElementById(
-      "modal-register"
-    )
-    .classList.add("active");
+    <!-- MODAL 1: REKAM BARANG (REGISTER NEW) -->
+    <div id="modal-rekam-barang" class="modal-overlay">
+      <div class="modal-box rekam-modal-box">
+        <div class="modal-form-grid">
+          <label class="required-label">Uraian Barang</label>
+          <textarea id="rekam-uraian"></textarea>
 
-}
+          <label class="required-label">Kode Barang</label>
+          <input type="text" id="rekam-kode" style="grid-column: 2 / 5;">
 
+          <label class="required-label">Jenis Satuan</label>
+          <input type="text" id="rekam-satuan">
 
-/*
-==================================================
-TUTUP MODAL REGISTER
-==================================================
-*/
+          <label class="required-label" style="text-align: right; padding-right: 5px;">Jumlah Barang</label>
+          <input type="number" id="rekam-jumlah">
 
-function tutupDataRegister() {
+          <label class="required-label">Aset No</label>
+          <input type="text" id="rekam-aset" style="grid-column: 2 / 5;">
+        </div>
 
-  document
-    .getElementById(
-      "modal-register"
-    )
-    .classList.remove("active");
+        <div style="display:flex; gap:10px; justify-content:center; margin-top:15px;">
+          <button class="btn btn-blue" onclick="simpanBarangRegister()">🚀 Simpan</button>
+          <button class="btn btn-red" onclick="closeRekamBarangModal()">X Batal</button>
+        </div>
+      </div>
+    </div>
 
-}
+    <!-- MODAL 2: CARI DATA FROM REGISTER NEW (DI MENU RECEIVING) -->
+    <div id="modal-cari-register" class="modal-overlay">
+      <div class="modal-box" style="width: 780px;">
+        <div style="font-weight: bold; font-size: 13px; margin-bottom: 10px;">Pilih Data Barang dari Register New</div>
+        
+        <table style="margin-bottom: 15px;">
+          <thead>
+            <tr>
+              <th style="width: 30px;">Pilih</th>
+              <th>URAIAN BARANG</th>
+              <th>KODE BARANG</th>
+              <th>JUMLAH</th>
+              <th>SATUAN</th>
+              <th>ASET NO</th>
+              <th>STATUS</th>
+              <th>SKK</th>
+              <th>PERUSAHAAN</th>
+              <th>DOC</th>
+            </tr>
+          </thead>
+          <tbody id="tabel-modal-cari-body">
+            <!-- Menampilkan item dari register new -->
+          </tbody>
+        </table>
 
+        <div style="display: flex; gap: 8px;">
+          <button class="btn btn-blue" onclick="tarikDataKeReceiving()">Pilih</button>
+          <button class="btn btn-red" onclick="closeSearchRegisterModal()">Batal</button>
+        </div>
+      </div>
+    </div>
 
-/*
-==================================================
-AMBIL DATA REGISTER KE RECEIVING
-==================================================
-*/
+    <!-- MODAL 3: ADD DOKUMEN BC (RECEIVING) -->
+    <div id="modal-add-doc" class="modal-overlay">
+      <div class="modal-box" style="width: 480px;">
+        <div style="font-weight: bold; margin-bottom: 10px; font-size: 12px;">Input Dokumen Pabean (BC)</div>
+        <div style="display: grid; grid-template-columns: 100px 1fr; gap: 8px; font-size: 11px; font-weight: bold; align-items: center;">
+          <label>Kode Doc</label>
+          <input type="text" id="add-kode-doc" style="border:1px solid #000; padding:3px;">
 
-function ambilKeReceiving() {
+          <label>Nomor Pengajuan</label>
+          <input type="text" id="add-no-aju" style="border:1px solid #000; padding:3px;">
 
-  const checked =
-    document.querySelectorAll(
-      ".check-register:checked"
-    );
+          <label>Nomor Daftar</label>
+          <input type="text" id="add-no-daftar" style="border:1px solid #000; padding:3px;">
 
+          <label>Tgl. Daftar</label>
+          <input type="date" id="add-tgl-daftar" style="border:1px solid #000; padding:3px;">
+        </div>
+        <div style="display:flex; justify-content:center; margin-top:15px; gap:8px;">
+          <button class="btn btn-blue" onclick="simpanDocBC()">Simpan</button>
+          <button class="btn btn-red" onclick="closeModalAddDoc()">Batal</button>
+        </div>
+      </div>
+    </div>
 
-  if (checked.length === 0) {
+    <!-- MODAL 4: GATE / REKAM MASUK (RECEIVING) -->
+    <div id="modal-gate" class="modal-overlay">
+      <div class="modal-box gate-modal-box">
+        <div class="gate-section-title">DATA BARANG</div>
+        <div class="gate-grid-2">
+          <label>Kode Barang</label><input type="text" id="gate-kode" readonly>
+          <label>Jumlah</label><input type="text" id="gate-jumlah" readonly>
+          <label>Uraian Barang</label><input type="text" id="gate-uraian" readonly>
+          <label>Satuan</label><input type="text" id="gate-satuan" readonly>
+        </div>
 
-    alert(
-      "Pilih minimal satu data Register."
-    );
+        <div class="gate-section-title">REKAM MASUK</div>
+        <div class="gate-grid-2">
+          <label>Tanggal</label><input type="date" id="gate-tgl">
+          <label>Waktu</label><input type="time" id="gate-waktu">
+          <label>Penerima</label><input type="text" id="gate-penerima">
+          <label>Lokasi</label><input type="text" id="gate-lokasi">
+        </div>
 
-    return;
+        <div class="gate-section-title">FOTO PENDUKUNG</div>
+        <div style="display:grid; grid-template-columns: 100px 1fr; gap:8px; font-size:11px; align-items:center;">
+          <span>Foto Unit</span><input type="file" id="gate-foto-unit">
+          <span>Foto Label</span><input type="file" id="gate-foto-label">
+        </div>
 
-  }
+        <div class="gate-section-title">KESESUAIAN DATA</div>
+        <div style="display:flex; gap:10px; margin-bottom:8px;">
+          <button class="btn btn-blue" style="padding:3px 15px;">Sesuai</button>
+          <button class="btn btn-red" style="padding:3px 15px;">Tidak Sesuai</button>
+        </div>
 
+        <div class="gate-section-title">KETERANGAN</div>
+        <textarea id="gate-keterangan" style="width:100%; height:45px; border:1px solid #000;"></textarea>
 
-  checked.forEach(
-    checkbox => {
+        <div style="display:flex; justify-content:center; margin-top:12px; gap:8px;">
+          <button class="btn btn-blue" onclick="simpanGateData()">🚀 Simpan</button>
+          <button class="btn btn-red" onclick="closeModalGate()">Batal</button>
+        </div>
+      </div>
+    </div>
 
-      const index =
-        Number(
-          checkbox.dataset.index
-        );
+    <!-- MODAL 5: PREVIEW DATA (RECEIVING) -->
+    <div id="modal-preview" class="modal-overlay">
+      <div class="modal-box" style="width: 500px; font-size: 11px;">
+        <div style="background-color: #bce3fb; padding: 4px; font-weight: bold; margin-bottom: 10px; text-align: center;">PREVIEW</div>
+        
+        <div style="display: grid; grid-template-columns: 100px 1fr; gap: 4px; margin-bottom: 8px;">
+          <strong>Perusahaan:</strong> <span id="prev-perusahaan">-</span>
+        </div>
 
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 4px; margin-bottom: 8px;">
+          <div><strong>Kode Doc:</strong> <div id="prev-doc">-</div></div>
+          <div><strong>Nomor Pengajuan:</strong> <div id="prev-aju">-</div></div>
+          <div><strong>Nomor Daftar:</strong> <div id="prev-daftar">-</div></div>
+          <div><strong>Tgl. Daftar:</strong> <div id="prev-tgldaftar">-</div></div>
+        </div>
 
-      const register =
-        listRegister[index];
+        <div style="font-weight: bold; border-bottom: 1px solid #000; margin-top: 8px;">DATA BARANG</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 4px; margin-top: 4px;">
+          <div><strong>Kode Barang:</strong> <div id="prev-kode">-</div></div>
+          <div><strong>Uraian Barang:</strong> <div id="prev-uraian">-</div></div>
+          <div><strong>Jumlah:</strong> <div id="prev-jumlah">-</div></div>
+          <div><strong>Satuan:</strong> <div id="prev-satuan">-</div></div>
+        </div>
 
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 6px;">
+          <div><strong>Aset Nomor:</strong> <div id="prev-aset">-</div></div>
+          <div><strong>Status Aset:</strong> <div id="prev-status">-</div></div>
+        </div>
 
-      /*
-      CEGAH DATA DUPLIKAT
-      */
+        <div style="font-weight: bold; border-bottom: 1px solid #000; margin-top: 8px;">WAKTU MASUK</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 4px; margin-top: 4px;">
+          <div><strong>Tanggal:</strong> <div id="prev-tglmasuk">-</div></div>
+          <div><strong>Waktu:</strong> <div id="prev-waktu">-</div></div>
+          <div><strong>Penerima:</strong> <div id="prev-penerima">-</div></div>
+          <div><strong>Lokasi:</strong> <div id="prev-lokasi">-</div></div>
+        </div>
 
-      const sudahAda =
-        listReceiving.some(
-          item =>
-            item.registerId === register.id
-        );
+        <div style="display: flex; justify-content: flex-end; margin-top: 15px;">
+          <button class="btn btn-red" onclick="closeModalPreview()">Tutup</button>
+        </div>
+      </div>
+    </div>
 
+    <!-- Footer -->
+    <div class="footer">
+      PT MURAMOTO ELEKTRONIKA INDONESIA
+      <div class="footer-sub">CUSTOMS OPERATIONS & COMPLIANCE DEPT.</div>
+    </div>
 
-      if (sudahAda) {
+  </div>
+
+  <script>
+    // Global Storage Data
+    let listRegisterNew = [];
+    let listReceiving = [];
+    let selectedReceivingIndex = null;
+
+    // Navigation Switcher
+    function switchPage(pageId) {
+      document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
+      const target = document.getElementById('page-' + pageId);
+      if (target) target.classList.add('active');
+    }
+
+    /* ---------------------------------------------------- */
+    /* REGISTER NEW LOGIC                                    */
+    /* ---------------------------------------------------- */
+    function openRekamBarangModal() {
+      document.getElementById('modal-rekam-barang').classList.add('active');
+    }
+
+    function closeRekamBarangModal() {
+      document.getElementById('modal-rekam-barang').classList.remove('active');
+    }
+
+    function simpanBarangRegister() {
+      const kode = document.getElementById('rekam-kode').value;
+      const uraian = document.getElementById('rekam-uraian').value;
+      const satuan = document.getElementById('rekam-satuan').value;
+      const jumlah = document.getElementById('rekam-jumlah').value;
+      const aset = document.getElementById('rekam-aset').value;
+
+      const skk = document.getElementById('skk-nomor-main').value || '-';
+      const perusahaan = document.getElementById('perusahaan-main').value || '-';
+      const doc = document.getElementById('documen-main').value || '-';
+      const status = document.getElementById('status-aset-main').value || '-';
+
+      if (!kode || !uraian) {
+        alert('Lengkapi Kode dan Uraian Barang!');
         return;
       }
 
+      listRegisterNew.push({ kode, uraian, jumlah, satuan, aset, status, skk, perusahaan, doc });
+      renderRegisterTable();
+      closeRekamBarangModal();
+    }
 
-      /*
-      COPY DATA REGISTER
-      KE RECEIVING
-      */
+    function renderRegisterTable() {
+      const tbody = document.getElementById('tabel-register-body');
+      tbody.innerHTML = '';
+      
+      listRegisterNew.forEach((item, idx) => {
+        tbody.innerHTML += `
+          <tr>
+            <td><input type="checkbox" class="cb-reg" data-idx="${idx}"></td>
+            <td>${item.kode}</td>
+            <td style="text-align:left;">${item.uraian}</td>
+            <td>${item.jumlah}</td>
+            <td>${item.satuan}</td>
+            <td>${item.aset}</td>
+            <td>${item.status}</td>
+            <td>${item.skk}</td>
+            <td>${item.perusahaan}</td>
+            <td>${item.doc}</td>
+          </tr>
+        `;
+      });
+    }
 
-      listReceiving.push({
+    function toggleSelectAllReg(master) {
+      document.querySelectorAll('.cb-reg').forEach(cb => cb.checked = master.checked);
+    }
 
-        registerId:
-          register.id,
+    function hapusBarangRegisterTerpilih() {
+      const checked = document.querySelectorAll('.cb-reg:checked');
+      const idxs = Array.from(checked).map(c => parseInt(c.dataset.idx));
+      listRegisterNew = listRegisterNew.filter((_, i) => !idxs.includes(i));
+      renderRegisterTable();
+    }
 
-        kode:
-          register.kode,
+    /* ---------------------------------------------------- */
+    /* RECEIVING MOLD/DIE LOGIC                              */
+    /* ---------------------------------------------------- */
+    function openSearchRegisterModal() {
+      const tbody = document.getElementById('tabel-modal-cari-body');
+      tbody.innerHTML = '';
 
-        uraian:
-          register.uraian,
+      if (listRegisterNew.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="10" style="padding:10px;">Tidak ada data di Register New. Silakan input Register New dahulu.</td></tr>';
+      } else {
+        listRegisterNew.forEach((item, idx) => {
+          tbody.innerHTML += `
+            <tr>
+              <td><input type="checkbox" class="cb-modal-cari" data-idx="${idx}"></td>
+              <td style="text-align:left;">${item.uraian}</td>
+              <td>${item.kode}</td>
+              <td>${item.jumlah}</td>
+              <td>${item.satuan}</td>
+              <td>${item.aset}</td>
+              <td>${item.status}</td>
+              <td>${item.skk}</td>
+              <td>${item.perusahaan}</td>
+              <td>${item.doc}</td>
+            </tr>
+          `;
+        });
+      }
 
-        jumlah:
-          register.jumlah,
+      document.getElementById('modal-cari-register').classList.add('active');
+    }
 
-        satuan:
-          register.satuan,
+    function closeSearchRegisterModal() {
+      document.getElementById('modal-cari-register').classList.remove('active');
+    }
 
-        aset:
-          register.aset,
+    function tarikDataKeReceiving() {
+      const checked = document.querySelectorAll('.cb-modal-cari:checked');
+      checked.forEach(cb => {
+        const idx = parseInt(cb.dataset.idx);
+        const item = listRegisterNew[idx];
 
-        status:
-          register.status,
-
-        skk:
-          register.skk,
-
-        perusahaan:
-          register.perusahaan,
-
-        doc:
-          register.doc,
-
-
-        /*
-        DOKUMEN BC
-        */
-
-        kodeDoc:
-          register.doc || "-",
-
-        noAju:
-          "-",
-
-        noDaftar:
-          "-",
-
-        tglDaftar:
-          "-",
-
-
-        /*
-        GATE
-        */
-
-        gateTanggal:
-          "-",
-
-        gateWaktu:
-          "-",
-
-        gatePenerima:
-          "-",
-
-        gateLokasi:
-          "-",
-
-        gateKeterangan:
-          "-"
-
+        // Memindahkan data ke listReceiving dengan field awal tambahan kosong untuk BC & Gate
+        listReceiving.push({
+          ...item,
+          kodeDoc: item.doc,
+          noAju: '-',
+          noDaftar: '-',
+          tglDaftar: '-',
+          gateTgl: '-',
+          gateWaktu: '-',
+          gatePenerima: '-',
+          gateLokasi: '-'
+        });
       });
 
-    }
-  );
-
-
-  /*
-  SIMPAN RECEIVING
-  */
-
-  localStorage.setItem(
-    RECEIVING_STORAGE,
-    JSON.stringify(
-      listReceiving
-    )
-  );
-
-
-  renderReceiving();
-
-  tutupDataRegister();
-
-}
-
-
-/*
-==================================================
-RENDER RECEIVING
-==================================================
-*/
-
-function renderReceiving() {
-
-  const tbody =
-    document.getElementById(
-      "receiving-body"
-    );
-
-
-  tbody.innerHTML = "";
-
-
-  if (listReceiving.length === 0) {
-
-    tbody.innerHTML = `
-
-      <tr>
-
-        <td
-          colspan="13"
-          style="
-          padding:15px;
-          color:#888;">
-
-          DATA RECEIVING BELUM ADA
-
-        </td>
-
-      </tr>
-
-    `;
-
-    return;
-
-  }
-
-
-  listReceiving.forEach(
-    (item, index) => {
-
-      tbody.innerHTML += `
-
-        <tr>
-
-          <td>
-            <input
-              type="checkbox"
-              class="check-receiving"
-              data-index="${index}">
-          </td>
-
-          <td>
-            ${item.kode}
-          </td>
-
-          <td style="text-align:left;">
-            ${item.uraian}
-          </td>
-
-          <td>
-            ${item.jumlah}
-          </td>
-
-          <td>
-            ${item.satuan}
-          </td>
-
-          <td>
-            ${item.aset}
-          </td>
-
-          <td>
-            ${item.status}
-          </td>
-
-          <td>
-            ${item.perusahaan}
-          </td>
-
-          <td>
-            ${item.kodeDoc}
-          </td>
-
-          <td>
-            ${item.noAju}
-          </td>
-
-          <td>
-            ${item.noDaftar}
-          </td>
-
-          <td>
-            ${item.tglDaftar}
-          </td>
-
-          <td>
-
-            <div class="action">
-
-              <button
-                onclick="bukaGate(${index})">
-                GATE
-              </button>
-
-              <button
-                onclick="bukaDokumen(${index})">
-                ADD
-              </button>
-
-              <button
-                onclick="preview(${index})">
-                👁
-              </button>
-
-              <button
-                style="background:#ff9999;"
-                onclick="hapusReceiving(${index})">
-                🗑
-              </button>
-
-            </div>
-
-          </td>
-
-        </tr>
-
-      `;
-
-    }
-  );
-
-}
-
-
-/*
-==================================================
-ADD DOKUMEN
-==================================================
-*/
-
-function bukaDokumen(index) {
-
-  selectedIndex = index;
-
-  const item =
-    listReceiving[index];
-
-
-  document.getElementById(
-    "kode-doc"
-  ).value =
-    item.kodeDoc === "-"
-      ? ""
-      : item.kodeDoc;
-
-
-  document.getElementById(
-    "no-aju"
-  ).value =
-    item.noAju === "-"
-      ? ""
-      : item.noAju;
-
-
-  document.getElementById(
-    "no-daftar"
-  ).value =
-    item.noDaftar === "-"
-      ? ""
-      : item.noDaftar;
-
-
-  document.getElementById(
-    "tgl-daftar"
-  ).value =
-    item.tglDaftar === "-"
-      ? ""
-      : item.tglDaftar;
-
-
-  document
-    .getElementById(
-      "modal-doc"
-    )
-    .classList.add("active");
-
-}
-
-
-function tutupDokumen() {
-
-  document
-    .getElementById(
-      "modal-doc"
-    )
-    .classList.remove("active");
-
-  selectedIndex = null;
-
-}
-
-
-function simpanDokumen() {
-
-  if (selectedIndex === null) {
-    return;
-  }
-
-
-  listReceiving[
-    selectedIndex
-  ].kodeDoc =
-    document.getElementById(
-      "kode-doc"
-    ).value || "-";
-
-
-  listReceiving[
-    selectedIndex
-  ].noAju =
-    document.getElementById(
-      "no-aju"
-    ).value || "-";
-
-
-  listReceiving[
-    selectedIndex
-  ].noDaftar =
-    document.getElementById(
-      "no-daftar"
-    ).value || "-";
-
-
-  listReceiving[
-    selectedIndex
-  ].tglDaftar =
-    document.getElementById(
-      "tgl-daftar"
-    ).value || "-";
-
-
-  simpanReceiving();
-
-  renderReceiving();
-
-  tutupDokumen();
-
-}
-
-
-/*
-==================================================
-GATE
-==================================================
-*/
-
-function bukaGate(index) {
-
-  selectedIndex = index;
-
-  const item =
-    listReceiving[index];
-
-
-  document.getElementById(
-    "gate-kode"
-  ).value = item.kode;
-
-
-  document.getElementById(
-    "gate-uraian"
-  ).value = item.uraian;
-
-
-  document.getElementById(
-    "gate-jumlah"
-  ).value = item.jumlah;
-
-
-  document.getElementById(
-    "gate-satuan"
-  ).value = item.satuan;
-
-
-  document.getElementById(
-    "gate-tanggal"
-  ).value =
-    item.gateTanggal === "-"
-      ? ""
-      : item.gateTanggal;
-
-
-  document.getElementById(
-    "gate-waktu"
-  ).value =
-    item.gateWaktu === "-"
-      ? ""
-      : item.gateWaktu;
-
-
-  document.getElementById(
-    "gate-penerima"
-  ).value =
-    item.gatePenerima === "-"
-      ? ""
-      : item.gatePenerima;
-
-
-  document.getElementById(
-    "gate-lokasi"
-  ).value =
-    item.gateLokasi === "-"
-      ? ""
-      : item.gateLokasi;
-
-
-  document.getElementById(
-    "gate-keterangan"
-  ).value =
-    item.gateKeterangan === "-"
-      ? ""
-      : item.gateKeterangan;
-
-
-  document
-    .getElementById(
-      "modal-gate"
-    )
-    .classList.add("active");
-
-}
-
-
-function tutupGate() {
-
-  document
-    .getElementById(
-      "modal-gate"
-    )
-    .classList.remove("active");
-
-  selectedIndex = null;
-
-}
-
-
-function simpanGate() {
-
-  if (selectedIndex === null) {
-    return;
-  }
-
-
-  const item =
-    listReceiving[
-      selectedIndex
-    ];
-
-
-  item.gateTanggal =
-    document.getElementById(
-      "gate-tanggal"
-    ).value || "-";
-
-
-  item.gateWaktu =
-    document.getElementById(
-      "gate-waktu"
-    ).value || "-";
-
-
-  item.gatePenerima =
-    document.getElementById(
-      "gate-penerima"
-    ).value || "-";
-
-
-  item.gateLokasi =
-    document.getElementById(
-      "gate-lokasi"
-    ).value || "-";
-
-
-  item.gateKeterangan =
-    document.getElementById(
-      "gate-keterangan"
-    ).value || "-";
-
-
-  simpanReceiving();
-
-  renderReceiving();
-
-  tutupGate();
-
-}
-
-
-/*
-==================================================
-PREVIEW
-==================================================
-*/
-
-function preview(index) {
-
-  const item =
-    listReceiving[index];
-
-
-  document.getElementById(
-    "preview-data"
-  ).innerHTML = `
-
-    <b>PERUSAHAAN:</b>
-    ${item.perusahaan}
-    <br>
-
-    <b>KODE DOC:</b>
-    ${item.kodeDoc}
-    <br>
-
-    <b>NOMOR AJU:</b>
-    ${item.noAju}
-    <br>
-
-    <b>NOMOR DAFTAR:</b>
-    ${item.noDaftar}
-    <br>
-
-    <b>TGL DAFTAR:</b>
-    ${item.tglDaftar}
-    <hr>
-
-    <b>KODE BARANG:</b>
-    ${item.kode}
-    <br>
-
-    <b>URAIAN:</b>
-    ${item.uraian}
-    <br>
-
-    <b>JUMLAH:</b>
-    ${item.jumlah}
-    <br>
-
-    <b>SATUAN:</b>
-    ${item.satuan}
-    <br>
-
-    <b>ASET NO:</b>
-    ${item.aset}
-    <br>
-
-    <b>STATUS:</b>
-    ${item.status}
-    <hr>
-
-    <b>TANGGAL MASUK:</b>
-    ${item.gateTanggal}
-    <br>
-
-    <b>WAKTU MASUK:</b>
-    ${item.gateWaktu}
-    <br>
-
-    <b>PENERIMA:</b>
-    ${item.gatePenerima}
-    <br>
-
-    <b>LOKASI:</b>
-    ${item.gateLokasi}
-    <br>
-
-    <b>KETERANGAN:</b>
-    ${item.gateKeterangan}
-
-  `;
-
-
-  document
-    .getElementById(
-      "modal-preview"
-    )
-    .classList.add("active");
-
-}
-
-
-function tutupPreview() {
-
-  document
-    .getElementById(
-      "modal-preview"
-    )
-    .classList.remove("active");
-
-}
-
-
-/*
-==================================================
-HAPUS RECEIVING
-==================================================
-*/
-
-function hapusReceiving(index) {
-
-  if (
-    !confirm(
-      "Hapus data dari Receiving?"
-    )
-  ) {
-    return;
-  }
-
-
-  listReceiving.splice(
-    index,
-    1
-  );
-
-
-  simpanReceiving();
-
-  renderReceiving();
-
-}
-
-
-/*
-==================================================
-SIMPAN RECEIVING
-==================================================
-*/
-
-function simpanReceiving() {
-
-  localStorage.setItem(
-    RECEIVING_STORAGE,
-    JSON.stringify(
-      listReceiving
-    )
-  );
-
-}
-
-
-/*
-==================================================
-PILIH SEMUA
-==================================================
-*/
-
-function pilihSemuaReceiving(master) {
-
-  document
-    .querySelectorAll(
-      ".check-receiving"
-    )
-    .forEach(
-      checkbox =>
-        checkbox.checked =
-          master.checked
-    );
-
-}
-
-
-/*
-==================================================
-FILTER BULAN
-==================================================
-*/
-
-function filterData() {
-
-  const bulan =
-    document.getElementById(
-      "filter-bulan"
-    ).value;
-
-
-  if (!bulan) {
-
-    renderReceiving();
-
-    return;
-
-  }
-
-
-  const tbody =
-    document.getElementById(
-      "receiving-body"
-    );
-
-
-  tbody.innerHTML = "";
-
-
-  const hasil =
-    listReceiving.filter(
-      item =>
-        item.tglDaftar !== "-" &&
-        item.tglDaftar.startsWith(
-          bulan
-        )
-    );
-
-
-  if (hasil.length === 0) {
-
-    tbody.innerHTML = `
-
-      <tr>
-
-        <td colspan="13">
-          Tidak ada data pada periode tersebut.
-        </td>
-
-      </tr>
-
-    `;
-
-    return;
-
-  }
-
-
-  /*
-  Render hasil filter
-  */
-
-  hasil.forEach(item => {
-
-    const index =
-      listReceiving.indexOf(item);
-
-
-    tbody.innerHTML += `
-
-      <tr>
-
-        <td>
-          <input
-            type="checkbox"
-            class="check-receiving">
-        </td>
-
-        <td>${item.kode}</td>
-
-        <td style="text-align:left;">
-          ${item.uraian}
-        </td>
-
-        <td>${item.jumlah}</td>
-
-        <td>${item.satuan}</td>
-
-        <td>${item.aset}</td>
-
-        <td>${item.status}</td>
-
-        <td>${item.perusahaan}</td>
-
-        <td>${item.kodeDoc}</td>
-
-        <td>${item.noAju}</td>
-
-        <td>${item.noDaftar}</td>
-
-        <td>${item.tglDaftar}</td>
-
-        <td>
-
-          <div class="action">
-
-            <button
-              onclick="bukaGate(${index})">
-              GATE
-            </button>
-
-            <button
-              onclick="bukaDokumen(${index})">
-              ADD
-            </button>
-
-            <button
-              onclick="preview(${index})">
-              👁
-            </button>
-
-            <button
-              onclick="hapusReceiving(${index})">
-              🗑
-            </button>
-
-          </div>
-
-        </td>
-
-      </tr>
-
-    `;
-
-  });
-
-}
-
-
-/*
-==================================================
-LOAD AWAL
-==================================================
-*/
-
-renderReceiving();
-
-
-/*
-==================================================
-AUTO UPDATE
-==================================================
-
-Kalau Register dibuka di tab lain lalu
-menambahkan data, Receiving akan membaca
-perubahan localStorage.
-*/
-
-window.addEventListener(
-  "storage",
-  function(event) {
-
-    if (
-      event.key === REGISTER_STORAGE
-    ) {
-
-      listRegister =
-        JSON.parse(
-          event.newValue
-        ) || [];
-
+      renderReceivingTable();
+      closeSearchRegisterModal();
     }
 
-  }
-);
+    function renderReceivingTable() {
+      const tbody = document.getElementById('tabel-receiving-body');
+      tbody.innerHTML = '';
 
-</script>
+      if (listReceiving.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="13" style="padding: 12px; color:#888;">DATA MASUK SETELAH DIPILIH</td></tr>';
+        return;
+      }
 
+      listReceiving.forEach((item, idx) => {
+        tbody.innerHTML += `
+          <tr>
+            <td><input type="checkbox"></td>
+            <td>${item.kode}</td>
+            <td style="text-align:left;">${item.uraian}</td>
+            <td>${item.jumlah}</td>
+            <td>${item.satuan}</td>
+            <td>${item.aset}</td>
+            <td>${item.status}</td>
+            <td>${item.perusahaan}</td>
+            <td>${item.kodeDoc}</td>
+            <td>${item.noAju}</td>
+            <td>${item.noDaftar}</td>
+            <td>${item.tglDaftar}</td>
+            <td>
+              <div class="action-cell-group">
+                <button class="btn-tbl-action" onclick="openModalGate(${idx})">GATE</button>
+                <button class="btn-tbl-action" onclick="openModalAddDoc(${idx})">ADD</button>
+                <button class="btn-tbl-action" onclick="openModalPreview(${idx})">👁️</button>
+                <button class="btn-tbl-action" style="background:#ff9999;" onclick="hapusRowReceiving(${idx})">🗑️</button>
+              </div>
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    function hapusRowReceiving(idx) {
+      listReceiving.splice(idx, 1);
+      renderReceivingTable();
+    }
+
+    /* Modal ADD Dokumen BC */
+    function openModalAddDoc(idx) {
+      selectedReceivingIndex = idx;
+      document.getElementById('modal-add-doc').classList.add('active');
+    }
+
+    function closeModalAddDoc() {
+      document.getElementById('modal-add-doc').classList.remove('active');
+      selectedReceivingIndex = null;
+    }
+
+    function simpanDocBC() {
+      if (selectedReceivingIndex !== null) {
+        listReceiving[selectedReceivingIndex].kodeDoc = document.getElementById('add-kode-doc').value || '-';
+        listReceiving[selectedReceivingIndex].noAju = document.getElementById('add-no-aju').value || '-';
+        listReceiving[selectedReceivingIndex].noDaftar = document.getElementById('add-no-daftar').value || '-';
+        listReceiving[selectedReceivingIndex].tglDaftar = document.getElementById('add-tgl-daftar').value || '-';
+        
+        renderReceivingTable();
+        closeModalAddDoc();
+      }
+    }
+
+    /* Modal GATE */
+    function openModalGate(idx) {
+      selectedReceivingIndex = idx;
+      const item = listReceiving[idx];
+
+      document.getElementById('gate-kode').value = item.kode;
+      document.getElementById('gate-uraian').value = item.uraian;
+      document.getElementById('gate-jumlah').value = item.jumlah;
+      document.getElementById('gate-satuan').value = item.satuan;
+
+      document.getElementById('modal-gate').classList.add('active');
+    }
+
+    function closeModalGate() {
+      document.getElementById('modal-gate').classList.remove('active');
+      selectedReceivingIndex = null;
+    }
+
+    function simpanGateData() {
+      if (selectedReceivingIndex !== null) {
+        listReceiving[selectedReceivingIndex].gateTgl = document.getElementById('gate-tgl').value || '-';
+        listReceiving[selectedReceivingIndex].gateWaktu = document.getElementById('gate-waktu').value || '-';
+        listReceiving[selectedReceivingIndex].gatePenerima = document.getElementById('gate-penerima').value || '-';
+        listReceiving[selectedReceivingIndex].gateLokasi = document.getElementById('gate-lokasi').value || '-';
+
+        renderReceivingTable();
+        closeModalGate();
+      }
+    }
+
+    /* Modal PREVIEW */
+    function openModalPreview(idx) {
+      const item = listReceiving[idx];
+
+      document.getElementById('prev-perusahaan').innerText = item.perusahaan;
+      document.getElementById('prev-doc').innerText = item.kodeDoc;
+      document.getElementById('prev-aju').innerText = item.noAju;
+      document.getElementById('prev-daftar').innerText = item.noDaftar;
+      document.getElementById('prev-tgldaftar').innerText = item.tglDaftar;
+
+      document.getElementById('prev-kode').innerText = item.kode;
+      document.getElementById('prev-uraian').innerText = item.uraian;
+      document.getElementById('prev-jumlah').innerText = item.jumlah;
+      document.getElementById('prev-satuan').innerText = item.satuan;
+      document.getElementById('prev-aset').innerText = item.aset;
+      document.getElementById('prev-status').innerText = item.status;
+
+      document.getElementById('prev-tglmasuk').innerText = item.gateTgl;
+      document.getElementById('prev-waktu').innerText = item.gateWaktu;
+      document.getElementById('prev-penerima').innerText = item.gatePenerima;
+      document.getElementById('prev-lokasi').innerText = item.gateLokasi;
+
+      document.getElementById('modal-preview').classList.add('active');
+    }
+
+    function closeModalPreview() {
+      document.getElementById('modal-preview').classList.remove('active');
+    }
+
+    // Chart Initializer (Dashboard)
+    const ctx1 = document.getElementById('assetCustomersChart').getContext('2d');
+    new Chart(ctx1, {
+      type: 'pie',
+      data: {
+        labels: ['BC 2.7', 'BC 4.0'],
+        datasets: [{ data: [94, 6], backgroundColor: ['#175d84', '#e66632'], borderWidth: 0 }]
+      },
+      options: { responsive: true, maintainAspectRatio: false }
+    });
+  </script>
 </body>
 </html>
