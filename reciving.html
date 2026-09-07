@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ASTOM - Reciving</title>
-  <!-- Memuat Bootstrap 5 CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Memuat FontAwesome untuk ikon -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>ASTOM - Asset Customers Control Management</title>
+  
+  <!-- Chart.js Library -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
   <style>
+    /* Reset & Base Styles */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -21,7 +22,6 @@
       height: 100vh;
       background-color: #e3ebf3;
       overflow: hidden;
-      font-size: 13px;
     }
 
     /* Sidebar Navigation */
@@ -46,19 +46,10 @@
       margin-bottom: 8px;
     }
 
-    .brand-logo {
-      width: 28px;
-      height: 28px;
-      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAFn0lEQVR4nO2bW2hcVRjHf3NmJtPcxCQ2iVabWJvU2l6qaROsRerF0gcv2EKEFvRF9MWH9s2H+gqCN0EQfBARxQfBgg9++FBQROxDK/WhtQ1Nmt6TNu29TdKkM5nMe/nOv002Z+dMkjZtkpl/WBYyWcvZe+3v+75v/845R0oJQoj/yVCSx2zbFjE+n++20xU8b4Wn287Ozs7eTq9i43e2jY3Z931tbm6+z1v91219b12N/f89evTo0b6+vqW/N40N05/61vdg61v30v3y3vVw4+31e++9989X1dfXx+fz+Wvb1i+A68A+4CSwB9ihd5sCjup7A3gbWNEyq+3/sH49B/qwldf0v4F/tO4i8LreH1T7U8BbwHfAVT0vAkeAjy3LClqWNbxt3wJ4f+tbz7a+v0a/v1/71239O9+/Ruvb2u92330f6v7j+l7S93N6Lupz7+vzc3p+Qsv8qeqnZfV6n5c9q21XgoLZd0TIXgU+Ab4CXbNt2g4OD+7b1LwB4w/pG097Z2flWdXX1vdbS0tISa2xsDDU2Noabmpqizc3Noebm5lB7e3vQ8t///e7g4KA/GAz6ly9f7u3p6fG3trYGW1tb/T2t6+tra+u//38A4Btr6xt7e3tv6/j/BvhQv78d2A20AJu1b12b3h/Vusva76yee9o3oe0D2t+jZT7S37a+T2rd/bqu0nLd2teuZb60bfuE53m/3dYxACqsr4f9+voN8DXwIdAH1Gvf3Tq+3bKsz3w/39bX12d93/fHff/q2u3s/PxW1gD8sL7g9er1/lA8/gTogXy8N8Cfh3wP/e8A363q+X39A3mva29l3/e1rf0/Ife3s/S8A1L3s/3/A/9726Xm/W9l10//l8A31v9sS3s/+51f5/D//7f1vAefW3q6/c73s/sN/b+s2p++pS5Xz+n6X9s1f/A+xS5w4s36O3q6v/5+j9L2A/31/31p83mN3//0S8N8f///a10s3/t/+/f9r6A+/m53+L8c/fN2f5d/c5/4/j0P/f+x//bX//a3//f9S4AAAAASUVORK5CYR==');
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
-    }
-
     .menu-item-main {
       font-size: 13px;
       font-weight: bold;
-      padding: 4px 0;
+      padding: 6px 0;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -67,10 +58,7 @@
       text-decoration: none;
     }
 
-    .search-box {
-      margin: 8px 0 12px 0;
-    }
-
+    .search-box { margin: 8px 0 12px 0; }
     .search-box input {
       width: 100%;
       padding: 3px 6px;
@@ -79,10 +67,7 @@
       font-size: 11px;
     }
 
-    .menu-group {
-      margin-bottom: 12px;
-    }
-
+    .menu-group { margin-bottom: 12px; }
     .menu-title {
       font-weight: bold;
       color: #ffffff;
@@ -95,14 +80,12 @@
       display: block;
       color: #f7a600;
       text-decoration: none;
-      padding: 1px 0;
+      padding: 3px 0;
       font-size: 11px;
       cursor: pointer;
     }
 
-    .menu-link:hover, .menu-item-main:hover {
-      text-decoration: underline;
-    }
+    .menu-link:hover, .menu-item-main:hover { text-decoration: underline; }
 
     /* Main Content Area */
     .main-content {
@@ -126,7 +109,6 @@
       font-size: 14px;
       font-weight: bold;
       color: #000;
-      letter-spacing: 0.5px;
     }
 
     .user-login-container {
@@ -135,36 +117,157 @@
       color: #000;
     }
 
-    /* Page Content */
+    /* Page Content Containers */
     .page-content {
+      display: none;
       padding: 15px;
       flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
     }
 
-    .table-custom th {
-      background-color: #ffffff;
-      color: #000;
+    .page-content.active {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .form-title { 
+      font-size: 15px; 
+      font-weight: bold; 
+      color: #000; 
+      text-transform: uppercase;
+    }
+
+    /* Dashboard Elements */
+    .cards-container { display: flex; gap: 12px; }
+    .card { flex: 1; color: #fff; text-align: center; padding: 8px 5px; box-shadow: 1px 1px 3px rgba(0,0,0,0.15); }
+    .card-title { font-size: 11px; text-decoration: underline; font-weight: bold; margin-bottom: 12px; }
+    .card-value { font-size: 10px; font-weight: bold; }
+    .card-blue { background-color: #00a0e9; }
+    .card-green { background-color: #58b036; }
+    .card-orange { background-color: #f37023; }
+    .card-red { background-color: #ff0000; }
+
+    .dashboard-row { display: flex; gap: 15px; align-items: stretch; }
+    .panel-table { flex: 1.6; border: 1px solid #000; background-color: #fff; display: flex; flex-direction: column; }
+    .panel-chart { flex: 1; border: 1px solid #d0d0d0; background-color: #fff; padding: 10px; display: flex; flex-direction: column; align-items: center; }
+    .panel-header { font-weight: bold; font-size: 13px; padding: 4px 8px; border-bottom: 1px solid #000; background-color: #fff; }
+    .chart-title { font-size: 13px; font-weight: bold; color: #666; margin-bottom: 8px; text-align: center; }
+    .chart-container { position: relative; width: 100%; max-width: 220px; height: 170px; }
+
+    /* Tables */
+    table { width: 100%; border-collapse: collapse; font-size: 10px; }
+    th, td { border: 1px solid #000; padding: 4px; text-align: center; }
+    th { background-color: #eaeaea; font-weight: bold; }
+    .empty-row { height: 18px; }
+    .empty-row td { border-style: dashed solid dashed solid; }
+
+    /* Buttons */
+    .btn {
+      padding: 4px 12px;
+      border: 1px solid #000;
+      border-radius: 3px;
+      color: #fff;
       font-weight: bold;
       font-size: 11px;
-      border-bottom: 2px solid #0d6efd;
-      vertical-align: middle;
-      text-align: center;
+      cursor: pointer;
     }
-    .table-custom td {
-      vertical-align: middle;
-      background-color: #ffffff;
+    .btn-blue { background-color: #179bd7; }
+    .btn-red { background-color: #ff0000; }
+    .btn-gray { background-color: #e0e0e0; color: #000; border: 1px solid #888; }
+
+    /* Register New Styles */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 160px 220px 220px;
+      gap: 10px 15px;
+      align-items: center;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 10px;
     }
-    .box-placeholder {
-      border: 1.5px solid #0056b3;
-      color: #000;
-      text-align: center;
-      padding: 8px;
-      background-color: #fff;
-      font-weight: 500;
+    .form-grid input { width: 100%; padding: 3px 6px; border: 2px solid #000; font-size: 11px; height: 24px; }
+    .action-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+
+    /* Modal Base System */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.4);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
     }
+    .modal-overlay.active { display: flex; }
+
+    .modal-box {
+      background: #fff;
+      border: 2px solid #000;
+      padding: 15px;
+      box-shadow: 2px 4px 12px rgba(0,0,0,0.3);
+      position: relative;
+    }
+
+    .required-label::before { content: "* "; color: red; }
+
+    /* Specific Modals Layout */
+    .rekam-modal-box { width: 720px; max-width: 90vw; }
+    .modal-form-grid {
+      display: grid;
+      grid-template-columns: 100px 1fr 110px 1fr;
+      gap: 10px;
+      align-items: center;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    .modal-form-grid input, .modal-form-grid textarea {
+      width: 100%; border: 2px solid #000; padding: 4px; font-size: 11px;
+    }
+    .modal-form-grid textarea { grid-column: 2 / 5; height: 50px; resize: none; }
+
+    /* Receiving Specific Layouts */
+    .receiving-filter-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+
+    .periode-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .periode-wrapper input[type="month"] {
+      border: 1px solid #000;
+      padding: 2px 4px;
+    }
+
+    /* Action Table Button Items */
+    .action-cell-group {
+      display: flex;
+      gap: 4px;
+      justify-content: center;
+    }
+    .btn-tbl-action {
+      padding: 2px 6px;
+      font-size: 10px;
+      font-weight: bold;
+      border: 1px solid #777;
+      background-color: #e0e0e0;
+      cursor: pointer;
+      border-radius: 2px;
+    }
+
+    /* Gate Modal Form */
+    .gate-modal-box { width: 550px; max-height: 90vh; overflow-y: auto; }
+    .gate-section-title { font-weight: bold; font-size: 12px; margin: 10px 0 5px 0; border-bottom: 1px solid #ccc; padding-bottom: 2px; }
+    .gate-grid-2 { display: grid; grid-template-columns: 80px 1fr 80px 1fr; gap: 6px; align-items: center; font-size: 11px; font-weight: bold; }
+    .gate-grid-2 input { width: 100%; border: 1px solid #000; padding: 3px; }
 
     /* Footer */
     .footer {
@@ -175,51 +278,44 @@
       font-weight: bold;
       margin-top: auto;
     }
-
-    .footer-sub {
-      font-size: 9px;
-      font-weight: normal;
-    }
+    .footer-sub { font-size: 9px; font-weight: normal; }
   </style>
 </head>
 <body>
 
-  <!-- Sidebar -->
+  <!-- Sidebar Navigation -->
   <div class="sidebar">
-    <div class="brand">
-      <div class="brand-logo"></div>
-      <span>ASTOM</span>
-    </div>
+    <div class="brand">ASTOM</div>
 
-    <a href="dashboard.html" class="menu-item-main"><span>🏠</span> DASHBOARD</a>
-
+    <a class="menu-item-main" onclick="switchPage('dashboard')">🏠 DASHBOARD</a>
+    
     <div class="search-box">
       <input type="text" placeholder="🔍 Cari menu">
     </div>
 
     <div class="menu-group">
       <div class="menu-title">REGISTER</div>
-      <a href="register-new.html" class="menu-link">NEW</a>
-     <a href="reciving.html" class="menu-link">RECIVING</a>
-      <a href="#" class="menu-link">RETURN</a>
+      <a class="menu-link" onclick="switchPage('register-new')">NEW</a>
+      <a class="menu-link" onclick="switchPage('receiving')">RECEIVING</a>
+      <a class="menu-link">RETURN</a>
     </div>
 
     <div class="menu-group">
       <div class="menu-title">MONITORING</div>
-      <a href="#" class="menu-link">GATE</a>
+      <a class="menu-link">GATE</a>
     </div>
 
     <div class="menu-group">
       <div class="menu-title">REPORT & DOWNLOAD</div>
-      <a href="#" class="menu-link">ALL ASSET</a>
-      <a href="#" class="menu-link">RETURN ASSET</a>
+      <a class="menu-link">ALL ASSET</a>
+      <a class="menu-link">RETURN ASSET</a>
     </div>
 
     <div class="menu-group">
       <div class="menu-title">SETTING</div>
-      <a href="#" class="menu-link">MASTER USER</a>
-      <a href="#" class="menu-link">MASTER CUSTOMER</a>
-      <a href="#" class="menu-link">MASTER BARANG</a>
+      <a class="menu-link">MASTER USER</a>
+      <a class="menu-link">MASTER CUSTOMER</a>
+      <a class="menu-link">MASTER BARANG</a>
     </div>
 
     <div class="menu-group" style="margin-top: 10px;">
@@ -228,80 +324,294 @@
     </div>
   </div>
 
-  <!-- Main Content -->
+  <!-- Main Content Area -->
   <div class="main-content">
-
+    
     <!-- Top Header -->
     <div class="header">
       <div class="header-title">ASSET CUSTOMERS CONTROL MANAGEMENT</div>
       <div class="user-login-container">USER LOGIN</div>
     </div>
 
-    <!-- Page Content -->
-    <div class="page-content">
-        <!-- Judul Bagian Atas -->
-        <div class="fw-bold" style="font-size: 14px;">Data Barang yang Dikirim</div>
+    <!-- PAGE 1: DASHBOARD -->
+    <div id="page-dashboard" class="page-content active">
+      <div class="cards-container">
+        <div class="card card-blue"><div class="card-title">ASSET CUSTOMER</div><div class="card-value">JUMLAH</div></div>
+        <div class="card card-green"><div class="card-title">BC 2.7</div><div class="card-value">JUMLAH</div></div>
+        <div class="card card-orange"><div class="card-title">BC 4.0</div><div class="card-value">JUMLAH</div></div>
+        <div class="card card-red"><div class="card-title">RETURN ASSET</div><div class="card-value">JUMLAH</div></div>
+      </div>
 
-        <!-- Bagian Filter & Tombol Atas -->
-        <div class="row align-items-center mb-2">
-            <div class="col-auto">
-                <button class="btn btn-info text-white px-3 py-1 fw-bold" style="background-color: #00bfff; border: none;">
-                    <i class="fa fa-search me-1"></i> Cari
-                </button>
-            </div>
-            <div class="col text-end d-flex justify-content-end align-items-center">
-                <span class="me-2 fw-normal">Periode Bulan</span>
-                <div class="input-group" style="width: 160px;">
-                    <input type="text" class="form-control form-control-sm rounded-0 border-dark">
-                    <span class="input-group-text bg-white rounded-0 border-dark"><i class="fa fa-calendar text-secondary"></i></span>
-                </div>
-                <button class="btn btn-danger btn-sm ms-2 fw-bold px-3 rounded-0" style="background-color: #ff0000;">Tampilkan</button>
-            </div>
+      <div class="dashboard-row">
+        <div class="panel-table">
+          <div class="panel-header">History Pemasukan</div>
+          <table>
+            <thead><tr><th>No</th><th>Dokumen</th><th>Nama Barang</th><th>Kode Barang</th><th>Nomor Pendaftar</th><th>Tgl. Pendaftar</th><th>Aset No.</th></tr></thead>
+            <tbody>
+              <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            </tbody>
+          </table>
         </div>
 
-        <!-- Tabel Data -->
-        <div class="table-responsive">
-            <table class="table table-bordered table-custom m-0">
-                <thead>
-                    <tr>
-                        <th style="width: 30px;"><input type="checkbox" class="form-check-input m-0"></th>
-                        <th>KODE BARANG</th>
-                        <th>URAIAN BARANG</th>
-                        <th>JUMLAH</th>
-                        <th>SATUAN</th>
-                        <th>ASET NO</th>
-                        <th>STATUS</th>
-                        <th>PERUSAHAAN</th>
-                        <th>KODE DOC</th>
-                        <th>NOMOR AJU</th>
-                        <th>NOMOR DAFTAR</th>
-                        <th>TGL. DAFTAR</th>
-                        <th>AKSI</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="text-center">
-                            <input type="checkbox" class="form-check-input border-dark">
-                        </td>
-                        <td colspan="7" class="p-1">
-                            <div class="box-placeholder">DATA MASUK SETELAH DIPILIH</div>
-                        </td>
-                        <td colspan="4" class="p-1">
-                            <div class="box-placeholder">&nbsp;</div>
-                        </td>
-                        <td class="text-center p-2">
-                            <div class="d-flex justify-content-center gap-1 align-items-center">
-                                <button class="btn btn-outline-secondary btn-sm px-2 py-1 fw-bold" style="font-size: 11px;">GATE</button>
-                                <button class="btn btn-outline-secondary btn-sm px-2 py-1 fw-bold" style="font-size: 11px;">ADD</button>
-                                <button class="btn btn-info btn-sm text-white px-2 py-1" style="background-color: #5bc0de; border: none;"><i class="fa fa-eye"></i></button>
-                                <button class="btn btn-danger btn-sm px-2 py-1" style="background-color: #ff0000; border: none;"><i class="fa fa-trash"></i></button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="panel-chart">
+          <div class="chart-title">ASSET CUSTOMERS</div>
+          <div class="chart-container"><canvas id="assetCustomersChart"></canvas></div>
         </div>
+      </div>
+    </div>
+
+    <!-- PAGE 2: REGISTER - NEW -->
+    <div id="page-register-new" class="page-content">
+      <div class="form-title">REGISTER - NEW</div>
+
+      <div class="form-grid">
+        <label>Nomor & Tanggal SKK</label>
+        <input type="text" id="skk-nomor-main">
+        <input type="date" id="skk-tgl-main">
+
+        <label>Nama Perusahaan / Documen</label>
+        <input type="text" id="perusahaan-main">
+        <input type="text" id="documen-main">
+
+        <label>Status Aset</label>
+        <input type="text" id="status-aset-main">
+        <div></div>
+      </div>
+
+      <div style="font-weight: bold; font-size: 12px;">Data Barang yang Dikirim:</div>
+
+      <div class="action-bar">
+        <div class="btn-group">
+          <button class="btn btn-blue" onclick="openRekamBarangModal()">+ Rekam</button>
+          <button class="btn btn-red" onclick="hapusBarangRegisterTerpilih()">Hapus Barang</button>
+        </div>
+      </div>
+
+      <table class="table-register-new">
+        <thead>
+          <tr>
+            <th style="width: 25px;"><input type="checkbox" id="check-all-reg" onclick="toggleSelectAllReg(this)"></th>
+            <th>KODE BARANG</th>
+            <th>URAIAN BARANG</th>
+            <th>JUMLAH</th>
+            <th>SATUAN</th>
+            <th>ASET NO</th>
+            <th>STATUS</th>
+            <th>SKK</th>
+            <th>PERUSAHAAN</th>
+            <th>DOC</th>
+          </tr>
+        </thead>
+        <tbody id="tabel-register-body"></tbody>
+      </table>
+    </div>
+
+    <!-- PAGE 3: RECEIVING MOLD/DIE (SESUAI GAMBAR BARU) -->
+    <div id="page-receiving" class="page-content">
+      <div class="form-title">RECEIVING MOLD/DIE</div>
+      <div style="font-weight: bold; font-size: 11px;">Data Barang yang Dikirim</div>
+
+      <div class="receiving-filter-bar">
+        <button class="btn btn-blue" onclick="openSearchRegisterModal()">🔍 Cari</button>
+
+        <div class="periode-wrapper">
+          <label>Periode Bulan</label>
+          <input type="month" id="filter-bulan">
+          <button class="btn btn-red" style="padding: 3px 10px;">Tampilkan</button>
+        </div>
+      </div>
+
+      <!-- Tabel Receiving Master -->
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 25px;"><input type="checkbox"></th>
+            <th>KODE BARANG</th>
+            <th>URAIAN BARANG</th>
+            <th>JUMLAH</th>
+            <th>SATUAN</th>
+            <th>ASET NO</th>
+            <th>STATUS</th>
+            <th>PERUSAHAAN</th>
+            <th>KODE DOC</th>
+            <th>NOMOR AJU</th>
+            <th>NOMOR DAFTAR</th>
+            <th>TGL. DAFTAR</th>
+            <th style="width: 140px;">AKSI</th>
+          </tr>
+        </thead>
+        <tbody id="tabel-receiving-body">
+          <!-- Item terpilih dari menu Register New masuk ke sini -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- MODAL 1: REKAM BARANG (REGISTER NEW) -->
+    <div id="modal-rekam-barang" class="modal-overlay">
+      <div class="modal-box rekam-modal-box">
+        <div class="modal-form-grid">
+          <label class="required-label">Uraian Barang</label>
+          <textarea id="rekam-uraian"></textarea>
+
+          <label class="required-label">Kode Barang</label>
+          <input type="text" id="rekam-kode" style="grid-column: 2 / 5;">
+
+          <label class="required-label">Jenis Satuan</label>
+          <input type="text" id="rekam-satuan">
+
+          <label class="required-label" style="text-align: right; padding-right: 5px;">Jumlah Barang</label>
+          <input type="number" id="rekam-jumlah">
+
+          <label class="required-label">Aset No</label>
+          <input type="text" id="rekam-aset" style="grid-column: 2 / 5;">
+        </div>
+
+        <div style="display:flex; gap:10px; justify-content:center; margin-top:15px;">
+          <button class="btn btn-blue" onclick="simpanBarangRegister()">🚀 Simpan</button>
+          <button class="btn btn-red" onclick="closeRekamBarangModal()">X Batal</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL 2: CARI DATA FROM REGISTER NEW (DI MENU RECEIVING) -->
+    <div id="modal-cari-register" class="modal-overlay">
+      <div class="modal-box" style="width: 780px;">
+        <div style="font-weight: bold; font-size: 13px; margin-bottom: 10px;">Pilih Data Barang dari Register New</div>
+        
+        <table style="margin-bottom: 15px;">
+          <thead>
+            <tr>
+              <th style="width: 30px;">Pilih</th>
+              <th>URAIAN BARANG</th>
+              <th>KODE BARANG</th>
+              <th>JUMLAH</th>
+              <th>SATUAN</th>
+              <th>ASET NO</th>
+              <th>STATUS</th>
+              <th>SKK</th>
+              <th>PERUSAHAAN</th>
+              <th>DOC</th>
+            </tr>
+          </thead>
+          <tbody id="tabel-modal-cari-body">
+            <!-- Menampilkan item dari register new -->
+          </tbody>
+        </table>
+
+        <div style="display: flex; gap: 8px;">
+          <button class="btn btn-blue" onclick="tarikDataKeReceiving()">Pilih</button>
+          <button class="btn btn-red" onclick="closeSearchRegisterModal()">Batal</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL 3: ADD DOKUMEN BC (RECEIVING) -->
+    <div id="modal-add-doc" class="modal-overlay">
+      <div class="modal-box" style="width: 480px;">
+        <div style="font-weight: bold; margin-bottom: 10px; font-size: 12px;">Input Dokumen Pabean (BC)</div>
+        <div style="display: grid; grid-template-columns: 100px 1fr; gap: 8px; font-size: 11px; font-weight: bold; align-items: center;">
+          <label>Kode Doc</label>
+          <input type="text" id="add-kode-doc" style="border:1px solid #000; padding:3px;">
+
+          <label>Nomor Pengajuan</label>
+          <input type="text" id="add-no-aju" style="border:1px solid #000; padding:3px;">
+
+          <label>Nomor Daftar</label>
+          <input type="text" id="add-no-daftar" style="border:1px solid #000; padding:3px;">
+
+          <label>Tgl. Daftar</label>
+          <input type="date" id="add-tgl-daftar" style="border:1px solid #000; padding:3px;">
+        </div>
+        <div style="display:flex; justify-content:center; margin-top:15px; gap:8px;">
+          <button class="btn btn-blue" onclick="simpanDocBC()">Simpan</button>
+          <button class="btn btn-red" onclick="closeModalAddDoc()">Batal</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL 4: GATE / REKAM MASUK (RECEIVING) -->
+    <div id="modal-gate" class="modal-overlay">
+      <div class="modal-box gate-modal-box">
+        <div class="gate-section-title">DATA BARANG</div>
+        <div class="gate-grid-2">
+          <label>Kode Barang</label><input type="text" id="gate-kode" readonly>
+          <label>Jumlah</label><input type="text" id="gate-jumlah" readonly>
+          <label>Uraian Barang</label><input type="text" id="gate-uraian" readonly>
+          <label>Satuan</label><input type="text" id="gate-satuan" readonly>
+        </div>
+
+        <div class="gate-section-title">REKAM MASUK</div>
+        <div class="gate-grid-2">
+          <label>Tanggal</label><input type="date" id="gate-tgl">
+          <label>Waktu</label><input type="time" id="gate-waktu">
+          <label>Penerima</label><input type="text" id="gate-penerima">
+          <label>Lokasi</label><input type="text" id="gate-lokasi">
+        </div>
+
+        <div class="gate-section-title">FOTO PENDUKUNG</div>
+        <div style="display:grid; grid-template-columns: 100px 1fr; gap:8px; font-size:11px; align-items:center;">
+          <span>Foto Unit</span><input type="file" id="gate-foto-unit">
+          <span>Foto Label</span><input type="file" id="gate-foto-label">
+        </div>
+
+        <div class="gate-section-title">KESESUAIAN DATA</div>
+        <div style="display:flex; gap:10px; margin-bottom:8px;">
+          <button class="btn btn-blue" style="padding:3px 15px;">Sesuai</button>
+          <button class="btn btn-red" style="padding:3px 15px;">Tidak Sesuai</button>
+        </div>
+
+        <div class="gate-section-title">KETERANGAN</div>
+        <textarea id="gate-keterangan" style="width:100%; height:45px; border:1px solid #000;"></textarea>
+
+        <div style="display:flex; justify-content:center; margin-top:12px; gap:8px;">
+          <button class="btn btn-blue" onclick="simpanGateData()">🚀 Simpan</button>
+          <button class="btn btn-red" onclick="closeModalGate()">Batal</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL 5: PREVIEW DATA (RECEIVING) -->
+    <div id="modal-preview" class="modal-overlay">
+      <div class="modal-box" style="width: 500px; font-size: 11px;">
+        <div style="background-color: #bce3fb; padding: 4px; font-weight: bold; margin-bottom: 10px; text-align: center;">PREVIEW</div>
+        
+        <div style="display: grid; grid-template-columns: 100px 1fr; gap: 4px; margin-bottom: 8px;">
+          <strong>Perusahaan:</strong> <span id="prev-perusahaan">-</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 4px; margin-bottom: 8px;">
+          <div><strong>Kode Doc:</strong> <div id="prev-doc">-</div></div>
+          <div><strong>Nomor Pengajuan:</strong> <div id="prev-aju">-</div></div>
+          <div><strong>Nomor Daftar:</strong> <div id="prev-daftar">-</div></div>
+          <div><strong>Tgl. Daftar:</strong> <div id="prev-tgldaftar">-</div></div>
+        </div>
+
+        <div style="font-weight: bold; border-bottom: 1px solid #000; margin-top: 8px;">DATA BARANG</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 4px; margin-top: 4px;">
+          <div><strong>Kode Barang:</strong> <div id="prev-kode">-</div></div>
+          <div><strong>Uraian Barang:</strong> <div id="prev-uraian">-</div></div>
+          <div><strong>Jumlah:</strong> <div id="prev-jumlah">-</div></div>
+          <div><strong>Satuan:</strong> <div id="prev-satuan">-</div></div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 6px;">
+          <div><strong>Aset Nomor:</strong> <div id="prev-aset">-</div></div>
+          <div><strong>Status Aset:</strong> <div id="prev-status">-</div></div>
+        </div>
+
+        <div style="font-weight: bold; border-bottom: 1px solid #000; margin-top: 8px;">WAKTU MASUK</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 4px; margin-top: 4px;">
+          <div><strong>Tanggal:</strong> <div id="prev-tglmasuk">-</div></div>
+          <div><strong>Waktu:</strong> <div id="prev-waktu">-</div></div>
+          <div><strong>Penerima:</strong> <div id="prev-penerima">-</div></div>
+          <div><strong>Lokasi:</strong> <div id="prev-lokasi">-</div></div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; margin-top: 15px;">
+          <button class="btn btn-red" onclick="closeModalPreview()">Tutup</button>
+        </div>
+      </div>
     </div>
 
     <!-- Footer -->
@@ -312,5 +622,278 @@
 
   </div>
 
+  <script>
+    // Global Storage Data
+    let listRegisterNew = [];
+    let listReceiving = [];
+    let selectedReceivingIndex = null;
+
+    // Navigation Switcher
+    function switchPage(pageId) {
+      document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
+      const target = document.getElementById('page-' + pageId);
+      if (target) target.classList.add('active');
+    }
+
+    /* ---------------------------------------------------- */
+    /* REGISTER NEW LOGIC                                    */
+    /* ---------------------------------------------------- */
+    function openRekamBarangModal() {
+      document.getElementById('modal-rekam-barang').classList.add('active');
+    }
+
+    function closeRekamBarangModal() {
+      document.getElementById('modal-rekam-barang').classList.remove('active');
+    }
+
+    function simpanBarangRegister() {
+      const kode = document.getElementById('rekam-kode').value;
+      const uraian = document.getElementById('rekam-uraian').value;
+      const satuan = document.getElementById('rekam-satuan').value;
+      const jumlah = document.getElementById('rekam-jumlah').value;
+      const aset = document.getElementById('rekam-aset').value;
+
+      const skk = document.getElementById('skk-nomor-main').value || '-';
+      const perusahaan = document.getElementById('perusahaan-main').value || '-';
+      const doc = document.getElementById('documen-main').value || '-';
+      const status = document.getElementById('status-aset-main').value || '-';
+
+      if (!kode || !uraian) {
+        alert('Lengkapi Kode dan Uraian Barang!');
+        return;
+      }
+
+      listRegisterNew.push({ kode, uraian, jumlah, satuan, aset, status, skk, perusahaan, doc });
+      renderRegisterTable();
+      closeRekamBarangModal();
+    }
+
+    function renderRegisterTable() {
+      const tbody = document.getElementById('tabel-register-body');
+      tbody.innerHTML = '';
+      
+      listRegisterNew.forEach((item, idx) => {
+        tbody.innerHTML += `
+          <tr>
+            <td><input type="checkbox" class="cb-reg" data-idx="${idx}"></td>
+            <td>${item.kode}</td>
+            <td style="text-align:left;">${item.uraian}</td>
+            <td>${item.jumlah}</td>
+            <td>${item.satuan}</td>
+            <td>${item.aset}</td>
+            <td>${item.status}</td>
+            <td>${item.skk}</td>
+            <td>${item.perusahaan}</td>
+            <td>${item.doc}</td>
+          </tr>
+        `;
+      });
+    }
+
+    function toggleSelectAllReg(master) {
+      document.querySelectorAll('.cb-reg').forEach(cb => cb.checked = master.checked);
+    }
+
+    function hapusBarangRegisterTerpilih() {
+      const checked = document.querySelectorAll('.cb-reg:checked');
+      const idxs = Array.from(checked).map(c => parseInt(c.dataset.idx));
+      listRegisterNew = listRegisterNew.filter((_, i) => !idxs.includes(i));
+      renderRegisterTable();
+    }
+
+    /* ---------------------------------------------------- */
+    /* RECEIVING MOLD/DIE LOGIC                              */
+    /* ---------------------------------------------------- */
+    function openSearchRegisterModal() {
+      const tbody = document.getElementById('tabel-modal-cari-body');
+      tbody.innerHTML = '';
+
+      if (listRegisterNew.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="10" style="padding:10px;">Tidak ada data di Register New. Silakan input Register New dahulu.</td></tr>';
+      } else {
+        listRegisterNew.forEach((item, idx) => {
+          tbody.innerHTML += `
+            <tr>
+              <td><input type="checkbox" class="cb-modal-cari" data-idx="${idx}"></td>
+              <td style="text-align:left;">${item.uraian}</td>
+              <td>${item.kode}</td>
+              <td>${item.jumlah}</td>
+              <td>${item.satuan}</td>
+              <td>${item.aset}</td>
+              <td>${item.status}</td>
+              <td>${item.skk}</td>
+              <td>${item.perusahaan}</td>
+              <td>${item.doc}</td>
+            </tr>
+          `;
+        });
+      }
+
+      document.getElementById('modal-cari-register').classList.add('active');
+    }
+
+    function closeSearchRegisterModal() {
+      document.getElementById('modal-cari-register').classList.remove('active');
+    }
+
+    function tarikDataKeReceiving() {
+      const checked = document.querySelectorAll('.cb-modal-cari:checked');
+      checked.forEach(cb => {
+        const idx = parseInt(cb.dataset.idx);
+        const item = listRegisterNew[idx];
+
+        // Memindahkan data ke listReceiving dengan field awal tambahan kosong untuk BC & Gate
+        listReceiving.push({
+          ...item,
+          kodeDoc: item.doc,
+          noAju: '-',
+          noDaftar: '-',
+          tglDaftar: '-',
+          gateTgl: '-',
+          gateWaktu: '-',
+          gatePenerima: '-',
+          gateLokasi: '-'
+        });
+      });
+
+      renderReceivingTable();
+      closeSearchRegisterModal();
+    }
+
+    function renderReceivingTable() {
+      const tbody = document.getElementById('tabel-receiving-body');
+      tbody.innerHTML = '';
+
+      if (listReceiving.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="13" style="padding: 12px; color:#888;">DATA MASUK SETELAH DIPILIH</td></tr>';
+        return;
+      }
+
+      listReceiving.forEach((item, idx) => {
+        tbody.innerHTML += `
+          <tr>
+            <td><input type="checkbox"></td>
+            <td>${item.kode}</td>
+            <td style="text-align:left;">${item.uraian}</td>
+            <td>${item.jumlah}</td>
+            <td>${item.satuan}</td>
+            <td>${item.aset}</td>
+            <td>${item.status}</td>
+            <td>${item.perusahaan}</td>
+            <td>${item.kodeDoc}</td>
+            <td>${item.noAju}</td>
+            <td>${item.noDaftar}</td>
+            <td>${item.tglDaftar}</td>
+            <td>
+              <div class="action-cell-group">
+                <button class="btn-tbl-action" onclick="openModalGate(${idx})">GATE</button>
+                <button class="btn-tbl-action" onclick="openModalAddDoc(${idx})">ADD</button>
+                <button class="btn-tbl-action" onclick="openModalPreview(${idx})">👁️</button>
+                <button class="btn-tbl-action" style="background:#ff9999;" onclick="hapusRowReceiving(${idx})">🗑️</button>
+              </div>
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    function hapusRowReceiving(idx) {
+      listReceiving.splice(idx, 1);
+      renderReceivingTable();
+    }
+
+    /* Modal ADD Dokumen BC */
+    function openModalAddDoc(idx) {
+      selectedReceivingIndex = idx;
+      document.getElementById('modal-add-doc').classList.add('active');
+    }
+
+    function closeModalAddDoc() {
+      document.getElementById('modal-add-doc').classList.remove('active');
+      selectedReceivingIndex = null;
+    }
+
+    function simpanDocBC() {
+      if (selectedReceivingIndex !== null) {
+        listReceiving[selectedReceivingIndex].kodeDoc = document.getElementById('add-kode-doc').value || '-';
+        listReceiving[selectedReceivingIndex].noAju = document.getElementById('add-no-aju').value || '-';
+        listReceiving[selectedReceivingIndex].noDaftar = document.getElementById('add-no-daftar').value || '-';
+        listReceiving[selectedReceivingIndex].tglDaftar = document.getElementById('add-tgl-daftar').value || '-';
+        
+        renderReceivingTable();
+        closeModalAddDoc();
+      }
+    }
+
+    /* Modal GATE */
+    function openModalGate(idx) {
+      selectedReceivingIndex = idx;
+      const item = listReceiving[idx];
+
+      document.getElementById('gate-kode').value = item.kode;
+      document.getElementById('gate-uraian').value = item.uraian;
+      document.getElementById('gate-jumlah').value = item.jumlah;
+      document.getElementById('gate-satuan').value = item.satuan;
+
+      document.getElementById('modal-gate').classList.add('active');
+    }
+
+    function closeModalGate() {
+      document.getElementById('modal-gate').classList.remove('active');
+      selectedReceivingIndex = null;
+    }
+
+    function simpanGateData() {
+      if (selectedReceivingIndex !== null) {
+        listReceiving[selectedReceivingIndex].gateTgl = document.getElementById('gate-tgl').value || '-';
+        listReceiving[selectedReceivingIndex].gateWaktu = document.getElementById('gate-waktu').value || '-';
+        listReceiving[selectedReceivingIndex].gatePenerima = document.getElementById('gate-penerima').value || '-';
+        listReceiving[selectedReceivingIndex].gateLokasi = document.getElementById('gate-lokasi').value || '-';
+
+        renderReceivingTable();
+        closeModalGate();
+      }
+    }
+
+    /* Modal PREVIEW */
+    function openModalPreview(idx) {
+      const item = listReceiving[idx];
+
+      document.getElementById('prev-perusahaan').innerText = item.perusahaan;
+      document.getElementById('prev-doc').innerText = item.kodeDoc;
+      document.getElementById('prev-aju').innerText = item.noAju;
+      document.getElementById('prev-daftar').innerText = item.noDaftar;
+      document.getElementById('prev-tgldaftar').innerText = item.tglDaftar;
+
+      document.getElementById('prev-kode').innerText = item.kode;
+      document.getElementById('prev-uraian').innerText = item.uraian;
+      document.getElementById('prev-jumlah').innerText = item.jumlah;
+      document.getElementById('prev-satuan').innerText = item.satuan;
+      document.getElementById('prev-aset').innerText = item.aset;
+      document.getElementById('prev-status').innerText = item.status;
+
+      document.getElementById('prev-tglmasuk').innerText = item.gateTgl;
+      document.getElementById('prev-waktu').innerText = item.gateWaktu;
+      document.getElementById('prev-penerima').innerText = item.gatePenerima;
+      document.getElementById('prev-lokasi').innerText = item.gateLokasi;
+
+      document.getElementById('modal-preview').classList.add('active');
+    }
+
+    function closeModalPreview() {
+      document.getElementById('modal-preview').classList.remove('active');
+    }
+
+    // Chart Initializer (Dashboard)
+    const ctx1 = document.getElementById('assetCustomersChart').getContext('2d');
+    new Chart(ctx1, {
+      type: 'pie',
+      data: {
+        labels: ['BC 2.7', 'BC 4.0'],
+        datasets: [{ data: [94, 6], backgroundColor: ['#175d84', '#e66632'], borderWidth: 0 }]
+      },
+      options: { responsive: true, maintainAspectRatio: false }
+    });
+  </script>
 </body>
 </html>
