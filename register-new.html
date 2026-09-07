@@ -250,17 +250,31 @@
     .empty-row { height: 18px; }
     .empty-row td { border-style: dashed solid dashed solid; }
 
-    /* Form Register New Styles */
+    /* Form Register New Styles - MODIFIED */
+    .register-container {
+      width: 100%;
+      background-color: #fff;
+      padding: 15px;
+      border: 1px solid #b0c4de;
+      box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .form-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
     .form-title { 
       font-size: 15px; 
       font-weight: bold; 
       color: #000; 
-      margin-bottom: 15px; 
     }
 
     .form-grid {
       display: grid;
-      grid-template-columns: 160px 220px 220px;
+      grid-template-columns: 160px minmax(200px, 1fr) minmax(200px, 1fr);
       gap: 10px 15px;
       align-items: center;
       font-size: 12px;
@@ -271,24 +285,15 @@
     .form-grid input {
       width: 100%;
       padding: 3px 6px;
-      border: 2px solid #000;
+      border: 1px solid #000;
       font-size: 11px;
-      height: 24px;
+      height: 26px;
     }
 
-    .date-input-wrapper { 
-      position: relative; 
-      display: flex; 
-      align-items: center; 
-    }
-
-    .date-input-wrapper input { padding-right: 25px; }
-
-    .calendar-icon { 
-      position: absolute; 
-      right: 6px; 
-      font-size: 12px; 
-      pointer-events: none; 
+    .table-responsive-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      margin-top: 5px;
     }
 
     .action-bar {
@@ -315,6 +320,7 @@
 
     .btn-blue { background-color: #179bd7; }
     .btn-red { background-color: #ff0000; }
+    .btn-orange { background-color: #f37023; }
 
     .search-table-group { 
       display: flex; 
@@ -324,7 +330,7 @@
     .search-table-group input { 
       border: 1px solid #000; 
       padding: 2px 4px; 
-      width: 100px; 
+      width: 150px; 
     }
 
     .btn-action-icon {
@@ -346,9 +352,13 @@
       border-radius: 2px;
     }
 
+    .table-register-new {
+      width: 100%;
+    }
+
     .table-register-new th { 
       font-size: 10px; 
-      padding: 4px 2px; 
+      padding: 6px 4px; 
       background-color: #eaeaea; 
     }
 
@@ -393,7 +403,7 @@
 
     .modal-form-grid input, 
     .modal-form-grid textarea {
-      border: 2px solid #000;
+      border: 1px solid #000;
       padding: 3px 6px;
       font-size: 11px;
     }
@@ -418,7 +428,7 @@
 
     .edit-form-grid input, 
     .edit-form-grid textarea {
-      border: 2px solid #000;
+      border: 1px solid #000;
       padding: 3px 6px;
       font-size: 11px;
       width: 100%;
@@ -622,63 +632,71 @@
       </div>
     </div>
 
-    <!-- PAGE 2: REGISTER - NEW -->
+    <!-- PAGE 2: REGISTER - NEW (MODIFIED SECTION) -->
     <div id="page-register-new" class="page-content">
-      <div class="form-title">REGISTER - NEW</div>
-
-      <div class="form-grid">
-        <label>Nomor & Tanggal SKK</label>
-        <input type="text" id="skk-nomor-main">
-        <div class="date-input-wrapper">
-          <input type="text" id="skk-tgl-main" placeholder="DD/MM/YYYY">
-          <span class="calendar-icon">📅</span>
+      <div class="register-container">
+        
+        <div class="form-header-row">
+          <div class="form-title">REGISTER - NEW</div>
+          <button class="btn btn-orange" onclick="resetFormRegisterNew()">🔄 Reset Form</button>
         </div>
 
-        <label>Nama Perusahaan / Documen</label>
-        <input type="text" id="perusahaan-main">
-        <input type="text" id="documen-main">
+        <form id="form-register-new-main">
+          <div class="form-grid">
+            <label>Nomor & Tanggal SKK</label>
+            <input type="text" id="skk-nomor-main" placeholder="Nomor SKK">
+            <input type="date" id="skk-tgl-main">
 
-        <label>Status Aset</label>
-        <input type="text" id="status-aset-main">
-        <div></div>
+            <label>Nama Perusahaan / Documen</label>
+            <input type="text" id="perusahaan-main" placeholder="Nama Perusahaan">
+            <input type="text" id="documen-main" placeholder="Dokumen">
+
+            <label>Status Aset</label>
+            <input type="text" id="status-aset-main" placeholder="Status Aset">
+            <div></div>
+          </div>
+        </form>
+
+        <div style="font-weight: bold; margin-bottom: 8px; font-size: 12px;">Data Barang yang Dikirim:</div>
+
+        <div class="action-bar">
+          <div class="btn-group">
+            <button class="btn btn-blue" onclick="openRekamBarangModal()">+ Rekam</button>
+            <button class="btn btn-red" onclick="hapusBarangTerpilih()">Hapus Barang</button>
+          </div>
+          <div class="search-table-group">
+            <input type="text" id="search-input" placeholder="Cari data..." onkeyup="cariTabelBarang()">
+            <button class="btn btn-blue">🔍 Cari</button>
+          </div>
+        </div>
+
+        <!-- Tabel Register New (Responsif & Lebar) -->
+        <div class="table-responsive-wrapper">
+          <table class="table-register-new" id="table-register-new">
+            <thead>
+              <tr>
+                <th style="width: 30px;">
+                  <input type="checkbox" id="check-all" onclick="toggleSelectAll(this)">
+                </th>
+                <th>KODE BARANG</th>
+                <th>URAIAN BARANG</th>
+                <th>JUMLAH</th>
+                <th>SATUAN</th>
+                <th>ASET NO</th>
+                <th>STATUS</th>
+                <th>SKK</th>
+                <th>PERUSAHAAN</th>
+                <th>DOC</th>
+                <th style="width: 90px;">AKSI</th>
+              </tr>
+            </thead>
+            <tbody id="tabel-barang-body">
+              <!-- Area Output Baris Data -->
+            </tbody>
+          </table>
+        </div>
+
       </div>
-
-      <div style="font-weight: bold; margin-bottom: 8px; font-size: 12px;">Data Barang yang Dikirim:</div>
-
-      <div class="action-bar">
-        <div class="btn-group">
-          <button class="btn btn-blue" onclick="openRekamBarangModal()">+ Rekam</button>
-          <button class="btn btn-red" onclick="hapusBarangTerpilih()">Hapus Barang</button>
-        </div>
-        <div class="search-table-group">
-          <input type="text" id="search-input" onkeyup="cariTabelBarang()">
-          <button class="btn btn-blue">🔍 Cari</button>
-        </div>
-      </div>
-
-      <!-- Tabel Register New -->
-      <table class="table-register-new" id="table-register-new">
-        <thead>
-          <tr>
-            <th style="width: 25px;">
-              <input type="checkbox" id="check-all" onclick="toggleSelectAll(this)">
-            </th>
-            <th>KODE BARANG</th>
-            <th>URAIAN BARANG</th>
-            <th>JUMLAH</th>
-            <th>SATUAN</th>
-            <th>ASET NO</th>
-            <th>STATUS</th>
-            <th>SKK</th>
-            <th>PERUSAHAAN</th>
-            <th>DOC</th>
-            <th style="width: 80px;">AKSI</th>
-          </tr>
-        </thead>
-        <tbody id="tabel-barang-body">
-          <!-- Area Output Baris Data -->
-        </tbody>
-      </table>
     </div>
 
     <!-- MODAL POPUP 1: REKAM BARANG -->
@@ -822,6 +840,16 @@
       document.getElementById('rekam-satuan').value = '';
       document.getElementById('rekam-jumlah').value = '';
       document.getElementById('rekam-aset').value = '';
+    }
+
+    // Reset Form Register New
+    function resetFormRegisterNew() {
+      document.getElementById('form-register-new-main').reset();
+      listBarang = [];
+      renderTable();
+      document.getElementById('search-input').value = '';
+      const checkAll = document.getElementById('check-all');
+      if(checkAll) checkAll.checked = false;
     }
 
     // CRUD Operations
