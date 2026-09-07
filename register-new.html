@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ASTOM - Asset Customers Control Management</title>
+  <!-- Chart.js Library untuk Grafik -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     * {
@@ -54,7 +55,7 @@
     .menu-item-main {
       font-size: 13px;
       font-weight: bold;
-      padding: 4px 0;
+      padding: 6px 0;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -85,7 +86,7 @@
       display: block;
       color: #f7a600;
       text-decoration: none;
-      padding: 1px 0;
+      padding: 3px 0;
       font-size: 11px;
       cursor: pointer;
     }
@@ -350,6 +351,7 @@
       <span>ASTOM</span>
     </div>
 
+    <!-- Pemicu Halaman Dashboard -->
     <a href="#" class="menu-item-main" onclick="switchPage('dashboard')"><span>🏠</span> DASHBOARD</a>
     
     <div class="search-box">
@@ -358,6 +360,7 @@
 
     <div class="menu-group">
       <div class="menu-title">REGISTER</div>
+      <!-- PEMICU UTAMA HALAMAN NEW -->
       <a class="menu-link" onclick="switchPage('register-new')">NEW</a>
       <a class="menu-link">RECIVING</a>
       <a class="menu-link">RETURN</a>
@@ -536,7 +539,7 @@
           </tr>
         </thead>
         <tbody id="tabel-barang-body">
-          <!-- Data baru akan masuk ke sini via JavaScript -->
+          <!-- Area Output Baris Data -->
         </tbody>
       </table>
     </div>
@@ -624,21 +627,23 @@
 
   </div>
 
-  <!-- JavaScript Navigation, Dynamic Table & Modal Logic -->
+  <!-- SCRIPT UTAMA UNTUK ROUTING KELUAR-MASUK MENU DAN MANAJEMEN DATA -->
   <script>
-    // In-memory Database Array
     let listBarang = [];
     let currentEditIndex = null;
 
-    // Navigation Routing Function
+    // FUNGSI UTAMA SHIFT MENU / NAVIGASI HALAMAN
     function switchPage(pageId) {
       document.querySelectorAll('.page-content').forEach(page => {
         page.classList.remove('active');
       });
-      document.getElementById('page-' + pageId).classList.add('active');
+      const targetPage = document.getElementById('page-' + pageId);
+      if (targetPage) {
+        targetPage.classList.add('active');
+      }
     }
 
-    // Modal Control
+    // FUNGSI MODAL REKAM & EDIT
     function openRekamBarangModal() {
       document.getElementById('modal-rekam-barang').classList.add('active');
     }
@@ -678,7 +683,7 @@
       document.getElementById('rekam-aset').value = '';
     }
 
-    // SIMPAN BARANG BARU (KE TABEL)
+    // LOGIKA SIMPAN BARANG (+ REKAM)
     function simpanBarangBaru() {
       const kode = document.getElementById('rekam-kode').value;
       const uraian = document.getElementById('rekam-uraian').value;
@@ -686,7 +691,6 @@
       const jumlah = document.getElementById('rekam-jumlah').value;
       const aset = document.getElementById('rekam-aset').value;
 
-      // Ambil data header form utama
       const skk = document.getElementById('skk-nomor-main').value || '-';
       const perusahaan = document.getElementById('perusahaan-main').value || '-';
       const doc = document.getElementById('documen-main').value || '-';
@@ -702,7 +706,7 @@
       closeRekamBarangModal();
     }
 
-    // SIMPAN HASIL EDIT BARANG
+    // LOGIKA PERBAIKAN DATA (EDIT)
     function simpanEditBarang() {
       if (currentEditIndex !== null) {
         listBarang[currentEditIndex] = {
@@ -722,13 +726,13 @@
       }
     }
 
-    // RENDER / TAMPILKAN TABEL DATA BARANG
+    // LOGIKA MENAMPILKAN BARIS DATA
     function renderTable() {
       const tbody = document.getElementById('tabel-barang-body');
       tbody.innerHTML = '';
 
       if (listBarang.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="11" style="padding: 10px; color: #888;">Belum ada data barang yang direkam. Klik "+ Rekam" untuk menambah data.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="11" style="padding: 10px; color: #888;">Belum ada data barang. Klik "+ Rekam" untuk menambah data.</td></tr>';
         return;
       }
 
@@ -754,7 +758,7 @@
       });
     }
 
-    // HAPUS BARANG YANG DICEKLIS
+    // LOGIKA HAPUS DATA
     function hapusBarangTerpilih() {
       const checkboxes = document.querySelectorAll('.row-checkbox:checked');
       if (checkboxes.length === 0) {
@@ -762,7 +766,7 @@
         return;
       }
 
-      if (confirm('Apakah Anda yakin ingin menghapus barang yang dipilih?')) {
+      if (confirm('Apakah Anda yakin ingin menghapus barang terpilih?')) {
         const indexesToDelete = Array.from(checkboxes).map(cb => parseInt(cb.dataset.index));
         listBarang = listBarang.filter((_, idx) => !indexesToDelete.includes(idx));
         renderTable();
@@ -770,12 +774,10 @@
       }
     }
 
-    // SELECT ALL CHECKBOX
     function toggleSelectAll(master) {
       document.querySelectorAll('.row-checkbox').forEach(cb => cb.checked = master.checked);
     }
 
-    // CARI DATA TABEL
     function cariTabelBarang() {
       const query = document.getElementById('search-input').value.toLowerCase();
       const rows = document.querySelectorAll('#tabel-barang-body tr');
@@ -786,10 +788,10 @@
       });
     }
 
-    // Initialize Empty Table
+    // Inisialisasi awal tabel kosong
     renderTable();
 
-    // Chart Configuration
+    // Chart Dashboard JS
     const ctx1 = document.getElementById('assetCustomersChart').getContext('2d');
     new Chart(ctx1, {
       type: 'pie',
