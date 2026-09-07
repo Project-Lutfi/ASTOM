@@ -349,7 +349,7 @@
       background-color: #eaeaea; 
     }
 
-    /* Modal Popups */
+    /* Modal Popups Base */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -378,10 +378,14 @@
       color: red; 
     }
 
-    /* Modal Rekam Barang */
+    /* PERBAIKAN: Modal Rekam Barang Lebar & Layout Grid Presisi */
+    .rekam-modal-box {
+      width: 750px;
+    }
+
     .modal-form-grid {
       display: grid;
-      grid-template-columns: 110px 320px 100px 120px;
+      grid-template-columns: 110px 240px 110px 240px;
       gap: 12px 10px;
       align-items: center;
       font-size: 12px;
@@ -390,6 +394,7 @@
 
     .modal-form-grid input, 
     .modal-form-grid textarea {
+      width: 100%;
       border: 2px solid #000;
       padding: 3px 6px;
       font-size: 11px;
@@ -401,7 +406,7 @@
       resize: none; 
     }
 
-    /* PERBAIKAN 3: Modal Edit Barang Lebih Lebar */
+    /* Modal Edit Barang Lebar */
     .edit-modal-box { 
       width: 780px; 
     }
@@ -628,7 +633,6 @@
       <div class="form-grid">
         <label>Nomor & Tanggal SKK</label>
         <input type="text" id="skk-nomor-main">
-        <!-- PERBAIKAN 1: Menambahkan Kalender Native (type="date") -->
         <div class="date-input-wrapper">
           <input type="date" id="skk-tgl-main">
         </div>
@@ -682,8 +686,8 @@
 
     <!-- MODAL POPUP 1: REKAM BARANG -->
     <div id="modal-rekam-barang" class="modal-overlay">
-      <div class="modal-box" style="width: 680px;">
-        <div style="margin-bottom: 10px;">
+      <div class="modal-box rekam-modal-box">
+        <div style="margin-bottom: 12px;">
           <button class="btn btn-blue" style="padding: 2px 8px;">🔍 Cari</button>
         </div>
 
@@ -693,7 +697,7 @@
 
           <label class="required-label">Kode Barang</label>
           <input type="text" id="rekam-kode">
-          <div style="grid-column: span 2;"></div>
+          <div></div><div></div>
 
           <label class="required-label">Jenis Satuan</label>
           <input type="text" id="rekam-satuan">
@@ -703,7 +707,7 @@
 
           <label class="required-label">Aset No</label>
           <input type="text" id="rekam-aset">
-          <div style="grid-column: span 2;"></div>
+          <div></div><div></div>
         </div>
 
         <div class="modal-actions">
@@ -768,7 +772,6 @@
     let listBarang = [];
     let currentEditIndex = null;
 
-    // Navigasi Halaman
     function switchPage(pageId) {
       const pages = document.querySelectorAll('.page-content');
       pages.forEach(page => {
@@ -783,7 +786,6 @@
       }
     }
 
-    // Modal Control
     function openRekamBarangModal() {
       document.getElementById('modal-rekam-barang').classList.add('active');
     }
@@ -815,7 +817,6 @@
       currentEditIndex = null;
     }
 
-    // PERBAIKAN 2: Mengosongkan Seluruh Field Input
     function clearMainForm() {
       document.getElementById('skk-nomor-main').value = '';
       document.getElementById('skk-tgl-main').value = '';
@@ -832,7 +833,6 @@
       document.getElementById('rekam-aset').value = '';
     }
 
-    // CRUD Operations
     function simpanBarangBaru() {
       const kode = document.getElementById('rekam-kode').value;
       const uraian = document.getElementById('rekam-uraian').value;
@@ -853,7 +853,7 @@
       listBarang.push({ kode, uraian, jumlah, satuan, aset, status, skk, perusahaan, doc });
       renderTable();
       closeRekamBarangModal();
-      clearMainForm(); // Mengosongkan form utama setelah tersimpan
+      clearMainForm();
     }
 
     function simpanEditBarang() {
@@ -935,10 +935,9 @@
       });
     }
 
-    // Inisialisasi awal
     renderTable();
 
-    // Chart Dashboard JS
+    // Chart Init
     const ctx1 = document.getElementById('assetCustomersChart').getContext('2d');
     new Chart(ctx1, {
       type: 'pie',
