@@ -634,14 +634,20 @@
 
     // FUNGSI UTAMA SHIFT MENU / NAVIGASI HALAMAN
     function switchPage(pageId) {
-      document.querySelectorAll('.page-content').forEach(page => {
-        page.classList.remove('active');
-      });
-      const targetPage = document.getElementById('page-' + pageId);
-      if (targetPage) {
-        targetPage.classList.add('active');
-      }
-    }
+  // 1. Sembunyikan semua halaman
+  const pages = document.querySelectorAll('.page-content');
+  pages.forEach(page => {
+    page.style.display = 'none';
+    page.classList.remove('active');
+  });
+
+  // 2. Tampilkan halaman sasaran
+  const targetPage = document.getElementById('page-' + pageId);
+  if (targetPage) {
+    targetPage.style.display = 'flex';
+    targetPage.classList.add('active');
+  }
+}
 
     // FUNGSI MODAL REKAM & EDIT
     function openRekamBarangModal() {
