@@ -4,9 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ASTOM - Asset Customers Control Management</title>
-  <!-- Chart.js Library untuk Grafik -->
+  
+  <!-- Chart.js Library -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
   <style>
+    /* Reset & Base Styles */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -64,7 +67,10 @@
       text-decoration: none;
     }
 
-    .search-box { margin: 8px 0 12px 0; }
+    .search-box { 
+      margin: 8px 0 12px 0; 
+    }
+
     .search-box input {
       width: 100%;
       padding: 3px 6px;
@@ -73,7 +79,10 @@
       font-size: 11px;
     }
 
-    .menu-group { margin-bottom: 12px; }
+    .menu-group { 
+      margin-bottom: 12px; 
+    }
+
     .menu-title {
       font-weight: bold;
       color: #ffffff;
@@ -91,7 +100,10 @@
       cursor: pointer;
     }
 
-    .menu-link:hover, .menu-item-main:hover { text-decoration: underline; }
+    .menu-link:hover, 
+    .menu-item-main:hover { 
+      text-decoration: underline; 
+    }
 
     /* Main Content Area */
     .main-content {
@@ -137,32 +149,114 @@
       gap: 15px;
     }
 
-    /* DASHBOARD ELEMENTS */
-    .cards-container { display: flex; gap: 12px; }
-    .card { flex: 1; color: #fff; text-align: center; padding: 8px 5px; box-shadow: 1px 1px 3px rgba(0,0,0,0.15); }
-    .card-title { font-size: 11px; text-decoration: underline; font-weight: bold; margin-bottom: 12px; }
-    .card-value { font-size: 10px; font-weight: bold; }
+    /* Dashboard Elements */
+    .cards-container { 
+      display: flex; 
+      gap: 12px; 
+    }
+
+    .card { 
+      flex: 1; 
+      color: #fff; 
+      text-align: center; 
+      padding: 8px 5px; 
+      box-shadow: 1px 1px 3px rgba(0,0,0,0.15); 
+    }
+
+    .card-title { 
+      font-size: 11px; 
+      text-decoration: underline; 
+      font-weight: bold; 
+      margin-bottom: 12px; 
+    }
+
+    .card-value { 
+      font-size: 10px; 
+      font-weight: bold; 
+    }
+
     .card-blue { background-color: #00a0e9; }
     .card-green { background-color: #58b036; }
     .card-orange { background-color: #f37023; }
     .card-red { background-color: #ff0000; }
 
-    .dashboard-row { display: flex; gap: 15px; align-items: stretch; }
-    .panel-table { flex: 1.6; border: 1px solid #000; background-color: #fff; display: flex; flex-direction: column; }
-    .panel-chart { flex: 1; border: 1px solid #d0d0d0; background-color: #fff; padding: 10px; display: flex; flex-direction: column; align-items: center; box-shadow: 1px 1px 2px rgba(0,0,0,0.05); }
-    .panel-header { font-weight: bold; font-size: 13px; padding: 4px 8px; border-bottom: 1px solid #000; background-color: #fff; color: #000; }
-    .chart-title { font-size: 13px; font-weight: bold; color: #666; margin-bottom: 8px; text-align: center; }
-    .chart-container { position: relative; width: 100%; max-width: 220px; height: 170px; }
+    .dashboard-row { 
+      display: flex; 
+      gap: 15px; 
+      align-items: stretch; 
+    }
 
-    /* TABLES */
-    table { width: 100%; border-collapse: collapse; font-size: 10px; }
-    th, td { border: 1px solid #000; padding: 4px; text-align: center; }
-    th { background-color: #fff; font-weight: bold; }
+    .panel-table { 
+      flex: 1.6; 
+      border: 1px solid #000; 
+      background-color: #fff; 
+      display: flex; 
+      flex-direction: column; 
+    }
+
+    .panel-chart { 
+      flex: 1; 
+      border: 1px solid #d0d0d0; 
+      background-color: #fff; 
+      padding: 10px; 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      box-shadow: 1px 1px 2px rgba(0,0,0,0.05); 
+    }
+
+    .panel-header { 
+      font-weight: bold; 
+      font-size: 13px; 
+      padding: 4px 8px; 
+      border-bottom: 1px solid #000; 
+      background-color: #fff; 
+      color: #000; 
+    }
+
+    .chart-title { 
+      font-size: 13px; 
+      font-weight: bold; 
+      color: #666; 
+      margin-bottom: 8px; 
+      text-align: center; 
+    }
+
+    .chart-container { 
+      position: relative; 
+      width: 100%; 
+      max-width: 220px; 
+      height: 170px; 
+    }
+
+    /* Tables */
+    table { 
+      width: 100%; 
+      border-collapse: collapse; 
+      font-size: 10px; 
+    }
+
+    th, td { 
+      border: 1px solid #000; 
+      padding: 4px; 
+      text-align: center; 
+    }
+
+    th { 
+      background-color: #fff; 
+      font-weight: bold; 
+    }
+
     .empty-row { height: 18px; }
     .empty-row td { border-style: dashed solid dashed solid; }
 
-    /* FORM REGISTER NEW STYLES */
-    .form-title { font-size: 15px; font-weight: bold; color: #000; margin-bottom: 15px; }
+    /* Form Register New Styles */
+    .form-title { 
+      font-size: 15px; 
+      font-weight: bold; 
+      color: #000; 
+      margin-bottom: 15px; 
+    }
 
     .form-grid {
       display: grid;
@@ -182,9 +276,20 @@
       height: 24px;
     }
 
-    .date-input-wrapper { position: relative; display: flex; align-items: center; }
+    .date-input-wrapper { 
+      position: relative; 
+      display: flex; 
+      align-items: center; 
+    }
+
     .date-input-wrapper input { padding-right: 25px; }
-    .calendar-icon { position: absolute; right: 6px; font-size: 12px; pointer-events: none; }
+
+    .calendar-icon { 
+      position: absolute; 
+      right: 6px; 
+      font-size: 12px; 
+      pointer-events: none; 
+    }
 
     .action-bar {
       display: flex;
@@ -193,7 +298,10 @@
       margin-bottom: 10px;
     }
 
-    .btn-group { display: flex; gap: 8px; }
+    .btn-group { 
+      display: flex; 
+      gap: 8px; 
+    }
 
     .btn {
       padding: 4px 12px;
@@ -208,8 +316,16 @@
     .btn-blue { background-color: #179bd7; }
     .btn-red { background-color: #ff0000; }
 
-    .search-table-group { display: flex; gap: 4px; }
-    .search-table-group input { border: 1px solid #000; padding: 2px 4px; width: 100px; }
+    .search-table-group { 
+      display: flex; 
+      gap: 4px; 
+    }
+
+    .search-table-group input { 
+      border: 1px solid #000; 
+      padding: 2px 4px; 
+      width: 100px; 
+    }
 
     .btn-action-icon {
       background-color: #d8e5f2;
@@ -230,9 +346,13 @@
       border-radius: 2px;
     }
 
-    .table-register-new th { font-size: 10px; padding: 4px 2px; background-color: #eaeaea; }
+    .table-register-new th { 
+      font-size: 10px; 
+      padding: 4px 2px; 
+      background-color: #eaeaea; 
+    }
 
-    /* MODAL POPUPS */
+    /* Modal Popups */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -256,7 +376,10 @@
       position: relative;
     }
 
-    .required-label::before { content: "* "; color: red; }
+    .required-label::before { 
+      content: "* "; 
+      color: red; 
+    }
 
     /* Modal Rekam Barang */
     .modal-form-grid {
@@ -268,13 +391,18 @@
       font-weight: bold;
     }
 
-    .modal-form-grid input, .modal-form-grid textarea {
+    .modal-form-grid input, 
+    .modal-form-grid textarea {
       border: 2px solid #000;
       padding: 3px 6px;
       font-size: 11px;
     }
 
-    .modal-form-grid textarea { grid-column: 2 / 5; height: 45px; resize: none; }
+    .modal-form-grid textarea { 
+      grid-column: 2 / 5; 
+      height: 45px; 
+      resize: none; 
+    }
 
     /* Modal Edit Barang */
     .edit-modal-box { width: 680px; }
@@ -288,14 +416,18 @@
       font-weight: bold;
     }
 
-    .edit-form-grid input, .edit-form-grid textarea {
+    .edit-form-grid input, 
+    .edit-form-grid textarea {
       border: 2px solid #000;
       padding: 3px 6px;
       font-size: 11px;
       width: 100%;
     }
 
-    .edit-form-grid textarea { height: 35px; resize: none; }
+    .edit-form-grid textarea { 
+      height: 35px; 
+      resize: none; 
+    }
 
     .modal-actions {
       display: flex;
@@ -339,7 +471,10 @@
       margin-top: auto;
     }
 
-    .footer-sub { font-size: 9px; font-weight: normal; }
+    .footer-sub { 
+      font-size: 9px; 
+      font-weight: normal; 
+    }
   </style>
 </head>
 <body>
@@ -351,8 +486,9 @@
       <span>ASTOM</span>
     </div>
 
-    <!-- Pemicu Halaman Dashboard -->
-    <a href="#" class="menu-item-main" onclick="switchPage('dashboard')"><span>🏠</span> DASHBOARD</a>
+    <a href="#" class="menu-item-main" onclick="switchPage('dashboard')">
+      <span>🏠</span> DASHBOARD
+    </a>
     
     <div class="search-box">
       <input type="text" placeholder="🔍 Cari menu">
@@ -360,7 +496,6 @@
 
     <div class="menu-group">
       <div class="menu-title">REGISTER</div>
-      <!-- PEMICU UTAMA HALAMAN NEW -->
       <a class="menu-link" onclick="switchPage('register-new')">NEW</a>
       <a class="menu-link">RECIVING</a>
       <a class="menu-link">RETURN</a>
@@ -525,7 +660,9 @@
       <table class="table-register-new" id="table-register-new">
         <thead>
           <tr>
-            <th style="width: 25px;"><input type="checkbox" id="check-all" onclick="toggleSelectAll(this)"></th>
+            <th style="width: 25px;">
+              <input type="checkbox" id="check-all" onclick="toggleSelectAll(this)">
+            </th>
             <th>KODE BARANG</th>
             <th>URAIAN BARANG</th>
             <th>JUMLAH</th>
@@ -627,29 +764,27 @@
 
   </div>
 
-  <!-- SCRIPT UTAMA UNTUK ROUTING KELUAR-MASUK MENU DAN MANAJEMEN DATA -->
+  <!-- JavaScript Management -->
   <script>
     let listBarang = [];
     let currentEditIndex = null;
 
-    // FUNGSI UTAMA SHIFT MENU / NAVIGASI HALAMAN
+    // Navigasi Halaman
     function switchPage(pageId) {
-  // 1. Sembunyikan semua halaman
-  const pages = document.querySelectorAll('.page-content');
-  pages.forEach(page => {
-    page.style.display = 'none';
-    page.classList.remove('active');
-  });
+      const pages = document.querySelectorAll('.page-content');
+      pages.forEach(page => {
+        page.style.display = 'none';
+        page.classList.remove('active');
+      });
 
-  // 2. Tampilkan halaman sasaran
-  const targetPage = document.getElementById('page-' + pageId);
-  if (targetPage) {
-    targetPage.style.display = 'flex';
-    targetPage.classList.add('active');
-  }
-}
+      const targetPage = document.getElementById('page-' + pageId);
+      if (targetPage) {
+        targetPage.style.display = 'flex';
+        targetPage.classList.add('active');
+      }
+    }
 
-    // FUNGSI MODAL REKAM & EDIT
+    // Modal Control
     function openRekamBarangModal() {
       document.getElementById('modal-rekam-barang').classList.add('active');
     }
@@ -689,7 +824,7 @@
       document.getElementById('rekam-aset').value = '';
     }
 
-    // LOGIKA SIMPAN BARANG (+ REKAM)
+    // CRUD Operations
     function simpanBarangBaru() {
       const kode = document.getElementById('rekam-kode').value;
       const uraian = document.getElementById('rekam-uraian').value;
@@ -712,7 +847,6 @@
       closeRekamBarangModal();
     }
 
-    // LOGIKA PERBAIKAN DATA (EDIT)
     function simpanEditBarang() {
       if (currentEditIndex !== null) {
         listBarang[currentEditIndex] = {
@@ -732,7 +866,6 @@
       }
     }
 
-    // LOGIKA MENAMPILKAN BARIS DATA
     function renderTable() {
       const tbody = document.getElementById('tabel-barang-body');
       tbody.innerHTML = '';
@@ -764,7 +897,6 @@
       });
     }
 
-    // LOGIKA HAPUS DATA
     function hapusBarangTerpilih() {
       const checkboxes = document.querySelectorAll('.row-checkbox:checked');
       if (checkboxes.length === 0) {
@@ -794,7 +926,7 @@
       });
     }
 
-    // Inisialisasi awal tabel kosong
+    // Inisialisasi awal
     renderTable();
 
     // Chart Dashboard JS
@@ -803,9 +935,22 @@
       type: 'pie',
       data: {
         labels: ['BC 2.7', 'BC 4.0'],
-        datasets: [{ data: [94, 6], backgroundColor: ['#175d84', '#e66632'], borderWidth: 0 }]
+        datasets: [{ 
+          data: [94, 6], 
+          backgroundColor: ['#175d84', '#e66632'], 
+          borderWidth: 0 
+        }]
       },
-      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 8, font: { size: 9 } } } } }
+      options: { 
+        responsive: true, 
+        maintainAspectRatio: false, 
+        plugins: { 
+          legend: { 
+            position: 'bottom', 
+            labels: { boxWidth: 8, font: { size: 9 } } 
+          } 
+        } 
+      }
     });
 
     const ctx2 = document.getElementById('returnAssetChart').getContext('2d');
@@ -813,9 +958,22 @@
       type: 'pie',
       data: {
         labels: ['BC 2.7', 'BC 4.1'],
-        datasets: [{ data: [35, 65], backgroundColor: ['#e66632', '#175d84'], borderWidth: 0 }]
+        datasets: [{ 
+          data: [35, 65], 
+          backgroundColor: ['#e66632', '#175d84'], 
+          borderWidth: 0 
+        }]
       },
-      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 8, font: { size: 9 } } } } }
+      options: { 
+        responsive: true, 
+        maintainAspectRatio: false, 
+        plugins: { 
+          legend: { 
+            position: 'bottom', 
+            labels: { boxWidth: 8, font: { size: 9 } } 
+          } 
+        } 
+      }
     });
   </script>
 </body>
