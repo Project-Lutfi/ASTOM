@@ -1,49 +1,249 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Receiving - Data Barang yang Dikirim</title>
-    <!-- Memuat Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Memuat Bootstrap Icons & FontAwesome untuk ikon -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body {
-            background-color: #f8f9fa;
-            font-size: 13px;
-        }
-        .table-custom th {
-            background-color: #ffffff;
-            color: #000;
-            font-weight: bold;
-            font-size: 11px;
-            border-bottom: 2px solid #0d6efd;
-            vertical-align: middle;
-            text-align: center;
-        }
-        .table-custom td {
-            vertical-align: middle;
-            background-color: #ffffff;
-        }
-        .box-placeholder {
-            border: 1.5px solid #0056b3;
-            color: #000;
-            text-align: center;
-            padding: 8px;
-            background-color: #fff;
-            font-weight: 500;
-        }
-    </style>
-</head>
-<body class="p-4">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASTOM - Receiving</title>
+  <!-- Memuat Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Memuat FontAwesome untuk ikon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
 
-    <div class="container-fluid">
+    body {
+      display: flex;
+      height: 100vh;
+      background-color: #e3ebf3;
+      overflow: hidden;
+      font-size: 13px;
+    }
+
+    /* Sidebar Navigation */
+    .sidebar {
+      width: 210px;
+      background-color: #24588a;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      padding: 12px 10px;
+      font-size: 11px;
+      flex-shrink: 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #f7a600;
+      margin-bottom: 8px;
+    }
+
+    .brand-logo {
+      width: 28px;
+      height: 28px;
+      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAFn0lEQVR4nO2bW2hcVRjHf3NmJtPcxCQ2iVabWJvU2l6qaROsRerF0gcv2EKEFvRF9MWH9s2H+gqCN0EQfBARxQfBgg9++FBQROxDK/WhtQ1Nmt6TNu29TdKkM5nMe/nOv002Z+dMkjZtkpl/WBYyWcvZe+3v+75v/845R0oJQoj/yVCSx2zbFjE+n++20xU8b4Wn287Ozs7eTq9i43e2jY3Z931tbm6+z1v91219b12N/f89evTo0b6+vqW/N40N05/61vdg61v30v3y3vVw4+31e++9989X1dfXx+fz+Wvb1i+A68A+4CSwB9ihd5sCjup7A3gbWNEyq+3/sH49B/qwldf0v4F/tO4i8LreH1T7U8BbwHfAVT0vAkeAjy3LClqWNbxt3wJ4f+tbz7a+v0a/v1/71239O9+/Ruvb2u92330f6v7j+l7S93N6Lupz7+vzc3p+Qsv8qeqnZfV6n5c9q21XgoLZd0TIXgU+Ab4CXbNt2g4OD+7b1LwB4w/pG097Z2flWdXX1vdbS0tISa2xsDDU2Noabmpqizc3Noebm5lB7e3vQ8t///e7g4KA/GAz6ly9f7u3p6fG3trYGW1tb/T2t6+tra+u//38A4Btr6xt7e3tv6/j/BvhQv78d2A20AJu1b12b3h/Vusva76yee9o3oe0D2t+jZT7S37a+T2rd/bqu0nLd2teuZb60bfuE53m/3dYxACqsr4f9+voN8DXwIdAH1Gvf3Tq+3bKsz3w/39bX12d93/fHff/q2u3s/PxW1gD8sL7g9er1/lA8/gTogXy8N8Cfh3wP/e8A363q+X39A3mva29l3/e1rf0/Ife3s/S8A1L3s/3/A/9726Xm/W9l10//l8A31v9sS3s/+51f5/D//7f1vAefW3q6/c73s/sN/b+s2p++pS5Xz+n6X9s1f/A+xS5w4s36O3q6v/5+j9L2A/31/31p83mN3//0S8N8f///a10s3/t/+/f9r6A+/m53+L8c/fN2f5d/c5/4/j0P/f+x//bX//a3//f9S4AAAAASUVORK5CYR==');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .menu-item-main {
+      font-size: 13px;
+      font-weight: bold;
+      padding: 4px 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .search-box {
+      margin: 8px 0 12px 0;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 3px 6px;
+      border-radius: 2px;
+      border: 1px solid #ccc;
+      font-size: 11px;
+    }
+
+    .menu-group {
+      margin-bottom: 12px;
+    }
+
+    .menu-title {
+      font-weight: bold;
+      color: #ffffff;
+      margin-bottom: 2px;
+      text-transform: uppercase;
+      font-size: 11px;
+    }
+
+    .menu-link {
+      display: block;
+      color: #f7a600;
+      text-decoration: none;
+      padding: 1px 0;
+      font-size: 11px;
+      cursor: pointer;
+    }
+
+    .menu-link:hover, .menu-item-main:hover {
+      text-decoration: underline;
+    }
+
+    /* Main Content Area */
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    /* Header */
+    .header {
+      background-color: #d2e1f0;
+      padding: 8px 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #a0b8d0;
+    }
+
+    .header-title {
+      font-size: 14px;
+      font-weight: bold;
+      color: #000;
+      letter-spacing: 0.5px;
+    }
+
+    .user-login-container {
+      font-size: 11px;
+      font-weight: bold;
+      color: #000;
+    }
+
+    /* Page Content */
+    .page-content {
+      padding: 15px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .table-custom th {
+      background-color: #ffffff;
+      color: #000;
+      font-weight: bold;
+      font-size: 11px;
+      border-bottom: 2px solid #0d6efd;
+      vertical-align: middle;
+      text-align: center;
+    }
+    .table-custom td {
+      vertical-align: middle;
+      background-color: #ffffff;
+    }
+    .box-placeholder {
+      border: 1.5px solid #0056b3;
+      color: #000;
+      text-align: center;
+      padding: 8px;
+      background-color: #fff;
+      font-weight: 500;
+    }
+
+    /* Footer */
+    .footer {
+      background-color: #4387c8;
+      color: #fff;
+      padding: 6px 15px;
+      font-size: 11px;
+      font-weight: bold;
+      margin-top: auto;
+    }
+
+    .footer-sub {
+      font-size: 9px;
+      font-weight: normal;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="brand">
+      <div class="brand-logo"></div>
+      <span>ASTOM</span>
+    </div>
+
+    <a href="dashboard.html" class="menu-item-main"><span>🏠</span> DASHBOARD</a>
+
+    <div class="search-box">
+      <input type="text" placeholder="🔍 Cari menu">
+    </div>
+
+    <div class="menu-group">
+      <div class="menu-title">REGISTER</div>
+      <a href="register-new.html" class="menu-link">NEW</a>
+      <a href="reciving.html" class="menu-link">RECIVING</a>
+      <a href="#" class="menu-link">RETURN</a>
+    </div>
+
+    <div class="menu-group">
+      <div class="menu-title">MONITORING</div>
+      <a href="#" class="menu-link">GATE</a>
+    </div>
+
+    <div class="menu-group">
+      <div class="menu-title">REPORT & DOWNLOAD</div>
+      <a href="#" class="menu-link">ALL ASSET</a>
+      <a href="#" class="menu-link">RETURN ASSET</a>
+    </div>
+
+    <div class="menu-group">
+      <div class="menu-title">SETTING</div>
+      <a href="#" class="menu-link">MASTER USER</a>
+      <a href="#" class="menu-link">MASTER CUSTOMER</a>
+      <a href="#" class="menu-link">MASTER BARANG</a>
+    </div>
+
+    <div class="menu-group" style="margin-top: 10px;">
+      <div class="menu-title">LOG HISTORY</div>
+      <div class="menu-title" style="margin-top: 4px;">LOGOUT</div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+
+    <!-- Top Header -->
+    <div class="header">
+      <div class="header-title">ASSET CUSTOMERS CONTROL MANAGEMENT</div>
+      <div class="user-login-container">USER LOGIN</div>
+    </div>
+
+    <!-- Page Content -->
+    <div class="page-content">
         <!-- Judul Bagian Atas -->
-        <div class="fw-bold mb-3" style="font-size: 14px;">Data Barang yang Dikirim</div>
+        <div class="fw-bold" style="font-size: 14px;">Data Barang yang Dikirim</div>
 
         <!-- Bagian Filter & Tombol Atas -->
-        <div class="row align-items-center mb-3">
+        <div class="row align-items-center mb-2">
             <div class="col-auto">
                 <button class="btn btn-info text-white px-3 py-1 fw-bold" style="background-color: #00bfff; border: none;">
                     <i class="fa fa-search me-1"></i> Cari
@@ -103,6 +303,14 @@
             </table>
         </div>
     </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      PT MURAMOTO ELEKTRONIKA INDONESIA
+      <div class="footer-sub">CUSTOMS OPERATIONS & COMPLIANCE DEPT.</div>
+    </div>
+
+  </div>
 
 </body>
 </html>
