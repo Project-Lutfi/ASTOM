@@ -152,6 +152,7 @@
       text-align: center;
       padding: 8px 5px;
       box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+      cursor: pointer;
     }
 
     .card-title {
@@ -272,36 +273,35 @@
       <span>ASTOM</span>
     </div>
 
-    <a href="#" class="menu-item-main"><span>🏠</span> DASHBOARD</a>
-    
+    <a href="index.html" class="menu-item-main"><span>🏠</span> DASHBOARD</a>
+
     <div class="search-box">
       <input type="text" placeholder="🔍 Cari menu">
     </div>
 
     <div class="menu-group">
-  <div class="menu-title">REGISTER</div>
-  <!-- Tambahkan atribut href ke file tujuan -->
-  <a href="register-new.html" class="menu-link">NEW</a>
-   <a href="reciving.html""menu-link">RECIVING</a>
-  <a class="menu-link">RETURN</a>
-</div>
-    
+      <div class="menu-title">REGISTER</div>
+      <a href="register-new.html" class="menu-link">NEW</a>
+      <a href="receiving.html" class="menu-link">RECEIVING</a>
+      <a href="#" class="menu-link">RETURN</a>
+    </div>
+
     <div class="menu-group">
       <div class="menu-title">MONITORING</div>
-      <a class="menu-link">GATE</a>
+      <a href="#" class="menu-link">GATE</a>
     </div>
 
     <div class="menu-group">
       <div class="menu-title">REPORT & DOWNLOAD</div>
-      <a class="menu-link">ALL ASSET</a>
-      <a class="menu-link">RETURN ASSET</a>
+      <a href="#" class="menu-link">ALL ASSET</a>
+      <a href="#" class="menu-link">RETURN ASSET</a>
     </div>
 
     <div class="menu-group">
       <div class="menu-title">SETTING</div>
-      <a class="menu-link">MASTER USER</a>
-      <a class="menu-link">MASTER CUSTOMER</a>
-      <a class="menu-link">MASTER BARANG</a>
+      <a href="#" class="menu-link">MASTER USER</a>
+      <a href="#" class="menu-link">MASTER CUSTOMER</a>
+      <a href="#" class="menu-link">MASTER BARANG</a>
     </div>
 
     <div class="menu-group" style="margin-top: 10px;">
@@ -312,13 +312,11 @@
 
   <!-- Main Content -->
   <div class="main-content">
-    
+
     <!-- Top Header -->
     <div class="header">
       <div class="header-title">ASSET CUSTOMERS CONTROL MANAGEMENT</div>
-      <div class="user-login-container">
-        USER LOGIN
-      </div>
+      <div class="user-login-container">USER LOGIN</div>
     </div>
 
     <!-- Page Content -->
@@ -326,7 +324,7 @@
 
       <!-- Summary Cards -->
       <div class="cards-container">
-        <div class="card card-blue">
+        <div class="card card-blue" onclick="window.location.href='receiving.html'">
           <div class="card-title">ASSET CUSTOMER</div>
           <div class="card-value">JUMLAH</div>
         </div>
