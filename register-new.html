@@ -6,9 +6,6 @@
   <title>ASTOM - Register New & Receiving</title>
 
   <style>
-    /* =========================================================
-       RESET & BASE
-    ========================================================= */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -19,134 +16,85 @@
     body {
       display: flex;
       height: 100vh;
-      background: #e3ebf3;
       overflow: hidden;
-      color: #000;
+      background: #e3ebf3;
+      color: #111;
+      font-size: 12px;
     }
 
-    /* =========================================================
-       SIDEBAR
-    ========================================================= */
     .sidebar {
       width: 210px;
-      background: #24588a;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      padding: 12px 10px;
-      font-size: 11px;
       flex-shrink: 0;
+      padding: 12px 10px;
+      color: #fff;
+      background: #24588a;
     }
 
     .brand {
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      margin-bottom: 14px;
+      color: #f7a600;
       font-size: 18px;
       font-weight: bold;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 3px 0;
       color: #f7a600;
-      margin-bottom: 8px;
-    }
-
-    .brand-logo {
-      width: 28px;
-      height: 28px;
-      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAFn0lEQVR4nO2bW2hcVRjHf3NmJtPcxCQ2iVabWJvU2l6qaROsRerF0gcv2EKEFvRF9MWH9s2H+gqCN0EQfBARxQfBgg9++FBQROxDK/WhtQ1Nmt6TNu29TdKkM5nMe/nOv002Z+dMkjZtkpl/WBYyWcvZe+3v+75v/845R0oJQoj/yVCSx2zbFjE+n++20xU8b4Wn287Ozs7eTq9i43e2jY3Z931tbm6+z1v91219b12N/f89evTo0b6+vqW/N40N05/61vdg61v30v3y3vVw4+31e++9989X1dfXx+fz+Wvb1i+A68A+4CSwB9ihd5sCjup7A3gbWNEyq+3/sH49B/ygdVf0v4F/tO4i8LreH1T7U8BbwHfAVT0vAkeAjy3LClqWNbxt3wJ4f+tbz7a+v0a/v1/71239O9+/Ruvb2u92330f6v7j+l7S93N6Lupz7+vzc3p+Qsv8qudZfV6n5c9q21XgoLZd0TIXgU+Ab4CXbNt2g4OD+7b1LwB4w/pG097Z2flWdXX1vdbS0tISa2xsDDU2Noabmpqizc3Noebm5lB7e3vQ8t///e7g4KA/GAz6ly9f7u3p6fG3trYGW1tb/T2t6+tra+u//38A4Btr6xt7e3tv6/j/BvhQv78d2A20AJu1b12b3h/Vusva76yee9o3oe0D2t+jZT7S37a+T2rd/bqu0nLd2teuZb60bfuE53m/3dYxACqsr4f9+voN8DXwIdAH1Gvf3Tq+3bKsz3w/39bX12d93/fHff/q2u3s7PxW1gD8sL7g9er1/lA8/gTogXy8N8Cfh3wP/e8A363q+X39A3mva29l3/e1rf0/Ife3s/S8A1L3s/3/A/9726Xm/W9l10//l8A31v9sS3s/+51f5/D//7f1vAefW3q6/c73s/sN/b+s2p++pS5Xz+n6X9s1f/A+xS5w4s36O3q6v/5+j9L2A/31/31p83mN3//0S8N8f///a10s3/t/+/f9r6A+/m53+L8c/fN2f5d/c5/4/j0P/f+x//bX//a3//f9S4AAAAASUVORK5CYII=');
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
-    }
-
-    .menu-item-main,
-    .menu-link {
-      color: #fff;
       text-decoration: none;
       cursor: pointer;
     }
 
-    .menu-item-main {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 13px;
-      font-weight: bold;
-      padding: 4px 0;
-    }
-
-    .search-box {
-      margin: 8px 0 12px;
-    }
-
-    .search-box input {
-      width: 100%;
-      padding: 4px 6px;
-      border: 1px solid #ccc;
-      border-radius: 2px;
-      font-size: 11px;
-    }
-
-    .menu-group {
-      margin-bottom: 12px;
-    }
-
-    .menu-title {
-      font-size: 11px;
-      font-weight: bold;
+    .sidebar a:hover {
       color: #fff;
-      margin-bottom: 3px;
-      text-transform: uppercase;
-    }
-
-    .menu-link {
-      display: block;
-      color: #f7a600;
-      padding: 2px 0;
-      font-size: 11px;
-    }
-
-    .menu-link:hover,
-    .menu-item-main:hover {
       text-decoration: underline;
     }
 
-    /* =========================================================
-       MAIN CONTENT
-    ========================================================= */
+    .dashboard-link {
+      color: #fff !important;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .sidebar input {
+      width: 100%;
+      margin: 8px 0 14px;
+      padding: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .menu-group {
+      margin-bottom: 15px;
+    }
+
+    .menu-title {
+      margin-bottom: 4px;
+      color: #fff;
+      font-size: 11px;
+      font-weight: bold;
+    }
+
     .main-content {
-      flex: 1;
       display: flex;
+      flex: 1;
       flex-direction: column;
       overflow-y: auto;
     }
 
     .header {
-      background: #d2e1f0;
-      padding: 8px 15px;
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      padding: 9px 15px;
+      background: #d2e1f0;
       border-bottom: 1px solid #a0b8d0;
-    }
-
-    .header-title {
-      font-size: 14px;
-      font-weight: bold;
-      letter-spacing: 0.5px;
-    }
-
-    .user-login-container {
-      font-size: 11px;
       font-weight: bold;
     }
 
     .page-content {
-      padding: 15px;
       flex: 1;
+      padding: 15px;
     }
 
-    /* =========================================================
-       TAB NEW / RECEIVING
-    ========================================================= */
     .page-tabs {
       display: flex;
       gap: 4px;
@@ -155,18 +103,14 @@
     }
 
     .page-tab {
-      border: none;
+      padding: 8px 20px;
+      border: 0;
+      border-radius: 4px 4px 0 0;
       background: #b7cbe0;
       color: #173b5c;
-      padding: 8px 22px;
       font-size: 12px;
       font-weight: bold;
       cursor: pointer;
-      border-radius: 4px 4px 0 0;
-    }
-
-    .page-tab:hover {
-      background: #9eb8d0;
     }
 
     .page-tab.active {
@@ -182,13 +126,10 @@
       display: block;
     }
 
-    /* =========================================================
-       FORM
-    ========================================================= */
     .form-title {
+      margin-bottom: 15px;
       font-size: 15px;
       font-weight: bold;
-      margin-bottom: 15px;
     }
 
     .form-grid {
@@ -196,39 +137,35 @@
       grid-template-columns: 160px 220px 220px;
       gap: 10px 15px;
       align-items: center;
-      font-size: 12px;
-      font-weight: bold;
       margin-bottom: 18px;
+      font-weight: bold;
     }
 
     .form-grid input {
       width: 100%;
-      height: 25px;
-      padding: 3px 6px;
-      border: 2px solid #000;
+      height: 26px;
+      padding: 4px 6px;
+      border: 2px solid #111;
       font-size: 11px;
     }
 
-    /* =========================================================
-       ACTION BAR
-    ========================================================= */
     .action-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 10px;
+      margin: 10px 0;
     }
 
-    .btn-group,
+    .button-group,
     .search-group {
       display: flex;
       gap: 6px;
     }
 
     .btn {
-      border: none;
+      padding: 6px 12px;
+      border: 0;
       border-radius: 3px;
-      padding: 5px 12px;
       color: #fff;
       font-size: 11px;
       font-weight: bold;
@@ -239,30 +176,30 @@
       background: #179bd7;
     }
 
-    .btn-blue:hover {
-      background: #0c85bd;
-    }
-
     .btn-red {
-      background: #e00000;
+      background: #df0000;
     }
 
-    .btn-red:hover {
-      background: #b90000;
+    .btn-green {
+      background: #4e9f32;
+    }
+
+    .btn-purple {
+      background: #7049a8;
+    }
+
+    .btn-orange {
+      background: #c47e12;
     }
 
     .search-group input {
-      width: 180px;
-      border: 1px solid #000;
-      padding: 4px 6px;
+      width: 190px;
+      padding: 5px;
+      border: 1px solid #111;
       font-size: 11px;
     }
 
-    /* =========================================================
-       TABLE
-    ========================================================= */
     .table-wrapper {
-      width: 100%;
       overflow-x: auto;
       background: #fff;
     }
@@ -270,21 +207,20 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 10px;
       background: #fff;
+      font-size: 10px;
     }
 
     th,
     td {
-      border: 1px solid #000;
-      padding: 4px;
+      padding: 5px;
+      border: 1px solid #111;
       text-align: center;
       vertical-align: middle;
     }
 
     th {
       background: #eaeaea;
-      font-weight: bold;
       white-space: nowrap;
     }
 
@@ -292,124 +228,150 @@
       text-align: left;
     }
 
-    .btn-edit {
-      background: #bce3fb;
-      border: 1px solid #82b9e5;
-      color: #000;
-      padding: 3px 8px;
-      border-radius: 2px;
-      font-size: 10px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .btn-edit:hover {
-      background: #a5d8f5;
-    }
-
-    .btn-receive {
-      background: #58b036;
-      color: #fff;
-      border: none;
-      padding: 3px 8px;
-      border-radius: 2px;
-      font-size: 10px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .btn-receive:hover {
-      background: #438f25;
-    }
-
-    .btn-disabled {
-      background: #aaa;
-      color: #fff;
-      border: none;
-      padding: 3px 8px;
-      border-radius: 2px;
-      font-size: 10px;
-      cursor: not-allowed;
-    }
-
-    /* Status */
     .status {
       display: inline-block;
       padding: 3px 7px;
       border-radius: 10px;
+      background: #fff0c2;
+      color: #8a5b00;
       font-size: 9px;
       font-weight: bold;
     }
 
-    .status-registered {
-      background: #fff0c2;
-      color: #8a5b00;
-    }
-
-    .status-received {
+    .status.received {
       background: #d9f3d1;
       color: #28731c;
     }
 
-    /* =========================================================
-       MODAL
-    ========================================================= */
+    .status.gate {
+      margin-top: 3px;
+      background: #d8eef7;
+      color: #245b75;
+    }
+
+    .aksi-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    .aksi-button {
+      padding: 5px 14px;
+      border: 0;
+      border-radius: 3px;
+      background: #c47e12;
+      color: #fff;
+      font-size: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .aksi-button::after {
+      content: "";
+      display: inline-block;
+      margin-left: 6px;
+      border: 4px solid transparent;
+      border-top-color: #fff;
+      transform: translateY(3px);
+    }
+
+    .aksi-dropdown {
+      position: absolute;
+      top: calc(100% + 2px);
+      right: 0;
+      z-index: 20;
+      display: none;
+      min-width: 175px;
+      padding: 4px 0;
+      border: 1px solid #d5dce2;
+      border-radius: 6px;
+      background: #fff;
+      box-shadow: 0 4px 16px #10213133;
+    }
+
+    .aksi-dropdown.open {
+      display: block;
+    }
+
+    .aksi-dropdown button,
+    .aksi-dropdown label {
+      display: flex;
+      width: 100%;
+      gap: 8px;
+      align-items: center;
+      padding: 8px 13px;
+      border: 0;
+      background: transparent;
+      color: #20313f;
+      text-align: left;
+      font-size: 11px;
+      cursor: pointer;
+    }
+
+    .aksi-dropdown button:hover,
+    .aksi-dropdown label:hover {
+      background: #f0f4f7;
+    }
+
+    .aksi-dropdown .danger {
+      color: #b22222;
+    }
+
+    .aksi-dropdown input {
+      display: none;
+    }
+
     .modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.35);
+      z-index: 100;
       display: none;
       align-items: center;
       justify-content: center;
-      z-index: 999;
+      background: #10213159;
     }
 
     .modal-overlay.active {
       display: flex;
     }
 
-    .modal-box {
+    .modal {
       width: 720px;
       max-width: 92vw;
       max-height: 90vh;
       overflow-y: auto;
-      background: #fff;
-      border: 2px solid #24588a;
       padding: 20px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+      border: 2px solid #24588a;
+      background: #fff;
     }
 
     .modal-title {
-      font-size: 14px;
-      font-weight: bold;
       margin-bottom: 15px;
       color: #24588a;
+      font-size: 14px;
+      font-weight: bold;
     }
 
-    .modal-form-grid {
+    .modal-grid {
       display: grid;
-      grid-template-columns: 110px 1fr 110px 1fr;
+      grid-template-columns: 120px 1fr 120px 1fr;
       gap: 10px;
       align-items: center;
       font-size: 11px;
       font-weight: bold;
     }
 
-    .modal-form-grid label {
-      white-space: nowrap;
-    }
-
-    .modal-form-grid input,
-    .modal-form-grid textarea {
+    .modal-grid input,
+    .modal-grid textarea,
+    .modal-grid select {
       width: 100%;
-      border: 2px solid #000;
-      padding: 5px;
+      padding: 6px;
+      border: 2px solid #111;
       font-size: 11px;
     }
 
-    .modal-form-grid textarea {
-      height: 45px;
-      resize: none;
+    .modal-grid textarea {
+      height: 60px;
+      resize: vertical;
     }
 
     .full-width {
@@ -419,40 +381,188 @@
     .modal-actions {
       display: flex;
       justify-content: center;
-      gap: 10px;
+      gap: 8px;
       margin-top: 18px;
     }
 
-    /* =========================================================
-       EMPTY MESSAGE
-    ========================================================= */
-    .empty-message {
-      text-align: center;
-      color: #888;
-      padding: 15px;
+    .file-list {
+      margin-top: 10px;
+    }
+
+    .file-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 5px;
+      padding: 7px;
+      background: #f1f5f8;
       font-size: 11px;
     }
 
-    /* =========================================================
-       FOOTER
-    ========================================================= */
+    .file-name {
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-weight: bold;
+    }
+
+    .file-item button,
+    .file-item a {
+      border: 0;
+      background: transparent;
+      color: #24588a;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 7px 12px;
+      font-size: 12px;
+    }
+
+    .preview-grid dt {
+      font-weight: bold;
+    }
+
+    .preview-stage {
+      display: flex;
+      min-height: 180px;
+      align-items: center;
+      justify-content: center;
+      overflow: auto;
+      padding: 10px;
+      background: #edf3f7;
+      border: 1px solid #cbd7df;
+    }
+
+    .preview-stage img {
+      max-width: 100%;
+      max-height: 55vh;
+      object-fit: contain;
+    }
+
+    .preview-stage iframe {
+      width: 100%;
+      height: 55vh;
+      border: 0;
+      background: #fff;
+    }
+
+    .preview-stage pre {
+      width: 100%;
+      margin: 0;
+      white-space: pre-wrap;
+      text-align: left;
+      font-family: Consolas, monospace;
+    }
+
+    .camera-box {
+      position: relative;
+      width: 100%;
+      max-width: 500px;
+      aspect-ratio: 4 / 3;
+      margin: auto;
+      overflow: hidden;
+      background: #102131;
+    }
+
+    .camera-box video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .camera-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      text-align: center;
+    }
+
+    .camera-controls {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+
+    .photo-gallery {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .photo-thumb {
+      position: relative;
+      width: 90px;
+      height: 68px;
+      overflow: hidden;
+      border: 2px solid #ccd5dc;
+      border-radius: 4px;
+    }
+
+    .photo-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      cursor: pointer;
+    }
+
+    .photo-thumb button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      border: 0;
+      background: #df0000;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: #000d;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+    }
+
+    .empty-message {
+      padding: 15px;
+      color: #888;
+      text-align: center;
+    }
+
     .footer {
+      padding: 7px 15px;
       background: #4387c8;
       color: #fff;
-      padding: 6px 15px;
-      font-size: 11px;
       font-weight: bold;
-      margin-top: auto;
     }
 
-    .footer-sub {
-      font-size: 9px;
+    .footer small {
       font-weight: normal;
     }
 
-    /* =========================================================
-       RESPONSIVE
-    ========================================================= */
     @media (max-width: 900px) {
       .sidebar {
         width: 180px;
@@ -465,254 +575,114 @@
       .form-grid input {
         grid-column: 2;
       }
-
-      .search-group input {
-        width: 130px;
-      }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- =========================================================
-       SIDEBAR
-  ========================================================= -->
   <aside class="sidebar">
+    <div class="brand">▣ ASTOM</div>
 
-    <div class="brand">
-      <div class="brand-logo"></div>
-      <span>ASTOM</span>
-    </div>
+    <a href="#" class="dashboard-link">🏠 DASHBOARD</a>
 
-    <a href="dashboard.html" class="menu-item-main">
-      <span>🏠</span>
-      DASHBOARD
-    </a>
-
-    <div class="search-box">
-      <input type="text" placeholder="🔍 Cari menu">
-    </div>
+    <input type="text" placeholder="🔍 Cari menu">
 
     <div class="menu-group">
       <div class="menu-title">REGISTER</div>
-
-      <a href="#" class="menu-link" onclick="bukaTab('new'); return false;">
-        NEW
-      </a>
-
-      <a href="#" class="menu-link" onclick="bukaTab('receiving'); return false;">
-        RECEIVING
-      </a>
-
-      <a href="#" class="menu-link">
-        RETURN
-      </a>
+      <a href="#" onclick="bukaTab('new'); return false;">NEW</a>
+      <a href="#" onclick="bukaTab('receiving'); return false;">RECEIVING</a>
+      <a href="#">RETURN</a>
     </div>
 
     <div class="menu-group">
       <div class="menu-title">MONITORING</div>
-
-      <a href="#" class="menu-link">
-        GATE
-      </a>
+      <a href="#">GATE</a>
     </div>
 
     <div class="menu-group">
       <div class="menu-title">REPORT & DOWNLOAD</div>
-
-      <a href="#" class="menu-link">
-        ALL ASSET
-      </a>
-
-      <a href="#" class="menu-link">
-        RETURN ASSET
-      </a>
+      <a href="#">ALL ASSET</a>
+      <a href="#">RETURN ASSET</a>
     </div>
 
     <div class="menu-group">
       <div class="menu-title">SETTING</div>
-
-      <a href="#" class="menu-link">
-        MASTER USER
-      </a>
-
-      <a href="#" class="menu-link">
-        MASTER CUSTOMER
-      </a>
-
-      <a href="#" class="menu-link">
-        MASTER BARANG
-      </a>
+      <a href="#">MASTER USER</a>
+      <a href="#">MASTER CUSTOMER</a>
+      <a href="#">MASTER BARANG</a>
     </div>
-
-    <div class="menu-group" style="margin-top: 10px;">
-      <div class="menu-title">LOG HISTORY</div>
-
-      <div class="menu-title" style="margin-top: 5px; cursor: pointer;">
-        LOGOUT
-      </div>
-    </div>
-
   </aside>
 
-
-  <!-- =========================================================
-       MAIN CONTENT
-  ========================================================= -->
   <main class="main-content">
 
-    <!-- HEADER -->
     <header class="header">
-      <div class="header-title">
-        ASSET CUSTOMERS CONTROL MANAGEMENT
-      </div>
-
-      <div class="user-login-container">
-        USER LOGIN
-      </div>
+      <span>ASSET CUSTOMERS CONTROL MANAGEMENT</span>
+      <span>USER LOGIN</span>
     </header>
 
-
-    <!-- PAGE -->
     <section class="page-content">
 
-      <!-- TAB BUTTON -->
       <div class="page-tabs">
-
-        <button
-          id="tab-button-new"
-          class="page-tab active"
+        <button id="tab-button-new" class="page-tab active"
           onclick="bukaTab('new')">
           REGISTER NEW
         </button>
 
-        <button
-          id="tab-button-receiving"
-          class="page-tab"
+        <button id="tab-button-receiving" class="page-tab"
           onclick="bukaTab('receiving')">
           RECEIVING
         </button>
-
       </div>
 
-
-      <!-- =====================================================
-           TAB 1 : REGISTER NEW
-      ====================================================== -->
+      <!-- REGISTER NEW -->
       <div id="tab-new" class="tab-content active">
 
-        <div class="form-title">
-          REGISTER - NEW
-        </div>
+        <div class="form-title">REGISTER - NEW</div>
 
-        <!-- DATA REGISTER -->
         <div class="form-grid">
+          <label>Nomor & Tanggal SKK</label>
+          <input type="text" id="skk-nomor-main" placeholder="Nomor SKK">
+          <input type="date" id="skk-tgl-main">
 
-          <label>
-            Nomor & Tanggal SKK
-          </label>
+          <label>Nama Perusahaan / Document</label>
+          <input type="text" id="perusahaan-main" placeholder="Nama Perusahaan">
+          <input type="text" id="documen-main" placeholder="Document">
 
-          <input
-            type="text"
-            id="skk-nomor-main"
-            placeholder="Nomor SKK">
-
-          <input
-            type="date"
-            id="skk-tgl-main">
-
-
-          <label>
-            Nama Perusahaan / Document
-          </label>
-
-          <input
-            type="text"
-            id="perusahaan-main"
-            placeholder="Nama Perusahaan">
-
-          <input
-            type="text"
-            id="documen-main"
-            placeholder="Document">
-
-
-          <label>
-            Status Aset
-          </label>
-
-          <input
-            type="text"
-            id="status-aset-main"
-            value="REGISTERED">
-
-          <div></div>
-
+          <label>Status Aset</label>
+          <input type="text" id="status-aset-main" value="REGISTERED">
+          <span></span>
         </div>
 
+        <strong>Data Barang yang Dikirim:</strong>
 
-        <div style="
-          font-weight:bold;
-          margin-bottom:8px;
-          font-size:12px;
-        ">
-          Data Barang yang Dikirim:
-        </div>
-
-
-        <!-- ACTION -->
         <div class="action-bar">
-
-          <div class="btn-group">
-
-            <button
-              class="btn btn-blue"
-              onclick="openRekamBarangModal()">
+          <div class="button-group">
+            <button class="btn btn-blue" onclick="openRekamBarangModal()">
               + Rekam
             </button>
 
-            <button
-              class="btn btn-red"
-              onclick="hapusBarangTerpilih()">
+            <button class="btn btn-red" onclick="hapusBarangTerpilih()">
               Hapus Barang
             </button>
-
           </div>
-
 
           <div class="search-group">
-
             <input
-              type="text"
               id="search-new"
+              type="text"
               placeholder="Cari barang..."
-              onkeyup="cariTabel('table-new', this.value)">
-
-            <button class="btn btn-blue">
-              🔍 Cari
-            </button>
-
+              oninput="cariTabel('table-new', this.value)">
           </div>
-
         </div>
 
-
-        <!-- TABLE NEW -->
         <div class="table-wrapper">
-
           <table id="table-new">
-
             <thead>
               <tr>
-
-                <th style="width:30px;">
-                  <input
-                    type="checkbox"
-                    id="check-all"
-                    onclick="toggleSelectAll(this)">
+                <th>
+                  <input type="checkbox" onclick="toggleSelectAll(this)">
                 </th>
-
                 <th>KODE BARANG</th>
                 <th>URAIAN BARANG</th>
                 <th>JUMLAH</th>
@@ -722,88 +692,44 @@
                 <th>SKK</th>
                 <th>PERUSAHAAN</th>
                 <th>DOC</th>
+                <th>FILE</th>
                 <th>AKSI</th>
-
               </tr>
             </thead>
 
-            <tbody id="tabel-barang-body">
-            </tbody>
-
+            <tbody id="tabel-barang-body"></tbody>
           </table>
-
         </div>
-
       </div>
 
-
-      <!-- =====================================================
-           TAB 2 : RECEIVING
-      ====================================================== -->
+      <!-- RECEIVING -->
       <div id="tab-receiving" class="tab-content">
 
-        <div class="form-title">
-          REGISTER - RECEIVING
+        <div class="form-title">REGISTER - RECEIVING</div>
+
+        <div style="padding:10px;margin-bottom:12px;background:#fff;border:1px solid #b8c8d8;">
+          <strong>Informasi:</strong>
+          Data Receiving berasal dari barang yang telah direkam pada Register New.
         </div>
 
-
-        <div style="
-          background:#fff;
-          border:1px solid #b8c8d8;
-          padding:10px;
-          margin-bottom:12px;
-          font-size:11px;
-        ">
-
-          <strong>
-            Informasi:
-          </strong>
-
-          Data pada Receiving berasal dari barang yang telah direkam
-          pada Register New.
-
-        </div>
-
-
-        <!-- SEARCH RECEIVING -->
         <div class="action-bar">
-
-          <div class="btn-group">
-
-            <button
-              class="btn btn-blue"
-              onclick="refreshReceiving()">
-              🔄 Refresh
-            </button>
-
-          </div>
-
+          <button class="btn btn-blue" onclick="refreshReceiving()">
+            🔄 Refresh
+          </button>
 
           <div class="search-group">
-
             <input
-              type="text"
               id="search-receiving"
+              type="text"
               placeholder="Cari SKK / barang / perusahaan..."
-              onkeyup="cariTabel('table-receiving', this.value)">
-
-            <button class="btn btn-blue">
-              🔍 Cari
-            </button>
-
+              oninput="cariTabel('table-receiving', this.value)">
           </div>
-
         </div>
 
-
-        <!-- TABLE RECEIVING -->
         <div class="table-wrapper">
-
           <table id="table-receiving">
-
             <thead>
               <tr>
-
                 <th>No</th>
                 <th>SKK</th>
                 <th>TGL SKK</th>
@@ -814,565 +740,524 @@
                 <th>JUMLAH</th>
                 <th>SATUAN</th>
                 <th>ASET NO</th>
+                <th>NOMOR AJU</th>
+                <th>NOMOR DAFTAR</th>
+                <th>TGL DAFTAR</th>
                 <th>STATUS</th>
+                <th>FOTO</th>
                 <th>AKSI</th>
-
               </tr>
             </thead>
 
-            <tbody id="tabel-receiving-body">
-            </tbody>
-
+            <tbody id="tabel-receiving-body"></tbody>
           </table>
-
         </div>
-
       </div>
 
     </section>
 
-
-    <!-- FOOTER -->
     <footer class="footer">
-
-      PT MURAMOTO ELEKTRONIKA INDONESIA
-
-      <div class="footer-sub">
-        CUSTOMS OPERATIONS & COMPLIANCE DEPT.
-      </div>
-
+      PT MURAMOTO ELEKTRONIKA INDONESIA<br>
+      <small>CUSTOMS OPERATIONS & COMPLIANCE DEPT.</small>
     </footer>
-
   </main>
 
+  <!-- MODAL REKAM BARANG -->
+  <div id="modal-rekam" class="modal-overlay">
+    <div class="modal">
+      <div class="modal-title">REKAM BARANG</div>
 
-  <!-- =========================================================
-       MODAL REKAM BARANG
-  ========================================================= -->
-  <div
-    id="modal-rekam-barang"
-    class="modal-overlay">
+      <div class="modal-grid">
+        <label>Uraian Barang *</label>
+        <textarea id="rekam-uraian" class="full-width"></textarea>
 
-    <div class="modal-box">
+        <label>Kode Barang *</label>
+        <input type="text" id="rekam-kode" class="full-width">
 
-      <div class="modal-title">
-        REKAM BARANG
+        <label>Jenis Satuan *</label>
+        <input type="text" id="rekam-satuan" placeholder="PCS">
+
+        <label>Jumlah Barang *</label>
+        <input type="number" id="rekam-jumlah" min="1">
+
+        <label>Aset No</label>
+        <input type="text" id="rekam-aset" class="full-width">
       </div>
-
-
-      <div class="modal-form-grid">
-
-        <label>
-          Uraian Barang *
-        </label>
-
-        <textarea
-          id="rekam-uraian"
-          class="full-width"
-          placeholder="Masukkan uraian barang">
-        </textarea>
-
-
-        <label>
-          Kode Barang *
-        </label>
-
-        <input
-          type="text"
-          id="rekam-kode"
-          class="full-width"
-          placeholder="Kode barang">
-
-
-        <label>
-          Jenis Satuan *
-        </label>
-
-        <input
-          type="text"
-          id="rekam-satuan"
-          placeholder="PCS">
-
-
-        <label>
-          Jumlah Barang *
-        </label>
-
-        <input
-          type="number"
-          id="rekam-jumlah"
-          min="1"
-          placeholder="Jumlah">
-
-
-        <label>
-          Aset No
-        </label>
-
-        <input
-          type="text"
-          id="rekam-aset"
-          class="full-width"
-          placeholder="Nomor aset">
-
-      </div>
-
 
       <div class="modal-actions">
-
-        <button
-          class="btn btn-blue"
-          onclick="simpanBarangBaru()">
-          🚀 Simpan
+        <button class="btn btn-blue" onclick="simpanBarangBaru()">
+          Simpan
         </button>
 
-        <button
-          class="btn btn-red"
-          onclick="closeRekamBarangModal()">
-          X Batal
+        <button class="btn btn-red" onclick="closeModal('modal-rekam')">
+          Batal
         </button>
-
       </div>
-
     </div>
-
   </div>
 
+  <!-- MODAL GATE -->
+  <div id="modal-gate" class="modal-overlay">
+    <div class="modal">
+      <div class="modal-title">GATE MONITORING</div>
 
-  <!-- =========================================================
-       MODAL EDIT BARANG
-  ========================================================= -->
-  <div
-    id="modal-edit-barang"
-    class="modal-overlay">
+      <div class="modal-grid">
+        <label>Nomor SKK</label>
+        <input id="gate-skk" class="full-width" readonly>
 
-    <div class="modal-box">
+        <label>Kode Barang</label>
+        <input id="gate-kode" class="full-width" readonly>
 
-      <div class="modal-title">
-        EDIT BARANG
+        <label>Uraian Barang</label>
+        <input id="gate-uraian" class="full-width" readonly>
+
+        <label>Status Gate</label>
+        <select id="gate-status" class="full-width">
+          <option value="">Pilih Status</option>
+          <option value="GATE IN">GATE IN</option>
+          <option value="GATE OUT">GATE OUT</option>
+        </select>
+
+        <label>Tanggal Gate</label>
+        <input type="date" id="gate-tanggal">
+
+        <label>Jam Gate</label>
+        <input type="time" id="gate-jam">
+
+        <label>Keterangan</label>
+        <textarea id="gate-keterangan" class="full-width"></textarea>
       </div>
-
-
-      <div class="modal-form-grid">
-
-        <label>
-          Uraian Barang *
-        </label>
-
-        <textarea
-          id="edit-uraian"
-          class="full-width">
-        </textarea>
-
-
-        <label>
-          Kode Barang *
-        </label>
-
-        <input
-          type="text"
-          id="edit-kode"
-          class="full-width">
-
-
-        <label>
-          Jenis Satuan *
-        </label>
-
-        <input
-          type="text"
-          id="edit-satuan">
-
-
-        <label>
-          Jumlah Barang *
-        </label>
-
-        <input
-          type="number"
-          id="edit-jumlah"
-          min="1">
-
-
-        <label>
-          Aset No
-        </label>
-
-        <input
-          type="text"
-          id="edit-aset"
-          class="full-width">
-
-
-        <label>
-          SKK Nomor
-        </label>
-
-        <input
-          type="text"
-          id="edit-skk">
-
-
-        <label>
-          Tanggal SKK
-        </label>
-
-        <input
-          type="date"
-          id="edit-tgl-skk">
-
-
-        <label>
-          Perusahaan
-        </label>
-
-        <input
-          type="text"
-          id="edit-perusahaan">
-
-
-        <label>
-          Document
-        </label>
-
-        <input
-          type="text"
-          id="edit-doc">
-
-      </div>
-
 
       <div class="modal-actions">
-
-        <button
-          class="btn btn-blue"
-          onclick="simpanEditBarang()">
-          🚀 Simpan
+        <button class="btn btn-green" onclick="simpanGate()">
+          Simpan Gate
         </button>
 
-        <button
-          class="btn btn-red"
-          onclick="closeEditBarangModal()">
-          X Batal
+        <button class="btn btn-red" onclick="closeModal('modal-gate')">
+          Batal
         </button>
-
       </div>
-
     </div>
-
   </div>
 
+  <!-- MODAL ADD BC -->
+  <div id="modal-bc" class="modal-overlay">
+    <div class="modal">
+      <div class="modal-title">ADD BC</div>
 
-  <!-- =========================================================
-       JAVASCRIPT
-  ========================================================= -->
+      <div class="modal-grid">
+        <label>Nomor SKK</label>
+        <input id="bc-skk" class="full-width" readonly>
+
+        <label>Kode Barang</label>
+        <input id="bc-kode" class="full-width" readonly>
+
+        <label>Nomor Aju *</label>
+        <input id="bc-nomor-aju" class="full-width">
+
+        <label>Nomor Daftar *</label>
+        <input id="bc-nomor-daftar" class="full-width">
+
+        <label>Tanggal Daftar *</label>
+        <input type="date" id="bc-tanggal-daftar">
+
+        <label>Jenis BC</label>
+        <input id="bc-jenis">
+
+        <label>Keterangan</label>
+        <textarea id="bc-keterangan" class="full-width"></textarea>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-purple" onclick="simpanBC()">
+          Simpan BC
+        </button>
+
+        <button class="btn btn-red" onclick="closeModal('modal-bc')">
+          Batal
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL KAMERA -->
+  <div id="modal-kamera" class="modal-overlay">
+    <div class="modal">
+      <div class="modal-title">📷 KAMERA BARANG</div>
+
+      <div id="camera-info" style="margin-bottom:10px;font-weight:bold;"></div>
+
+      <div class="camera-box">
+        <video id="camera-video" autoplay muted playsinline></video>
+
+        <div id="camera-placeholder" class="camera-placeholder">
+          Klik "Buka Kamera" untuk mulai
+        </div>
+      </div>
+
+      <div style="margin-top:10px;text-align:center;">
+        <button id="btn-open-camera"
+          class="btn btn-blue"
+          onclick="bukaKamera()">
+          📷 Buka Kamera
+        </button>
+
+        <button id="btn-capture"
+          class="btn btn-green"
+          onclick="ambilFoto()"
+          style="display:none;">
+          📸 Ambil Foto
+        </button>
+
+        <button id="btn-stop-camera"
+          class="btn btn-red"
+          onclick="stopKamera()"
+          style="display:none;">
+          Stop Kamera
+        </button>
+
+        <label class="btn btn-purple">
+          📁 Upload Foto
+          <input
+            type="file"
+            accept="image/*"
+            capture="environment"
+            onchange="uploadFoto(event)"
+            style="display:none;">
+        </label>
+      </div>
+
+      <div id="photo-gallery" class="photo-gallery"></div>
+
+      <div class="modal-actions">
+        <button class="btn btn-blue" onclick="closeKamera()">
+          Tutup
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL FILE -->
+  <div id="modal-file" class="modal-overlay">
+    <div class="modal">
+      <div class="modal-title">📎 FILE DOKUMEN</div>
+
+      <div id="file-info" style="margin-bottom:10px;font-weight:bold;"></div>
+
+      <label class="btn btn-blue">
+        📁 Upload File
+        <input
+          type="file"
+          multiple
+          accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.gif,.txt,.csv,.zip,.rar"
+          onchange="uploadFile(event)"
+          style="display:none;">
+      </label>
+
+      <div id="file-list" class="file-list"></div>
+
+      <div class="modal-actions">
+        <button class="btn btn-blue" onclick="closeModal('modal-file')">
+          Tutup
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL PREVIEW ITEM -->
+  <div id="modal-preview-item" class="modal-overlay">
+    <div class="modal">
+      <div class="modal-title">PREVIEW BARANG</div>
+
+      <dl id="item-preview" class="preview-grid"></dl>
+
+      <div class="modal-actions">
+        <button class="btn btn-blue"
+          onclick="closeModal('modal-preview-item')">
+          Tutup
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL PREVIEW FILE -->
+  <div id="modal-preview-file" class="modal-overlay">
+    <div class="modal">
+      <div id="file-preview-title" class="modal-title">
+        PREVIEW FILE
+      </div>
+
+      <div id="file-preview-stage" class="preview-stage"></div>
+
+      <div class="modal-actions">
+        <a id="file-download-link"
+          class="btn btn-blue"
+          download>
+          Download
+        </a>
+
+        <button class="btn btn-red"
+          onclick="closeModal('modal-preview-file')">
+          Tutup
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX FOTO -->
+  <div id="lightbox" class="lightbox" onclick="tutupLightbox()">
+    <img id="lightbox-image">
+  </div>
+
   <script>
-
-    /* =========================================================
-       DATA
-    ========================================================= */
-
-    let listBarang = [];
-    let currentEditIndex = null;
-
     const STORAGE_KEY = "astom_list_barang";
 
-
-    /* =========================================================
-       LOAD DATA
-    ========================================================= */
+    let listBarang = [];
+    let selectedIndex = null;
+    let currentFileIndex = null;
+    let currentCameraIndex = null;
+    let cameraStream = null;
+    let openedDropdown = null;
 
     function loadData() {
+      const saved = localStorage.getItem(STORAGE_KEY);
 
-      const data =
-        localStorage.getItem(STORAGE_KEY);
-
-      if (data) {
-
-        try {
-
-          listBarang = JSON.parse(data);
-
-        } catch (error) {
-
-          listBarang = [];
-
-        }
-
+      if (!saved) {
+        listBarang = [];
+        return;
       }
 
+      try {
+        listBarang = JSON.parse(saved);
+      } catch (error) {
+        listBarang = [];
+      }
     }
 
-
-    /* =========================================================
-       SAVE DATA
-    ========================================================= */
-
     function saveData() {
-
       localStorage.setItem(
         STORAGE_KEY,
         JSON.stringify(listBarang)
       );
-
     }
 
+    function esc(value) {
+      if (value === null || value === undefined) {
+        return "";
+      }
 
-    /* =========================================================
-       TAB SWITCH
-    ========================================================= */
+      return String(value)
+        .replace(/&/g, "&")
+        .replace(/</g, "<")
+        .replace(/>/g, ">")
+        .replace(/"/g, """)
+        .replace(/'/g, "&#039;");
+    }
+
+    function formatTanggal(value) {
+      if (!value || value === "-") {
+        return "-";
+      }
+
+      const parts = value.split("-");
+
+      if (parts.length !== 3) {
+        return value;
+      }
+
+      return parts.reverse().join("-");
+    }
+
+    function formatFileSize(bytes) {
+      if (!bytes) {
+        return "0 B";
+      }
+
+      const units = ["B", "KB", "MB", "GB"];
+      const index = Math.floor(
+        Math.log(bytes) / Math.log(1024)
+      );
+
+      return (
+        parseFloat(
+          (bytes / Math.pow(1024, index)).toFixed(1)
+        ) + " " + units[index]
+      );
+    }
 
     function bukaTab(tab) {
-
-      const tabNew =
-        document.getElementById("tab-new");
-
-      const tabReceiving =
-        document.getElementById("tab-receiving");
-
-      const buttonNew =
-        document.getElementById("tab-button-new");
-
-      const buttonReceiving =
-        document.getElementById("tab-button-receiving");
-
-
-      tabNew.classList.remove("active");
-      tabReceiving.classList.remove("active");
-
-      buttonNew.classList.remove("active");
-      buttonReceiving.classList.remove("active");
-
-
-      if (tab === "new") {
-
-        tabNew.classList.add("active");
-        buttonNew.classList.add("active");
-
-        renderTableNew();
-
-      }
-
-
-      if (tab === "receiving") {
-
-        tabReceiving.classList.add("active");
-        buttonReceiving.classList.add("active");
-
-        renderTableReceiving();
-
-      }
-
-    }
-
-
-    /* =========================================================
-       MODAL REKAM
-    ========================================================= */
-
-    function openRekamBarangModal() {
+      document
+        .querySelectorAll(".tab-content")
+        .forEach(element => {
+          element.classList.remove("active");
+        });
 
       document
-        .getElementById("modal-rekam-barang")
+        .querySelectorAll(".page-tab")
+        .forEach(element => {
+          element.classList.remove("active");
+        });
+
+      document
+        .getElementById("tab-" + tab)
         .classList.add("active");
 
+      document
+        .getElementById("tab-button-" + tab)
+        .classList.add("active");
+
+      if (tab === "new") {
+        renderTableNew();
+      }
+
+      if (tab === "receiving") {
+        renderTableReceiving();
+      }
     }
 
-
-    function closeRekamBarangModal() {
-
+    function openRekamBarangModal() {
       document
-        .getElementById("modal-rekam-barang")
+        .getElementById("modal-rekam")
+        .classList.add("active");
+    }
+
+    function closeModal(id) {
+      document
+        .getElementById(id)
         .classList.remove("active");
 
-      clearRekamForm();
-
+      selectedIndex = null;
     }
-
-
-    function clearRekamForm() {
-
-      document.getElementById("rekam-kode").value = "";
-      document.getElementById("rekam-uraian").value = "";
-      document.getElementById("rekam-satuan").value = "";
-      document.getElementById("rekam-jumlah").value = "";
-      document.getElementById("rekam-aset").value = "";
-
-    }
-
-
-    /* =========================================================
-       SIMPAN BARANG BARU
-    ========================================================= */
 
     function simpanBarangBaru() {
-
-      const kode =
-        document.getElementById("rekam-kode").value.trim();
-
-      const uraian =
-        document.getElementById("rekam-uraian").value.trim();
-
-      const satuan =
-        document.getElementById("rekam-satuan").value.trim();
-
-      const jumlah =
-        document.getElementById("rekam-jumlah").value.trim();
-
-      const aset =
-        document.getElementById("rekam-aset").value.trim();
-
-
-      const skk =
-        document.getElementById("skk-nomor-main").value.trim();
-
-      const tglSkk =
-        document.getElementById("skk-tgl-main").value;
-
-      const perusahaan =
-        document.getElementById("perusahaan-main").value.trim();
-
-      const doc =
-        document.getElementById("documen-main").value.trim();
-
-      const status =
-        document.getElementById("status-aset-main").value.trim()
-        || "REGISTERED";
-
-
-      /* VALIDASI */
-
-      if (!skk) {
-
-        alert("Nomor SKK wajib diisi.");
-
-        return;
-
-      }
-
-
-      if (!kode) {
-
-        alert("Kode Barang wajib diisi.");
-
-        return;
-
-      }
-
-
-      if (!uraian) {
-
-        alert("Uraian Barang wajib diisi.");
-
-        return;
-
-      }
-
-
-      if (!satuan) {
-
-        alert("Jenis Satuan wajib diisi.");
-
-        return;
-
-      }
-
-
-      if (!jumlah || Number(jumlah) <= 0) {
-
-        alert("Jumlah Barang harus lebih dari 0.");
-
-        return;
-
-      }
-
-
-      /* TAMBAH DATA */
-
-      const dataBarang = {
-
+      const data = {
         id: Date.now(),
+        kode: document
+          .getElementById("rekam-kode")
+          .value
+          .trim(),
 
-        kode: kode,
+        uraian: document
+          .getElementById("rekam-uraian")
+          .value
+          .trim(),
 
-        uraian: uraian,
+        jumlah: document
+          .getElementById("rekam-jumlah")
+          .value
+          .trim(),
 
-        jumlah: jumlah,
+        satuan: document
+          .getElementById("rekam-satuan")
+          .value
+          .trim(),
 
-        satuan: satuan,
+        aset: document
+          .getElementById("rekam-aset")
+          .value
+          .trim() || "-",
 
-        aset: aset || "-",
+        skk: document
+          .getElementById("skk-nomor-main")
+          .value
+          .trim(),
 
-        status: status,
+        tglSkk: document
+          .getElementById("skk-tgl-main")
+          .value || "-",
 
-        skk: skk,
+        perusahaan: document
+          .getElementById("perusahaan-main")
+          .value
+          .trim() || "-",
 
-        tglSkk: tglSkk || "-",
+        doc: document
+          .getElementById("documen-main")
+          .value
+          .trim() || "-",
 
-        perusahaan: perusahaan || "-",
-
-        doc: doc || "-",
-
+        status: "REGISTERED",
+        statusReceiving: "BELUM DITERIMA",
         tanggalReceiving: "",
-
-        statusReceiving: "BELUM DITERIMA"
-
+        nomorAju: "",
+        nomorDaftar: "",
+        tanggalDaftar: "",
+        jenisBC: "",
+        keteranganBC: "",
+        gateStatus: "",
+        gateTanggal: "",
+        gateJam: "",
+        gateKeterangan: "",
+        photos: [],
+        files: []
       };
 
+      if (!data.skk) {
+        alert("Nomor SKK wajib diisi.");
+        return;
+      }
 
-      listBarang.push(dataBarang);
+      if (!data.kode) {
+        alert("Kode Barang wajib diisi.");
+        return;
+      }
 
+      if (!data.uraian) {
+        alert("Uraian Barang wajib diisi.");
+        return;
+      }
+
+      if (!data.jumlah || Number(data.jumlah) <= 0) {
+        alert("Jumlah Barang harus lebih dari 0.");
+        return;
+      }
+
+      if (!data.satuan) {
+        alert("Jenis Satuan wajib diisi.");
+        return;
+      }
+
+      listBarang.push(data);
       saveData();
 
       renderTableNew();
       renderTableReceiving();
 
-      closeRekamBarangModal();
+      closeModal("modal-rekam");
 
+      document
+        .querySelectorAll("#modal-rekam input, #modal-rekam textarea")
+        .forEach(element => {
+          element.value = "";
+        });
 
-      alert(
-        "Barang berhasil direkam dan masuk ke Receiving."
-      );
-
+      alert("Barang berhasil direkam.");
     }
 
-
-    /* =========================================================
-       RENDER TABLE NEW
-    ========================================================= */
-
     function renderTableNew() {
-
-      const tbody =
-        document.getElementById("tabel-barang-body");
+      const tbody = document.getElementById(
+        "tabel-barang-body"
+      );
 
       tbody.innerHTML = "";
 
-
       if (listBarang.length === 0) {
-
         tbody.innerHTML = `
           <tr>
-            <td colspan="11" class="empty-message">
+            <td colspan="12" class="empty-message">
               Belum ada data barang.
-              Klik "+ Rekam" untuk menambahkan barang.
             </td>
           </tr>
         `;
-
         return;
-
       }
 
-
       listBarang.forEach((item, index) => {
+        const files = item.files || [];
 
-        const tr =
-          document.createElement("tr");
+        const row = document.createElement("tr");
 
-
-        tr.innerHTML = `
-
+        row.innerHTML = `
           <td>
             <input
               type="checkbox"
@@ -1380,611 +1265,924 @@
               data-index="${index}">
           </td>
 
-          <td>${escapeHTML(item.kode)}</td>
-
-          <td class="left">
-            ${escapeHTML(item.uraian)}
-          </td>
-
-          <td>${escapeHTML(item.jumlah)}</td>
-
-          <td>${escapeHTML(item.satuan)}</td>
-
-          <td>${escapeHTML(item.aset)}</td>
+          <td>${esc(item.kode)}</td>
+          <td class="left">${esc(item.uraian)}</td>
+          <td>${esc(item.jumlah)}</td>
+          <td>${esc(item.satuan)}</td>
+          <td>${esc(item.aset)}</td>
+          <td>${esc(item.status)}</td>
+          <td>${esc(item.skk)}</td>
+          <td>${esc(item.perusahaan)}</td>
+          <td>${esc(item.doc)}</td>
 
           <td>
-            <span class="status status-${getStatusClass(item.status)}">
-              ${escapeHTML(item.status)}
-            </span>
+            ${files.length
+              ? "📎 " + files.length
+              : "-"}
           </td>
-
-          <td>${escapeHTML(item.skk)}</td>
-
-          <td>${escapeHTML(item.perusahaan)}</td>
-
-          <td>${escapeHTML(item.doc)}</td>
 
           <td>
-            <button
-              class="btn-edit"
-              onclick="openEditBarangModal(${index})">
-              Edit
-            </button>
-          </td>
+            <div class="aksi-wrapper">
+              <button
+                class="aksi-button"
+                onclick="toggleDropdown('new-${index}', event)">
+                Aksi
+              </button>
 
+              <div
+                id="dropdown-new-${index}"
+                class="aksi-dropdown">
+
+                <button onclick="openFileModal(${index})">
+                  📄 Lihat File
+                </button>
+
+                <label>
+                  ⬆️ Upload File
+                  <input
+                    type="file"
+                    multiple
+                    accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.gif,.txt,.csv,.zip,.rar"
+                    onchange="quickUploadFile(${index}, event)">
+                </label>
+              </div>
+            </div>
+          </td>
         `;
 
-
-        tbody.appendChild(tr);
-
+        tbody.appendChild(row);
       });
-
     }
 
-
-    /* =========================================================
-       RENDER TABLE RECEIVING
-    ========================================================= */
-
     function renderTableReceiving() {
-
-      const tbody =
-        document.getElementById("tabel-receiving-body");
+      const tbody = document.getElementById(
+        "tabel-receiving-body"
+      );
 
       tbody.innerHTML = "";
 
-
       if (listBarang.length === 0) {
-
         tbody.innerHTML = `
           <tr>
-            <td colspan="12" class="empty-message">
-              Belum ada barang yang terdaftar.
+            <td colspan="16" class="empty-message">
+              Belum ada data barang.
             </td>
           </tr>
         `;
-
         return;
-
       }
 
-
       listBarang.forEach((item, index) => {
-
+        const photos = item.photos || [];
         const sudahDiterima =
           item.statusReceiving === "DITERIMA";
 
+        const row = document.createElement("tr");
 
-        const tr =
-          document.createElement("tr");
-
-
-        tr.innerHTML = `
-
+        row.innerHTML = `
           <td>${index + 1}</td>
-
-          <td>${escapeHTML(item.skk)}</td>
-
+          <td>${esc(item.skk)}</td>
           <td>${formatTanggal(item.tglSkk)}</td>
-
-          <td>${escapeHTML(item.perusahaan)}</td>
-
-          <td>${escapeHTML(item.doc)}</td>
-
-          <td>${escapeHTML(item.kode)}</td>
-
-          <td class="left">
-            ${escapeHTML(item.uraian)}
-          </td>
-
-          <td>${escapeHTML(item.jumlah)}</td>
-
-          <td>${escapeHTML(item.satuan)}</td>
-
-          <td>${escapeHTML(item.aset)}</td>
+          <td>${esc(item.perusahaan)}</td>
+          <td>${esc(item.doc)}</td>
+          <td>${esc(item.kode)}</td>
+          <td class="left">${esc(item.uraian)}</td>
+          <td>${esc(item.jumlah)}</td>
+          <td>${esc(item.satuan)}</td>
+          <td>${esc(item.aset)}</td>
+          <td>${esc(item.nomorAju || "-")}</td>
+          <td>${esc(item.nomorDaftar || "-")}</td>
+          <td>${formatTanggal(item.tanggalDaftar)}</td>
 
           <td>
+            <span class="status ${
+              sudahDiterima ? "received" : ""
+            }">
+              ${sudahDiterima
+                ? "DITERIMA"
+                : "BELUM DITERIMA"}
+            </span>
 
             ${
-              sudahDiterima
-
-              ? `
-                <span class="status status-received">
-                  DITERIMA
-                </span>
-              `
-
-              : `
-                <span class="status status-registered">
-                  BELUM DITERIMA
-                </span>
-              `
+              item.gateStatus
+                ? `
+                  <br>
+                  <span class="status gate">
+                    ${esc(item.gateStatus)}
+                  </span>
+                `
+                : ""
             }
-
           </td>
 
           <td>
-
-            ${
-              sudahDiterima
-
-              ? `
-                <button
-                  class="btn-disabled"
-                  disabled>
-                  ✓ Selesai
-                </button>
-              `
-
-              : `
-                <button
-                  class="btn-receive"
-                  onclick="terimaBarang(${index})">
-                  Terima
-                </button>
-              `
-            }
-
+            ${photos.length
+              ? "📷 " + photos.length
+              : "-"}
           </td>
 
+          <td>
+            <div class="aksi-wrapper">
+              <button
+                class="aksi-button"
+                onclick="toggleDropdown('receiving-${index}', event)">
+                Aksi
+              </button>
+
+              <div
+                id="dropdown-receiving-${index}"
+                class="aksi-dropdown">
+
+                <button onclick="openGateModal(${index})">
+                  🚪 Gate
+                </button>
+
+                ${
+                  sudahDiterima
+                    ? `
+                      <button disabled style="opacity:.5">
+                        ✅ Sudah Diterima
+                      </button>
+                    `
+                    : `
+                      <button onclick="terimaBarang(${index})">
+                        ✅ Terima Barang
+                      </button>
+                    `
+                }
+
+                <button onclick="openBCModal(${index})">
+                  📄 Add BC
+                </button>
+
+                <button onclick="openCameraModal(${index})">
+                  📷 Kamera
+                </button>
+
+                <button onclick="openPreviewItem(${index})">
+                  👁️ Preview
+                </button>
+
+                <button
+                  class="danger"
+                  onclick="hapusBarangReceiving(${index})">
+                  🗑️ Hapus
+                </button>
+              </div>
+            </div>
+          </td>
         `;
 
-
-        tbody.appendChild(tr);
-
+        tbody.appendChild(row);
       });
-
     }
 
+    function toggleDropdown(id, event) {
+      event.stopPropagation();
 
-    /* =========================================================
-       TERIMA BARANG
-    ========================================================= */
+      document
+        .querySelectorAll(".aksi-dropdown")
+        .forEach(dropdown => {
+          dropdown.classList.remove("open");
+        });
+
+      const dropdown = document.getElementById(
+        "dropdown-" + id
+      );
+
+      if (openedDropdown === id) {
+        openedDropdown = null;
+        return;
+      }
+
+      dropdown.classList.add("open");
+      openedDropdown = id;
+    }
+
+    document.addEventListener("click", () => {
+      document
+        .querySelectorAll(".aksi-dropdown")
+        .forEach(dropdown => {
+          dropdown.classList.remove("open");
+        });
+
+      openedDropdown = null;
+    });
 
     function terimaBarang(index) {
+      const item = listBarang[index];
 
-      const item =
-        listBarang[index];
-
-
-      if (!item) {
-
+      if (!confirm(
+        `Terima barang "${item.uraian}"?`
+      )) {
         return;
-
       }
-
-
-      const konfirmasi =
-        confirm(
-          `Terima barang "${item.uraian}" dengan SKK "${item.skk}"?`
-        );
-
-
-      if (!konfirmasi) {
-
-        return;
-
-      }
-
 
       item.statusReceiving = "DITERIMA";
-
       item.status = "RECEIVED";
-
       item.tanggalReceiving =
         new Date().toISOString();
 
-
       saveData();
-
       renderTableNew();
       renderTableReceiving();
 
-
-      alert(
-        "Barang berhasil diterima."
-      );
-
+      alert("Barang berhasil diterima.");
     }
 
+    function openGateModal(index) {
+      selectedIndex = index;
 
-    /* =========================================================
-       EDIT BARANG
-    ========================================================= */
+      const item = listBarang[index];
 
-    function openEditBarangModal(index) {
-
-      currentEditIndex = index;
-
-      const item =
-        listBarang[index];
-
-
-      if (!item) {
-
-        return;
-
-      }
-
-
-      document.getElementById("edit-kode").value =
-        item.kode;
-
-      document.getElementById("edit-uraian").value =
-        item.uraian;
-
-      document.getElementById("edit-jumlah").value =
-        item.jumlah;
-
-      document.getElementById("edit-satuan").value =
-        item.satuan;
-
-      document.getElementById("edit-aset").value =
-        item.aset;
-
-      document.getElementById("edit-skk").value =
+      document.getElementById("gate-skk").value =
         item.skk;
 
-      document.getElementById("edit-tgl-skk").value =
-        item.tglSkk !== "-"
-          ? item.tglSkk
-          : "";
+      document.getElementById("gate-kode").value =
+        item.kode;
 
-      document.getElementById("edit-perusahaan").value =
-        item.perusahaan;
+      document.getElementById("gate-uraian").value =
+        item.uraian;
 
-      document.getElementById("edit-doc").value =
-        item.doc;
+      document.getElementById("gate-status").value =
+        item.gateStatus || "";
 
+      document.getElementById("gate-tanggal").value =
+        item.gateTanggal ||
+        new Date().toISOString().slice(0, 10);
+
+      document.getElementById("gate-jam").value =
+        item.gateJam || "";
+
+      document.getElementById("gate-keterangan").value =
+        item.gateKeterangan || "";
 
       document
-        .getElementById("modal-edit-barang")
+        .getElementById("modal-gate")
         .classList.add("active");
-
     }
 
-
-    function closeEditBarangModal() {
-
-      document
-        .getElementById("modal-edit-barang")
-        .classList.remove("active");
-
-      currentEditIndex = null;
-
-    }
-
-
-    function simpanEditBarang() {
-
-      if (currentEditIndex === null) {
-
+    function simpanGate() {
+      if (selectedIndex === null) {
         return;
-
       }
 
+      const status = document
+        .getElementById("gate-status")
+        .value;
 
-      const kode =
-        document.getElementById("edit-kode").value.trim();
-
-      const uraian =
-        document.getElementById("edit-uraian").value.trim();
-
-      const jumlah =
-        document.getElementById("edit-jumlah").value.trim();
-
-      const satuan =
-        document.getElementById("edit-satuan").value.trim();
-
-      const aset =
-        document.getElementById("edit-aset").value.trim();
-
-      const skk =
-        document.getElementById("edit-skk").value.trim();
-
-      const tglSkk =
-        document.getElementById("edit-tgl-skk").value;
-
-      const perusahaan =
-        document.getElementById("edit-perusahaan").value.trim();
-
-      const doc =
-        document.getElementById("edit-doc").value.trim();
-
-
-      if (!kode || !uraian || !jumlah || !satuan || !skk) {
-
-        alert(
-          "Kode, Uraian, Jumlah, Satuan dan SKK wajib diisi."
-        );
-
+      if (!status) {
+        alert("Status Gate wajib dipilih.");
         return;
-
       }
 
+      const item = listBarang[selectedIndex];
 
-      const item =
-        listBarang[currentEditIndex];
+      item.gateStatus = status;
+      item.gateTanggal = document
+        .getElementById("gate-tanggal")
+        .value;
 
+      item.gateJam = document
+        .getElementById("gate-jam")
+        .value;
 
-      item.kode = kode;
-      item.uraian = uraian;
-      item.jumlah = jumlah;
-      item.satuan = satuan;
-      item.aset = aset || "-";
-      item.skk = skk;
-      item.tglSkk = tglSkk || "-";
-      item.perusahaan = perusahaan || "-";
-      item.doc = doc || "-";
-
+      item.gateKeterangan = document
+        .getElementById("gate-keterangan")
+        .value
+        .trim();
 
       saveData();
-
-      renderTableNew();
       renderTableReceiving();
+      closeModal("modal-gate");
 
-      closeEditBarangModal();
-
-
-      alert(
-        "Data barang berhasil diperbarui."
-      );
-
+      alert("Data Gate berhasil disimpan.");
     }
 
+    function openBCModal(index) {
+      selectedIndex = index;
 
-    /* =========================================================
-       HAPUS BARANG
-    ========================================================= */
+      const item = listBarang[index];
+
+      document.getElementById("bc-skk").value =
+        item.skk;
+
+      document.getElementById("bc-kode").value =
+        item.kode;
+
+      document.getElementById("bc-nomor-aju").value =
+        item.nomorAju || "";
+
+      document.getElementById("bc-nomor-daftar").value =
+        item.nomorDaftar || "";
+
+      document.getElementById("bc-tanggal-daftar").value =
+        item.tanggalDaftar || "";
+
+      document.getElementById("bc-jenis").value =
+        item.jenisBC || "";
+
+      document.getElementById("bc-keterangan").value =
+        item.keteranganBC || "";
+
+      document
+        .getElementById("modal-bc")
+        .classList.add("active");
+    }
+
+    function simpanBC() {
+      if (selectedIndex === null) {
+        return;
+      }
+
+      const nomorAju = document
+        .getElementById("bc-nomor-aju")
+        .value
+        .trim();
+
+      const nomorDaftar = document
+        .getElementById("bc-nomor-daftar")
+        .value
+        .trim();
+
+      const tanggalDaftar = document
+        .getElementById("bc-tanggal-daftar")
+        .value;
+
+      if (!nomorAju || !nomorDaftar || !tanggalDaftar) {
+        alert(
+          "Nomor Aju, Nomor Daftar, dan Tanggal Daftar wajib diisi."
+        );
+        return;
+      }
+
+      const item = listBarang[selectedIndex];
+
+      item.nomorAju = nomorAju;
+      item.nomorDaftar = nomorDaftar;
+      item.tanggalDaftar = tanggalDaftar;
+
+      item.jenisBC = document
+        .getElementById("bc-jenis")
+        .value
+        .trim();
+
+      item.keteranganBC = document
+        .getElementById("bc-keterangan")
+        .value
+        .trim();
+
+      saveData();
+      renderTableReceiving();
+      closeModal("modal-bc");
+
+      alert("Data BC berhasil disimpan.");
+    }
+
+    async function bukaKamera() {
+      if (!window.isSecureContext) {
+        alert(
+          "Kamera membutuhkan HTTPS atau localhost."
+        );
+        return;
+      }
+
+      if (!navigator.mediaDevices ||
+          !navigator.mediaDevices.getUserMedia) {
+        alert(
+          "Browser tidak mendukung akses kamera."
+        );
+        return;
+      }
+
+      try {
+        cameraStream =
+          await navigator.mediaDevices.getUserMedia({
+            video: {
+              facingMode: {
+                ideal: "environment"
+              }
+            },
+            audio: false
+          });
+
+        document
+          .getElementById("camera-video")
+          .srcObject = cameraStream;
+
+        document
+          .getElementById("camera-placeholder")
+          .style.display = "none";
+
+        document
+          .getElementById("btn-open-camera")
+          .style.display = "none";
+
+        document
+          .getElementById("btn-capture")
+          .style.display = "inline-block";
+
+        document
+          .getElementById("btn-stop-camera")
+          .style.display = "inline-block";
+      } catch (error) {
+        alert(
+          "Kamera tidak dapat dibuka. Pastikan izin kamera sudah diberikan. Gunakan Upload Foto sebagai alternatif."
+        );
+      }
+    }
+
+    function stopKamera() {
+      if (cameraStream) {
+        cameraStream
+          .getTracks()
+          .forEach(track => track.stop());
+
+        cameraStream = null;
+      }
+
+      document
+        .getElementById("camera-video")
+        .srcObject = null;
+
+      document
+        .getElementById("camera-placeholder")
+        .style.display = "flex";
+
+      document
+        .getElementById("btn-open-camera")
+        .style.display = "inline-block";
+
+      document
+        .getElementById("btn-capture")
+        .style.display = "none";
+
+      document
+        .getElementById("btn-stop-camera")
+        .style.display = "none";
+    }
+
+    function openCameraModal(index) {
+      currentCameraIndex = index;
+
+      const item = listBarang[index];
+
+      document.getElementById("camera-info").textContent =
+        `SKK: ${item.skk} | Kode: ${item.kode} | ${item.uraian}`;
+
+      renderPhotoGallery();
+
+      document
+        .getElementById("modal-kamera")
+        .classList.add("active");
+    }
+
+    function closeKamera() {
+      stopKamera();
+
+      document
+        .getElementById("modal-kamera")
+        .classList.remove("active");
+
+      currentCameraIndex = null;
+      renderTableReceiving();
+    }
+
+    function ambilFoto() {
+      if (currentCameraIndex === null) {
+        return;
+      }
+
+      const video = document.getElementById(
+        "camera-video"
+      );
+
+      const canvas = document.createElement("canvas");
+
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+
+      canvas
+        .getContext("2d")
+        .drawImage(video, 0, 0);
+
+      simpanFoto(canvas.toDataURL("image/jpeg", 0.85));
+    }
+
+    function uploadFoto(event) {
+      const file = event.target.files[0];
+
+      if (!file || currentCameraIndex === null) {
+        return;
+      }
+
+      const reader = new FileReader();
+
+      reader.onload = function(event) {
+        simpanFoto(event.target.result);
+      };
+
+      reader.readAsDataURL(file);
+      event.target.value = "";
+    }
+
+    function simpanFoto(data) {
+      const item = listBarang[currentCameraIndex];
+
+      if (!item.photos) {
+        item.photos = [];
+      }
+
+      item.photos.push({
+        data,
+        timestamp: new Date().toLocaleString("id-ID")
+      });
+
+      saveData();
+      renderPhotoGallery();
+      renderTableReceiving();
+    }
+
+    function renderPhotoGallery() {
+      const gallery = document.getElementById(
+        "photo-gallery"
+      );
+
+      if (currentCameraIndex === null) {
+        return;
+      }
+
+      const photos =
+        listBarang[currentCameraIndex].photos || [];
+
+      gallery.innerHTML = photos.length
+        ? photos.map((photo, index) => `
+          <div class="photo-thumb">
+            [${photo.data}](${photo.data})
+
+            <button
+              onclick="hapusFoto(${index})">
+              ×
+            </button>
+          </div>
+        `).join("")
+        : "<small>Belum ada foto.</small>";
+    }
+
+    function hapusFoto(index) {
+      if (!confirm("Hapus foto ini?")) {
+        return;
+      }
+
+      listBarang[currentCameraIndex]
+        .photos
+        .splice(index, 1);
+
+      saveData();
+      renderPhotoGallery();
+      renderTableReceiving();
+    }
+
+    function openFileModal(index) {
+      currentFileIndex = index;
+
+      const item = listBarang[index];
+
+      document.getElementById("file-info").textContent =
+        `SKK: ${item.skk} | ${item.uraian}`;
+
+      renderFileList();
+
+      document
+        .getElementById("modal-file")
+        .classList.add("active");
+    }
+
+    function quickUploadFile(index, event) {
+      currentFileIndex = index;
+      prosesFile(event.target.files);
+      event.target.value = "";
+    }
+
+    function uploadFile(event) {
+      prosesFile(event.target.files);
+      event.target.value = "";
+    }
+
+    function prosesFile(files) {
+      if (!files.length || currentFileIndex === null) {
+        return;
+      }
+
+      const item = listBarang[currentFileIndex];
+
+      if (!item.files) {
+        item.files = [];
+      }
+
+      let completed = 0;
+
+      [...files].forEach(file => {
+        const reader = new FileReader();
+
+        reader.onload = function(event) {
+          item.files.push({
+            name: file.name,
+            size: file.size,
+            type: file.type,
+            data: event.target.result,
+            timestamp: new Date().toLocaleString("id-ID")
+          });
+
+          completed++;
+
+          if (completed === files.length) {
+            saveData();
+            renderFileList();
+            renderTableNew();
+          }
+        };
+
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function renderFileList() {
+      const container =
+        document.getElementById("file-list");
+
+      const files =
+        listBarang[currentFileIndex].files || [];
+
+      if (!files.length) {
+        container.innerHTML =
+          "<div class='empty-message'>Belum ada file.</div>";
+        return;
+      }
+
+      container.innerHTML = files.map((file, index) => `
+        <div class="file-item">
+          📄
+
+          <span class="file-name">
+            ${esc(file.name)}
+          </span>
+
+          <small>
+            ${formatFileSize(file.size)}
+          </small>
+
+          <button onclick="previewFile(${index})">
+            👁 Preview
+          </button>
+
+          <a
+            href="${file.data}"
+            download="${esc(file.name)}">
+            ⬇️
+          </a>
+
+          <button onclick="hapusFile(${index})">
+            🗑️
+          </button>
+        </div>
+      `).join("");
+    }
+
+    function previewFile(index) {
+      const file =
+        listBarang[currentFileIndex].files[index];
+
+      const extension =
+        file.name
+          .split(".")
+          .pop()
+          .toLowerCase();
+
+      const stage =
+        document.getElementById(
+          "file-preview-stage"
+        );
+
+      document.getElementById(
+        "file-preview-title"
+      ).textContent = "Preview: " + file.name;
+
+      const download =
+        document.getElementById(
+          "file-download-link"
+        );
+
+      download.href = file.data;
+      download.download = file.name;
+
+      if (
+        file.type.startsWith("image/") ||
+        ["jpg", "jpeg", "png", "gif", "bmp", "webp"]
+          .includes(extension)
+      ) {
+        stage.innerHTML = `
+          [${file.data}](${file.data})
+        `;
+      } else if (
+        file.type === "application/pdf" ||
+        extension === "pdf"
+      ) {
+        stage.innerHTML = `
+          [${file.data}](${file.data})
+          </iframe>
+        `;
+      } else if (
+        file.type.startsWith("text/") ||
+        ["txt", "csv", "json", "xml", "html"]
+          .includes(extension)
+      ) {
+        try {
+          const text = atob(
+            file.data.split(",")[1]
+          );
+
+          stage.innerHTML = `
+            <pre>${esc(text)}</pre>
+          `;
+        } catch (error) {
+          stage.innerHTML =
+            "<p>File tidak bisa dipreview. Silakan download.</p>";
+        }
+      } else {
+        stage.innerHTML = `
+          <p>
+            Format file ini belum mendukung preview langsung.
+            Silakan klik Download.
+          </p>
+        `;
+      }
+
+      document
+        .getElementById("modal-preview-file")
+        .classList.add("active");
+    }
+
+    function hapusFile(index) {
+      if (!confirm("Hapus file ini?")) {
+        return;
+      }
+
+      listBarang[currentFileIndex]
+        .files
+        .splice(index, 1);
+
+      saveData();
+      renderFileList();
+      renderTableNew();
+    }
+
+    function openPreviewItem(index) {
+      const item = listBarang[index];
+
+      const fields = [
+        ["Nomor SKK", item.skk],
+        ["Tanggal SKK", formatTanggal(item.tglSkk)],
+        ["Perusahaan", item.perusahaan],
+        ["Document", item.doc],
+        ["Kode Barang", item.kode],
+        ["Uraian Barang", item.uraian],
+        ["Jumlah", item.jumlah],
+        ["Satuan", item.satuan],
+        ["Aset No", item.aset],
+        ["Status Aset", item.status],
+        ["Status Receiving", item.statusReceiving],
+        ["Nomor Aju", item.nomorAju || "-"],
+        ["Nomor Daftar", item.nomorDaftar || "-"],
+        ["Tanggal Daftar", formatTanggal(item.tanggalDaftar)],
+        ["Gate", item.gateStatus || "-"],
+        ["Jumlah Foto", (item.photos || []).length],
+        ["Jumlah File", (item.files || []).length]
+      ];
+
+      document.getElementById(
+        "item-preview"
+      ).innerHTML = fields.map(field => `
+        <dt>${esc(field[0])}</dt>
+        <dd>${esc(field[1])}</dd>
+      `).join("");
+
+      document
+        .getElementById("modal-preview-item")
+        .classList.add("active");
+    }
+
+    function hapusBarangReceiving(index) {
+      const item = listBarang[index];
+
+      if (!confirm(
+        `Hapus barang "${item.uraian}"?`
+      )) {
+        return;
+      }
+
+      listBarang.splice(index, 1);
+
+      saveData();
+      renderTableNew();
+      renderTableReceiving();
+    }
 
     function hapusBarangTerpilih() {
-
-      const checkboxes =
+      const checked =
         document.querySelectorAll(
           ".row-checkbox:checked"
         );
 
-
-      if (checkboxes.length === 0) {
-
-        alert(
-          "Pilih minimal satu barang yang ingin dihapus."
-        );
-
+      if (!checked.length) {
+        alert("Pilih barang terlebih dahulu.");
         return;
-
       }
 
-
-      const konfirmasi =
-        confirm(
-          "Apakah Anda yakin ingin menghapus barang yang dipilih?"
-        );
-
-
-      if (!konfirmasi) {
-
+      if (!confirm("Hapus barang terpilih?")) {
         return;
-
       }
-
 
       const indexes =
-        Array.from(checkboxes)
-          .map(
-            checkbox =>
-              Number(checkbox.dataset.index)
-          );
-
-
-      listBarang =
-        listBarang.filter(
-          (_, index) =>
-            !indexes.includes(index)
+        [...checked].map(
+          checkbox => Number(
+            checkbox.dataset.index
+          )
         );
 
+      listBarang = listBarang.filter(
+        (_, index) => !indexes.includes(index)
+      );
 
       saveData();
-
       renderTableNew();
       renderTableReceiving();
-
-
-      document.getElementById(
-        "check-all"
-      ).checked = false;
-
     }
-
-
-    /* =========================================================
-       SELECT ALL
-    ========================================================= */
 
     function toggleSelectAll(master) {
-
       document
         .querySelectorAll(".row-checkbox")
-        .forEach(
-          checkbox => {
-            checkbox.checked =
-              master.checked;
-          }
-        );
-
+        .forEach(checkbox => {
+          checkbox.checked = master.checked;
+        });
     }
 
-
-    /* =========================================================
-       SEARCH TABLE
-    ========================================================= */
-
-    function cariTabel(tableId, query) {
-
+    function cariTabel(tableId, keyword) {
       const table =
         document.getElementById(tableId);
 
+      keyword = keyword.toLowerCase();
 
-      if (!table) {
-
-        return;
-
-      }
-
-
-      const keyword =
-        query.toLowerCase().trim();
-
-
-      const rows =
-        table.querySelectorAll("tbody tr");
-
-
-      rows.forEach(row => {
-
-        const text =
-          row.innerText.toLowerCase();
-
-        row.style.display =
-          text.includes(keyword)
-            ? ""
-            : "none";
-
-      });
-
+      table
+        .querySelectorAll("tbody tr")
+        .forEach(row => {
+          row.style.display =
+            row.innerText
+              .toLowerCase()
+              .includes(keyword)
+              ? ""
+              : "none";
+        });
     }
-
-
-    /* =========================================================
-       REFRESH RECEIVING
-    ========================================================= */
 
     function refreshReceiving() {
-
       loadData();
-
       renderTableReceiving();
-
-      alert(
-        "Data Receiving berhasil diperbarui."
-      );
-
     }
 
+    function openLightbox(src) {
+      document
+        .getElementById("lightbox-image")
+        .src = src;
 
-    /* =========================================================
-       STATUS CLASS
-    ========================================================= */
-
-    function getStatusClass(status) {
-
-      if (
-        status === "RECEIVED" ||
-        status === "DITERIMA"
-      ) {
-
-        return "received";
-
-      }
-
-      return "registered";
-
+      document
+        .getElementById("lightbox")
+        .classList.add("active");
     }
 
-
-    /* =========================================================
-       FORMAT TANGGAL
-    ========================================================= */
-
-    function formatTanggal(tanggal) {
-
-      if (!tanggal || tanggal === "-") {
-
-        return "-";
-
-      }
-
-
-      const parts =
-        tanggal.split("-");
-
-
-      if (parts.length !== 3) {
-
-        return tanggal;
-
-      }
-
-
-      return `
-        ${parts[2]}-${parts[1]}-${parts[0]}
-      `;
-
+    function tutupLightbox() {
+      document
+        .getElementById("lightbox")
+        .classList.remove("active");
     }
-
-
-    /* =========================================================
-       SECURITY / HTML ESCAPE
-    ========================================================= */
-
-    function escapeHTML(value) {
-
-      if (
-        value === null ||
-        value === undefined
-      ) {
-
-        return "";
-
-      }
-
-
-      return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-
-    }
-
-
-    /* =========================================================
-       CLOSE MODAL WHEN CLICK OUTSIDE
-    ========================================================= */
 
     document
       .querySelectorAll(".modal-overlay")
       .forEach(modal => {
-
-        modal.addEventListener(
-          "click",
-          function(event) {
-
-            if (event.target === modal) {
-
+        modal.addEventListener("click", event => {
+          if (event.target === modal) {
+            if (modal.id === "modal-kamera") {
+              closeKamera();
+            } else {
               modal.classList.remove("active");
-
-              currentEditIndex = null;
-
             }
-
           }
-        );
-
+        });
       });
 
-
-    /* =========================================================
-       INITIALIZE
-    ========================================================= */
-
     loadData();
-
     renderTableNew();
-
     renderTableReceiving();
-
   </script>
 
 </body>
