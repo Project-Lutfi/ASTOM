@@ -1,0 +1,212 @@
+/* ==========================================================
+   DASHBOARD
+   Dipakai bersama css/astom.css (sidebar, header, footer).
+   File ini hanya berisi style khusus halaman dashboard.
+   ========================================================== */
+
+/* ----- Halaman ----- */
+
+.page-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+
+/* ----- Kartu ringkasan ----- */
+
+.cards-container {
+  display: flex;
+  gap: 12px;
+}
+
+.card {
+  flex: 1;
+  display: block;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  padding: 8px 5px 10px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+}
+
+.card:hover {
+  filter: brightness(0.94);
+}
+
+.card-title {
+  font-size: 11px;
+  text-decoration: underline;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.card-number {
+  font-size: 22px;
+  font-weight: bold;
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+
+.card-value {
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.card-blue   { background-color: #00a0e9; }
+.card-green  { background-color: #58b036; }
+.card-orange { background-color: #f37023; }
+.card-red    { background-color: #ff0000; }
+
+
+/* ----- Baris panel (tabel + grafik) ----- */
+
+.dashboard-row {
+  display: flex;
+  gap: 15px;
+  align-items: stretch;
+}
+
+.panel-table {
+  flex: 1.6;
+  min-width: 0;
+  border: 1px solid #000;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-chart {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid #d0d0d0;
+  background-color: #fff;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.panel-header {
+  font-weight: bold;
+  font-size: 13px;
+  padding: 4px 8px;
+  border-bottom: 1px solid #000;
+  background-color: #fff;
+  color: #000;
+}
+
+.chart-title {
+  font-size: 13px;
+  font-weight: bold;
+  color: #666;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.chart-container {
+  position: relative;
+  width: 100%;
+  max-width: 220px;
+  height: 170px;
+}
+
+.chart-pesan {
+  display: none;
+  position: absolute;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  font-size: 10px;
+  color: #888;
+  text-align: center;
+}
+
+
+/* ----- Tabel history ----- */
+
+/* Tinggi tabel tetap (sekitar 7 baris); kalau data lebih banyak, bisa digulir */
+.panel-table .table-scroll {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.panel-table table {
+  font-size: 10px;
+}
+
+.panel-table th,
+.panel-table td {
+  padding: 3px;
+}
+
+.panel-table th {
+  background-color: #fff;
+  white-space: normal;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.panel-table td.left {
+  text-align: left;
+}
+
+.empty-row {
+  height: 18px;
+}
+
+.empty-row td {
+  border-style: dashed solid dashed solid;
+}
+
+
+/* ----- Layar kecil ----- */
+
+@media (max-width: 900px) {
+
+  .cards-container {
+    flex-wrap: wrap;
+  }
+
+  .card {
+    flex: 1 1 40%;
+  }
+
+  .dashboard-row {
+    flex-direction: column;
+  }
+
+}
+
+
+/* ----- Tampilan HP ----- */
+
+@media (max-width: 768px) {
+
+  .card {
+    flex: 1 1 calc(50% - 6px);
+  }
+
+  .card-number {
+    font-size: 20px;
+  }
+
+  /* tabel history bisa digeser ke samping */
+  .panel-table .table-scroll {
+    overflow-x: auto;
+  }
+
+  .panel-table table {
+    min-width: 560px;
+  }
+
+  .chart-container {
+    max-width: 260px;
+    height: 200px;
+  }
+
+}
