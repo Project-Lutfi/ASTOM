@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="id" data-butuh-login>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASTOM - Register New & Receiving</title>
+  <link rel="stylesheet" href="css/astom.css">
+  <script src="js/session.js"></script>
+</head>
+<body>
+
+  <!-- ============================================================
+       SIDEBAR
+       ============================================================ -->
+  <aside class="sidebar">
+
+    <div class="brand">
+      <div class="brand-logo"></div>
+      <span>ASTOM</span>
+    </div>
+
+    <a href="dashboard.html" class="menu-item-main">
+      <span class="ico ico-home"></span>
+      DASHBOARD
+    </a>
+
+    <div class="search-box">
+      <span class="ico ico-search"></span>
+      <input type="text" id="cari-menu" placeholder="Cari menu">
+    </div>
+
+    <div class="menu-group">
+      <div class="menu-title">REGISTER</div>
+      <a href="#" class="menu-link" onclick="bukaTab('new'); return false;">NEW</a>
+      <a href="#" class="menu-link" onclick="bukaTab('receiving'); return false;">RECEIVING</a>
+      <a href="#" class="menu-link" onclick="bukaTab('return'); return false;">RETURN</a>
+    </div>
+
+    <div class="menu-group">
+      <div class="menu-title">MONITORING</div>
+      <a href="gate.html" class="menu-link">GATE</a>
+    </div>
+
+    <div class="menu-group">
+      <div class="menu-title">REPORT & DOWNLOAD</div>
+      <a href="report.html#all" class="menu-link">ALL ASSET</a>
+      <a href="report.html#return" class="menu-link">RETURN ASSET</a>
+    </div>
+
+    <div class="menu-group">
+      <div class="menu-title">SETTING</div>
+      <a href="master-user.html" class="menu-link">MASTER USER</a>
+      <a href="master-customer.html" class="menu-link">MASTER CUSTOMER</a>
+      <a href="master-barang.html" class="menu-link">MASTER BARANG</a>
+    </div>
+
+    <div class="menu-group" style="margin-top: 10px;">
+      <div class="menu-title">LOG HISTORY</div>
+      <div id="menu-logout" class="menu-title" style="margin-top: 5px; cursor: pointer;">LOGOUT</div>
+    </div>
+
+  </aside>
+
+
+  <!-- ============================================================
+       MAIN CONTENT
+       ============================================================ -->
+  <main class="main-content">
+
+    <!-- HEADER -->
+    <header class="header">
+      <button type="button" id="tombol-menu" class="btn-menu" aria-label="Buka menu" title="Menu"><span class="ico ico-menu"></span></button>
+      <div class="header-title">ASSET CUSTOMERS CONTROL MANAGEMENT</div>
+      <div class="user-login-container">USER LOGIN</div>
+    </header>
+
+
+    <!-- PAGE -->
+    <section class="page-content">
+
+      <!-- TAB BUTTON -->
+      <div class="page-tabs">
+        <button id="tab-button-new" class="page-tab active" onclick="bukaTab('new')">
+          REGISTER NEW
+        </button>
+        <button id="tab-button-receiving" class="page-tab" onclick="bukaTab('receiving')">
+          RECEIVING
+        </button>
+        <button id="tab-button-return" class="page-tab" onclick="bukaTab('return')">
+          RETURN
+        </button>
+      </div>
+
+
+      <!-- ========================================================
+           TAB: REGISTER NEW
+           ======================================================== -->
+      <div id="tab-new" class="tab-content active">
+
+        <div class="form-title">REGISTER - NEW</div>
+
+        <div class="form-grid">
+
+          <label>Nomor & Tanggal SKK</label>
+          <input type="text" id="skk-nomor-main" placeholder="Nomor SKK">
+          <input type="date" id="skk-tgl-main">
+
+          <label>Nama Perusahaan / Document</label>
+          <input type="text" id="perusahaan-main" placeholder="Nama Perusahaan">
+          <input type="text" id="documen-main" placeholder="Document">
+
+          <label>Status Aset</label>
+          <input type="text" id="status-aset-main" value="REGISTERED">
+          <div></div>
+
+        </div>
+
+        <div style="font-weight: bold; margin-bottom: 8px; font-size: 12px;">
+          Data Barang yang Dikirim:
+        </div>
+
+        <!-- ACTION -->
+        <div class="action-bar">
+
+          <div class="btn-group">
+            <button class="btn btn-blue" onclick="openRekamBarangModal()"><span class="ico ico-plus"></span> Rekam</button>
+            <button class="btn btn-red" onclick="hapusBarangTerpilih()">Hapus Barang</button>
+          </div>
+
+          <div class="search-group">
+            <input
+              type="text"
+              id="search-new"
+              placeholder="Cari barang..."
+              onkeyup="cariTabel('table-new', this.value)">
+            <button class="btn btn-blue"><span class="ico ico-search"></span> Cari</button>
+          </div>
+
+        </div>
+
+        <!-- TABLE NEW -->
+        <div class="table-wrapper">
+          <table id="table-new" class="tabel-kartu">
+            <thead>
+              <tr>
+                <th style="width: 30px;">
+                  <input type="checkbox" id="check-all" onclick="toggleSelectAll(this)">
+                </th>
+                <th>KODE BARANG</th>
+                <th>URAIAN BARANG</th>
+                <th>JUMLAH</th>
+                <th>SATUAN</th>
+                <th>ASET NO</th>
+                <th>STATUS</th>
+                <th>SKK</th>
+                <th>PERUSAHAAN</th>
+                <th>DOC</th>
+                <th>AKSI</th>
+              </tr>
+            </thead>
+            <tbody id="tabel-barang-body"></tbody>
+          </table>
+        </div>
+
+      </div>
+
+
+      <!-- ========================================================
+           TAB: RECEIVING
+           ======================================================== -->
+      <div id="tab-receiving" class="tab-content">
+
+        <div class="form-title">REGISTER - RECEIVING</div>
+
+        <!-- TOOLBAR: Cari (kiri) + Periode Bulan (kanan) -->
+        <div class="receiving-toolbar">
+
+          <button class="btn btn-blue btn-cari" onclick="openPilihBarangModal()">
+            <span class="ico ico-search"></span> Cari
+          </button>
+
+          <div class="periode-group">
+            <label for="periode-bulan">Periode Bulan :</label>
+            <input type="month" id="periode-bulan">
+            <button class="btn btn-red" onclick="tampilkanPeriode()">Tampilkan</button>
+          </div>
+
+        </div>
+
+        <!-- TABLE RECEIVING -->
+        <div class="table-wrapper">
+          <table id="table-receiving" class="tabel-kartu">
+            <thead>
+              <tr>
+                <th>KODE BARANG</th>
+                <th>URAIAN BARANG</th>
+                <th>JUMLAH</th>
+                <th>SATUAN</th>
+                <th>ASET NO</th>
+                <th>STATUS</th>
+                <th>PERUSAHAAN</th>
+                <th>KODE DOC</th>
+                <th>NOMOR AJU</th>
+                <th>NOMOR DAFTAR</th>
+                <th>TGL. DAFTAR</th>
+                <th>AKSI</th>
+              </tr>
+            </thead>
+            <tbody id="tabel-receiving-body"></tbody>
+          </table>
+        </div>
+
+      </div>
+
+      <!-- ========================================================
+           TAB: RETURN
+           ======================================================== -->
+      <div id="tab-return" class="tab-content">
+
+        <div class="form-title">REGISTER - RETURN</div>
+
+        <!-- FORM PERMINTAAN -->
+        <div class="form-grid return-form-grid">
+
+          <label>Nama & Tanggal Requestor</label>
+          <input type="text" id="ret-requestor" placeholder="Nama Requestor">
+          <input type="date" id="ret-tgl-request">
+
+          <label>Departemen</label>
+          <input type="text" id="ret-departemen" placeholder="Departemen">
+          <div></div>
+
+          <label>Alasan Pengembalian</label>
+          <input type="text" id="ret-alasan" placeholder="Alasan pengembalian">
+          <div></div>
+
+          <label>Nama Perusahaan / Penerima & Lokasi</label>
+          <input type="text" id="ret-penerima" placeholder="Nama Perusahaan / Penerima">
+          <input type="text" id="ret-lokasi" placeholder="Lokasi">
+
+        </div>
+
+        <div style="font-weight: bold; margin-bottom: 8px; font-size: 12px;">
+          Data barang yang dikembalikan
+        </div>
+
+        <!-- TOOLBAR: Cari (kiri) + Periode Bulan (kanan) -->
+        <div class="receiving-toolbar">
+
+          <button class="btn btn-blue btn-cari" onclick="openPilihReturnModal()">
+            <span class="ico ico-search"></span> Cari
+          </button>
+
+          <div class="periode-group">
+            <label for="return-periode-bulan">Periode Bulan :</label>
+            <input type="month" id="return-periode-bulan">
+            <button class="btn btn-red" onclick="tampilkanPeriodeReturn()">Tampilkan</button>
+          </div>
+
+        </div>
+
+        <!-- TABLE RETURN -->
+        <div class="table-wrapper">
+          <table id="table-return" class="tabel-kartu">
+            <thead>
+              <tr>
+                <th>KODE BARANG</th>
+                <th>URAIAN BARANG</th>
+                <th>JUMLAH</th>
+                <th>SATUAN</th>
+                <th>ASET NO</th>
+                <th>PERUSAHAAN</th>
+                <th>KODE DOC</th>
+                <th>NOMOR AJU</th>
+                <th>NOMOR DAFTAR</th>
+                <th>TGL. DAFTAR</th>
+                <th>AKSI</th>
+              </tr>
+            </thead>
+            <tbody id="tabel-return-body"></tbody>
+          </table>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      PT MURAMOTO ELEKTRONIKA INDONESIA
+      <div class="footer-sub">CUSTOMS OPERATIONS & COMPLIANCE DEPT.</div>
+    </footer>
+
+  </main>
+
+
+  <!-- ============================================================
+       MODAL: REKAM BARANG (Register New)
+       ============================================================ -->
+  <div id="modal-rekam-barang" class="modal-overlay">
+    <div class="modal-box">
+
+      <div class="modal-title">REKAM BARANG</div>
+
+      <div class="modal-form-grid">
+
+        <label>Uraian Barang *</label>
+        <textarea id="rekam-uraian" class="full-width" placeholder="Masukkan uraian barang"></textarea>
+
+        <label>Kode Barang *</label>
+        <input type="text" id="rekam-kode" class="full-width" placeholder="Kode barang">
+
+        <label>Jenis Satuan *</label>
+        <input type="text" id="rekam-satuan" placeholder="PCS">
+
+        <label>Jumlah Barang *</label>
+        <input type="number" id="rekam-jumlah" min="1" placeholder="Jumlah">
+
+        <label>Aset No</label>
+        <input type="text" id="rekam-aset" class="full-width" placeholder="Nomor aset">
+
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-blue" onclick="simpanBarangBaru()"><span class="ico ico-save"></span> Simpan</button>
+        <button class="btn btn-red" onclick="closeRekamBarangModal()"><span class="ico ico-x"></span> Batal</button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       MODAL: EDIT BARANG (Register New)
+       ============================================================ -->
+  <div id="modal-edit-barang" class="modal-overlay">
+    <div class="modal-box">
+
+      <div class="modal-title">EDIT BARANG</div>
+
+      <div class="modal-form-grid">
+
+        <label>Uraian Barang *</label>
+        <textarea id="edit-uraian" class="full-width"></textarea>
+
+        <label>Kode Barang *</label>
+        <input type="text" id="edit-kode" class="full-width">
+
+        <label>Jenis Satuan *</label>
+        <input type="text" id="edit-satuan">
+
+        <label>Jumlah Barang *</label>
+        <input type="number" id="edit-jumlah" min="1">
+
+        <label>Aset No</label>
+        <input type="text" id="edit-aset" class="full-width">
+
+        <label>SKK Nomor</label>
+        <input type="text" id="edit-skk">
+
+        <label>Tanggal SKK</label>
+        <input type="date" id="edit-tgl-skk">
+
+        <label>Perusahaan</label>
+        <input type="text" id="edit-perusahaan">
+
+        <label>Document</label>
+        <input type="text" id="edit-doc">
+
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-blue" onclick="simpanEditBarang()"><span class="ico ico-save"></span> Simpan</button>
+        <button class="btn btn-red" onclick="closeEditBarangModal()"><span class="ico ico-x"></span> Batal</button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       MODAL: CARI / PILIH BARANG (Receiving)
+       Barang yang dipilih di sini masuk ke tabel Receiving.
+       ============================================================ -->
+  <div id="modal-pilih-barang" class="modal-overlay">
+    <div class="modal-box modal-box-lg">
+
+      <div class="modal-title">CARI BARANG</div>
+
+      <div class="modal-toolbar">
+        <input
+          type="text"
+          id="pilih-cari"
+          placeholder="Cari kode, uraian, SKK, atau perusahaan..."
+          oninput="renderTablePilih()">
+      </div>
+
+      <div class="table-wrapper table-scroll">
+        <table id="table-pilih" class="tabel-kartu">
+          <thead>
+            <tr>
+              <th style="width: 30px;">
+                <input type="checkbox" id="check-all-pilih" onclick="toggleSelectAllPilih(this)">
+              </th>
+              <th>URAIAN BARANG</th>
+              <th>KODE BARANG</th>
+              <th>JUMLAH</th>
+              <th>SATUAN</th>
+              <th>ASET NO</th>
+              <th>STATUS</th>
+              <th>SKK</th>
+              <th>PERUSAHAAN</th>
+            </tr>
+          </thead>
+          <tbody id="tabel-pilih-body"></tbody>
+        </table>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-blue" onclick="pilihBarang()"><span class="ico ico-check"></span> Pilih</button>
+        <button class="btn btn-red" onclick="closePilihBarangModal()"><span class="ico ico-x"></span> Batal</button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       MODAL: ADD BC (Receiving)
+       ============================================================ -->
+  <div id="modal-add-bc" class="modal-overlay">
+    <div class="modal-box modal-box-bc">
+
+      <div class="modal-title">ADD BC</div>
+
+      <div id="add-bc-info" class="modal-info"></div>
+
+      <div class="gate-row">
+
+        <div class="gate-field">
+          <label for="bc-kode-doc">Kode Doc</label>
+          <input type="text" id="bc-kode-doc" placeholder="BC 2.3">
+        </div>
+
+        <div class="gate-field">
+          <label for="bc-nomor-aju">Nomor Pengajuan</label>
+          <input type="text" id="bc-nomor-aju">
+        </div>
+
+        <div class="gate-field">
+          <label for="bc-nomor-daftar">Nomor Daftar</label>
+          <input type="text" id="bc-nomor-daftar">
+        </div>
+
+        <div class="gate-field">
+          <label for="bc-tgl-daftar">Tgl. Daftar</label>
+          <input type="date" id="bc-tgl-daftar">
+        </div>
+
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-blue" onclick="simpanAddBc()"><span class="ico ico-save"></span> Simpan</button>
+        <button class="btn btn-red" onclick="closeAddBcModal()"><span class="ico ico-x"></span> Batal</button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       MODAL: GATE (Receiving)
+       Form pemeriksaan barang masuk. Dibuka dari tombol GATE.
+       ============================================================ -->
+  <div id="modal-gate" class="modal-overlay">
+    <div class="modal-box modal-box-gate">
+
+      <div class="modal-title">GATE - BARANG MASUK</div>
+
+      <!-- DATA BARANG (otomatis dari baris yang diklik) -->
+      <div class="gate-section">
+        <div class="gate-title">DATA BARANG</div>
+
+        <div class="gate-grid">
+
+          <label for="gate-kode">Kode brg</label>
+          <input type="text" id="gate-kode" readonly>
+
+          <label for="gate-jumlah">Jumlah</label>
+          <input type="text" id="gate-jumlah" readonly>
+
+          <label for="gate-uraian">Uraian brg</label>
+          <textarea id="gate-uraian" readonly></textarea>
+
+          <label for="gate-satuan">Satuan</label>
+          <input type="text" id="gate-satuan" readonly>
+
+        </div>
+      </div>
+
+      <!-- REKAM MASUK -->
+      <div class="gate-section">
+        <div class="gate-title">REKAM MASUK</div>
+
+        <div class="gate-row">
+
+          <div class="gate-field">
+            <label for="gate-tanggal">Tanggal</label>
+            <input type="date" id="gate-tanggal">
+          </div>
+
+          <div class="gate-field">
+            <label for="gate-waktu">Waktu</label>
+            <input type="time" id="gate-waktu">
+          </div>
+
+          <div class="gate-field">
+            <label for="gate-penerima">Penerima</label>
+            <input type="text" id="gate-penerima">
+          </div>
+
+          <div class="gate-field">
+            <label for="gate-lokasi">Lokasi</label>
+            <input type="text" id="gate-lokasi">
+          </div>
+
+        </div>
+      </div>
+
+      <!-- FOTO PENDUKUNG -->
+      <div class="gate-section">
+        <div class="gate-title">FOTO PENDUKUNG</div>
+
+        <div class="gate-foto-item">
+          <div class="gate-foto-side">
+            <span>Foto unit</span>
+            <button type="button" class="btn-kamera" title="Ambil / pilih foto unit"
+                    onclick="pilihFotoGate('unit')"><span class="ico ico-camera"></span></button>
+            <input type="file" id="gate-file-unit" accept="image/*" hidden
+                   onchange="prosesFotoGate('unit', this)">
+          </div>
+          <div class="gate-foto-box" id="gate-preview-unit"></div>
+        </div>
+
+        <div class="gate-foto-item">
+          <div class="gate-foto-side">
+            <span>Foto label</span>
+            <button type="button" class="btn-kamera" title="Ambil / pilih foto label"
+                    onclick="pilihFotoGate('label')"><span class="ico ico-camera"></span></button>
+            <input type="file" id="gate-file-label" accept="image/*" hidden
+                   onchange="prosesFotoGate('label', this)">
+          </div>
+          <div class="gate-foto-box" id="gate-preview-label"></div>
+        </div>
+      </div>
+
+      <!-- KESESUAIAN DATA -->
+      <div class="gate-section">
+        <div class="gate-title">KESESUAIAN DATA</div>
+
+        <div class="gate-kesesuaian">
+          <button type="button" id="btn-sesuai" class="btn-kesesuaian sesuai"
+                  onclick="setKesesuaian('SESUAI')">Sesuai</button>
+          <button type="button" id="btn-tidak-sesuai" class="btn-kesesuaian tidak"
+                  onclick="setKesesuaian('TIDAK SESUAI')">Tidak Sesuai</button>
+        </div>
+      </div>
+
+      <!-- KETERANGAN -->
+      <div class="gate-section gate-section-akhir">
+        <div class="gate-title">KETERANGAN</div>
+        <textarea id="gate-keterangan" class="gate-textarea"
+                  placeholder="Wajib diisi jika data Tidak Sesuai"></textarea>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-blue" onclick="simpanGate()"><span class="ico ico-save"></span> Simpan</button>
+        <button class="btn btn-red" onclick="closeGateModal()"><span class="ico ico-x"></span> Batal</button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       MODAL: PREVIEW (Receiving) - tampilan baca-saja
+       Dibuka dari ikon mata di kolom AKSI.
+       ============================================================ -->
+  <div id="modal-preview" class="modal-overlay">
+    <div class="modal-box modal-box-gate modal-box-preview">
+
+      <div id="preview-title" class="modal-title">PREVIEW</div>
+
+      <div id="preview-body"></div>
+
+      <div class="modal-actions">
+        <button class="btn btn-red" onclick="closePreviewModal()"><span class="ico ico-x"></span> Tutup</button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       MODAL: CARI / PILIH BARANG (Return)
+       Yang tampil: barang yang sudah GATE di Receiving.
+       ============================================================ -->
+  <div id="modal-pilih-return" class="modal-overlay">
+    <div class="modal-box modal-box-lg">
+
+      <div class="modal-title">CARI BARANG (RETURN)</div>
+
+      <div class="modal-toolbar">
+        <input
+          type="text"
+          id="pilih-return-cari"
+          placeholder="Cari kode, uraian, aset no, perusahaan, atau nomor daftar..."
+          oninput="renderTablePilihReturn()">
+      </div>
+
+      <div class="table-wrapper table-scroll">
+        <table id="table-pilih-return" class="tabel-kartu">
+          <thead>
+            <tr>
+              <th style="width: 30px;">
+                <input type="checkbox" id="check-all-pilih-return" onclick="toggleSelectAllPilihReturn(this)">
+              </th>
+              <th>KODE BARANG</th>
+              <th>URAIAN BARANG</th>
+              <th>JUMLAH</th>
+              <th>SATUAN</th>
+              <th>ASET NO</th>
+              <th>PERUSAHAAN</th>
+              <th>NOMOR DAFTAR</th>
+              <th>TGL. DAFTAR</th>
+            </tr>
+          </thead>
+          <tbody id="tabel-pilih-return-body"></tbody>
+        </table>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-blue" onclick="pilihReturn()"><span class="ico ico-check"></span> Pilih</button>
+        <button class="btn btn-red" onclick="closePilihReturnModal()"><span class="ico ico-x"></span> Batal</button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       MODAL: GATE RETURN (barang keluar)
+       ============================================================ -->
+  <div id="modal-gate-return" class="modal-overlay">
+    <div class="modal-box modal-box-gate">
+
+      <div class="modal-title">GATE - BARANG KELUAR (RETURN)</div>
+
+      <!-- DATA BARANG (otomatis sesuai input awal) -->
+      <div class="gate-section">
+        <div class="gate-title">DATA BARANG</div>
+
+        <div class="gate-grid">
+
+          <label for="rgate-kode">Kode brg</label>
+          <input type="text" id="rgate-kode" readonly>
+
+          <label for="rgate-jumlah">Jumlah</label>
+          <input type="text" id="rgate-jumlah" readonly>
+
+          <label for="rgate-uraian">Uraian brg</label>
+          <textarea id="rgate-uraian" readonly></textarea>
+
+          <label for="rgate-satuan">Satuan</label>
+          <input type="text" id="rgate-satuan" readonly>
+
+        </div>
+      </div>
+
+      <!-- REKAM KELUAR -->
+      <div class="gate-section">
+        <div class="gate-title">REKAM KELUAR</div>
+
+        <div class="gate-row gate-row-2">
+
+          <div class="gate-field">
+            <label for="rgate-tanggal">Tanggal</label>
+            <input type="date" id="rgate-tanggal">
+          </div>
+
+          <div class="gate-field">
+            <label for="rgate-waktu">Waktu</label>
+            <input type="time" id="rgate-waktu">
+          </div>
+
+        </div>
+      </div>
+
+      <!-- FOTO PENDUKUNG -->
+      <div class="gate-section">
+        <div class="gate-title">FOTO PENDUKUNG</div>
+
+        <div class="gate-foto-item">
+          <div class="gate-foto-side">
+            <span>Foto unit</span>
+            <button type="button" class="btn-kamera" title="Ambil / pilih foto unit"
+                    onclick="pilihFotoReturn('unit')"><span class="ico ico-camera"></span></button>
+            <input type="file" id="rgate-file-unit" accept="image/*" hidden
+                   onchange="prosesFotoReturn('unit', this)">
+          </div>
+          <div class="gate-foto-box" id="rgate-preview-unit"></div>
+        </div>
+
+        <div class="gate-foto-item">
+          <div class="gate-foto-side">
+            <span>Foto label</span>
+            <button type="button" class="btn-kamera" title="Ambil / pilih foto label"
+                    onclick="pilihFotoReturn('label')"><span class="ico ico-camera"></span></button>
+            <input type="file" id="rgate-file-label" accept="image/*" hidden
+                   onchange="prosesFotoReturn('label', this)">
+          </div>
+          <div class="gate-foto-box" id="rgate-preview-label"></div>
+        </div>
+      </div>
+
+      <!-- KESESUAIAN DATA -->
+      <div class="gate-section">
+        <div class="gate-title">KESESUAIAN DATA</div>
+
+        <div class="gate-kesesuaian">
+          <button type="button" id="rbtn-sesuai" class="btn-kesesuaian sesuai"
+                  onclick="setKesesuaianReturn('SESUAI')">Sesuai</button>
+          <button type="button" id="rbtn-tidak-sesuai" class="btn-kesesuaian tidak"
+                  onclick="setKesesuaianReturn('TIDAK SESUAI')">Tidak Sesuai</button>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-blue" onclick="simpanGateReturn()"><span class="ico ico-save"></span> Simpan</button>
+        <button class="btn btn-red" onclick="closeGateReturnModal()"><span class="ico ico-x"></span> Batal</button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- JAVASCRIPT -->
+  <script src="js/menu.js"></script>
+  <script src="js/register.js"></script>
+</body>
+</html>

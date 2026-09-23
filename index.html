@@ -4,55 +4,57 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ASTOM Portal Login</title>
+
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+
   <!-- Font Awesome Icons CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    .hero-bg {
-      background-image: url('Aset 4.jpg');
-      background-size: contain;
-      background-position: center;
-    }
-  </style>
+
+  <!-- Style tambahan (komponen berulang) -->
+  <link rel="stylesheet" href="css/login.css">
 </head>
 <body class="bg-gray-200 font-sans text-gray-800 antialiased min-h-screen flex flex-col justify-between">
 
   <!-- TOP WRAPPER (Header + Main Content) -->
   <div>
+
     <!-- Header Navigation -->
     <header class="bg-[#002d62] text-white text-xs py-2 px-6 flex items-center justify-between">
       <div class="flex items-center space-x-6">
-       <span>PT. MURAMOTO ELEKTRONIKA INDONESIA</span>
+        <span>PT. MURAMOTO ELEKTRONIKA INDONESIA</span>
       </div>
     </header>
 
-    <!-- Banner Pengumuman -->
-    <div class="bg-[#ffcb05] text-black text-xs font-semibold py-2.5 px-6 flex items-center justify-between shadow-sm">
-      <div class="flex items-center gap-2">
+    <!-- Banner Pengumuman (klik tombol biru untuk ciutkan / tampilkan) -->
+    <div id="bannerWelcome" class="bg-[#ffcb05] text-black text-xs font-semibold py-2.5 px-6 flex items-center justify-between shadow-sm">
+      <div id="teksWelcome" class="flex items-center gap-2">
         <span>Welcome Back</span>
       </div>
-      <button type="button" class="bg-[#00a8e8] text-white rounded-sm w-4 h-4 flex items-center justify-center text-[10px]">
-        <i class="fa-solid fa-caret-up"></i>
+      <button type="button" id="tombolBanner" aria-label="Ciutkan atau tampilkan pengumuman"
+              class="bg-[#00a8e8] text-white rounded-sm w-4 h-4 flex items-center justify-center text-[10px] cursor-pointer">
+        <i id="ikonBanner" class="fa-solid fa-caret-up"></i>
       </button>
     </div>
 
     <!-- Main Container -->
     <main class="flex items-center justify-center p-4 my-6">
       <div class="bg-white rounded-xl shadow-xl max-w-4xl w-full flex flex-col md:flex-row overflow-hidden border border-gray-100">
-        
-        <!-- Left Panel: Form Login -->
+
+        <!-- Left Panel: Form -->
         <div class="w-full md:w-1/2 p-8 sm:p-10 flex flex-col justify-between">
           <div>
+
             <!-- Badge User Manual -->
-            <div class="inline-block bg-[#002b5b] text-white text-xs px-3 py-1.5 rounded-r-md font-medium mb-6 -ml-8 sm:-ml-10 shadow-sm">
+            <button type="button" id="tombolManual"
+                    class="inline-block bg-[#002b5b] hover:bg-[#003b7a] text-white text-xs px-3 py-1.5 rounded-r-md font-medium mb-6 -ml-8 sm:-ml-10 shadow-sm cursor-pointer text-left">
               Petunjuk Penggunaan (User Manual)
-            </div>
+            </button>
 
             <!-- Tabs -->
-            <div class="flex border-b border-gray-200 mb-6 text-xs font-semibold">
-              <button class="pb-2 px-1 text-[#00a8e8] border-b-2 border-[#00a8e8] mr-6">Public</button>
-              <button class="pb-2 px-1 text-gray-400 hover:text-gray-600">Personal</button>
+            <div id="areaTab" class="flex border-b border-gray-200 mb-6">
+              <button type="button" id="tabPublic" class="tab-akun tab-aktif">Public</button>
+              <button type="button" id="tabPersonal" class="tab-akun">Personal</button>
             </div>
 
             <!-- Logo & Title -->
@@ -61,99 +63,231 @@
                 <span>ASTOM</span>
               </div>
               <p class="text-[9px] text-gray-400 font-mono tracking-widest uppercase -mt-1">Asset Customers Control Management</p>
-              <h1 class="text-xl font-bold text-[#002d62] mt-4">Portal Login</h1>
+              <h1 id="judulPanel" class="text-xl font-bold text-[#002d62] mt-4">Portal Login</h1>
             </div>
 
             <!-- Alert Pesan Sukses / Gagal -->
             <div id="alertMessage" class="hidden mb-4 p-3 rounded text-xs"></div>
 
-            <!-- Form Area -->
-            <div class="space-y-3">
-              <!-- Username Input -->
+
+            <!-- ==================================================
+                 PANEL: LOGIN
+                 ================================================== -->
+            <form id="panelLogin" class="panel space-y-3" novalidate>
+
               <div class="relative">
-                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400 text-xs">
-                  <i class="fa-regular fa-user"></i>
-                </span>
-                <input 
-                  type="text" 
-                  id="usernameInput"
-                  placeholder="Username" 
-                  class="w-full pl-9 pr-3 py-2 bg-[#edf4ff] border border-[#cce0ff] rounded-md text-xs text-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                >
+                <span class="ikon-input"><i class="fa-regular fa-user"></i></span>
+                <input type="text" id="usernameInput" class="input-login"
+                       placeholder="Username atau email" autocomplete="username">
               </div>
 
-              <!-- Password Input -->
               <div class="relative">
-                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400 text-xs">
-                  <i class="fa-solid fa-lock"></i>
-                </span>
-                <input 
-                  type="password" 
-                  id="passwordInput"
-                  placeholder="Password" 
-                  class="w-full pl-9 pr-3 py-2 bg-[#edf4ff] border border-[#cce0ff] rounded-md text-xs text-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                >
+                <span class="ikon-input"><i class="fa-solid fa-lock"></i></span>
+                <input type="password" id="passwordInput" class="input-login"
+                       placeholder="Password" autocomplete="current-password">
               </div>
 
-              <!-- Tombol Log In -->
-              <button 
-                type="button" 
-                onclick="prosesLogin()"
-                class="w-full bg-[#00a8e8] hover:bg-[#0092cd] text-white font-medium py-2 rounded-md text-xs transition shadow-sm mt-1 cursor-pointer"
-              >
-                Log in
-              </button>
-            </div>
+              <button type="submit" class="tombol-utama">Log in</button>
 
-            <!-- Divider -->
-            <div class="relative my-6 text-center">
-              <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-gray-200"></div></div>
-              <span class="relative bg-white px-3 text-[11px] text-gray-400">Belum Punya Akses?</span>
-            </div>
+              <!-- Divider -->
+              <div class="relative my-6 text-center">
+                <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-gray-200"></div></div>
+                <span class="relative bg-white px-3 text-[11px] text-gray-400">Belum Punya Akses?</span>
+              </div>
 
-            <!-- Register Button -->
-            <button 
-              type="button" 
-              class="w-full bg-[#2b6cb0] hover:bg-[#235893] text-white font-medium py-2 rounded-md text-xs transition shadow-sm"
-            >
-              Daftar
-            </button>
+              <button type="button" data-panel="daftar" class="tombol-sekunder">Daftar</button>
+
+            </form>
+
+
+            <!-- ==================================================
+                 PANEL: DAFTAR
+                 ================================================== -->
+            <form id="panelDaftar" class="panel space-y-3 hidden" novalidate>
+
+              <div class="relative">
+                <span class="ikon-input"><i class="fa-regular fa-id-badge"></i></span>
+                <input type="text" id="daftarNama" class="input-login"
+                       placeholder="Nama lengkap" autocomplete="name">
+              </div>
+
+              <div class="relative">
+                <span class="ikon-input"><i class="fa-regular fa-envelope"></i></span>
+                <input type="email" id="daftarEmail" class="input-login"
+                       placeholder="Email" autocomplete="email">
+              </div>
+
+              <div class="relative">
+                <span class="ikon-input"><i class="fa-regular fa-user"></i></span>
+                <input type="text" id="daftarUsername" class="input-login"
+                       placeholder="Username" autocomplete="username">
+              </div>
+
+              <div class="relative">
+                <span class="ikon-input"><i class="fa-solid fa-lock"></i></span>
+                <input type="password" id="daftarPassword" class="input-login"
+                       placeholder="Password" autocomplete="new-password">
+              </div>
+
+              <div class="relative">
+                <span class="ikon-input"><i class="fa-solid fa-lock"></i></span>
+                <input type="password" id="daftarPassword2" class="input-login"
+                       placeholder="Ulangi password" autocomplete="new-password">
+              </div>
+
+              <p class="teks-bantu">
+                Password minimal 8 karakter, kombinasi huruf dan angka.<br>
+                <span id="infoTipeDaftar"></span>
+              </p>
+
+              <button type="submit" class="tombol-utama">Daftar</button>
+
+              <div class="text-center pt-2">
+                <a href="#" data-panel="login" class="link-kecil">Sudah punya akun? Kembali ke Login</a>
+              </div>
+
+            </form>
+
+
+            <!-- ==================================================
+                 PANEL: KONFIRMASI EMAIL
+                 ================================================== -->
+            <form id="panelKonfirmasi" class="panel space-y-3 hidden" novalidate>
+
+              <p class="teks-bantu">
+                Masukkan kode 6 digit yang dikirim ke email Anda. Belum menerimanya?
+                Klik <strong>Kirim Ulang Kode</strong>.
+              </p>
+
+              <div class="relative">
+                <span class="ikon-input"><i class="fa-regular fa-envelope"></i></span>
+                <input type="email" id="konfirmasiEmail" class="input-login"
+                       placeholder="Email" autocomplete="email">
+              </div>
+
+              <div class="relative">
+                <span class="ikon-input"><i class="fa-solid fa-key"></i></span>
+                <input type="text" id="konfirmasiKode" class="input-login"
+                       placeholder="Kode konfirmasi (6 digit)" inputmode="numeric"
+                       maxlength="6" autocomplete="one-time-code">
+              </div>
+
+              <div id="demoKonfirmasi" class="kotak-demo hidden">
+                <strong>Mode demo:</strong> email belum terhubung ke server, jadi kode
+                ditampilkan di sini.<br>
+                Kode Anda: <span id="kodeDemoKonfirmasi" class="kode-demo"></span>
+              </div>
+
+              <button type="submit" class="tombol-utama">Konfirmasi</button>
+
+              <button type="button" id="tombolKirimUlang" class="tombol-garis">Kirim Ulang Kode</button>
+
+              <div class="text-center pt-2">
+                <a href="#" data-panel="login" class="link-kecil">Kembali ke Login</a>
+              </div>
+
+            </form>
+
+
+            <!-- ==================================================
+                 PANEL: RESET PASSWORD (langkah 1)
+                 ================================================== -->
+            <form id="panelResetMinta" class="panel space-y-3 hidden" novalidate>
+
+              <p class="teks-bantu">
+                Masukkan username atau email akun Anda. Kami akan mengirim kode untuk
+                membuat password baru.
+              </p>
+
+              <div class="relative">
+                <span class="ikon-input"><i class="fa-regular fa-user"></i></span>
+                <input type="text" id="resetKunci" class="input-login"
+                       placeholder="Username atau email" autocomplete="username">
+              </div>
+
+              <button type="submit" class="tombol-utama">Kirim Kode Reset</button>
+
+              <div class="text-center pt-2">
+                <a href="#" data-panel="login" class="link-kecil">Kembali ke Login</a>
+              </div>
+
+            </form>
+
+
+            <!-- ==================================================
+                 PANEL: RESET PASSWORD (langkah 2)
+                 ================================================== -->
+            <form id="panelResetBaru" class="panel space-y-3 hidden" novalidate>
+
+              <div class="relative">
+                <span class="ikon-input"><i class="fa-solid fa-key"></i></span>
+                <input type="text" id="resetKode" class="input-login"
+                       placeholder="Kode reset (6 digit)" inputmode="numeric"
+                       maxlength="6" autocomplete="one-time-code">
+              </div>
+
+              <div id="demoReset" class="kotak-demo hidden">
+                <strong>Mode demo:</strong> email belum terhubung ke server, jadi kode
+                ditampilkan di sini.<br>
+                Kode Anda: <span id="kodeDemoReset" class="kode-demo"></span>
+              </div>
+
+              <div class="relative">
+                <span class="ikon-input"><i class="fa-solid fa-lock"></i></span>
+                <input type="password" id="resetPassword" class="input-login"
+                       placeholder="Password baru" autocomplete="new-password">
+              </div>
+
+              <div class="relative">
+                <span class="ikon-input"><i class="fa-solid fa-lock"></i></span>
+                <input type="password" id="resetPassword2" class="input-login"
+                       placeholder="Ulangi password baru" autocomplete="new-password">
+              </div>
+
+              <p class="teks-bantu">Password minimal 8 karakter, kombinasi huruf dan angka.</p>
+
+              <button type="submit" class="tombol-utama">Simpan Password Baru</button>
+
+              <div class="text-center pt-2">
+                <a href="#" data-panel="resetMinta" class="link-kecil">Minta kode baru</a>
+                &nbsp;/&nbsp;
+                <a href="#" data-panel="login" class="link-kecil">Kembali ke Login</a>
+              </div>
+
+            </form>
+
           </div>
 
-          <!-- Footer Links Login -->
-          <div class="mt-8 text-[11px] text-gray-500">
-            Tidak bisa login? 
-            <a href="#" class="font-semibold text-[#002d62] hover:underline">Reset Password</a> / 
-            <a href="#" class="font-semibold text-[#002d62] hover:underline">Belum Dapat Email Konfirmasi</a>
+          <!-- Footer Links Login (hanya tampil di panel Login) -->
+          <div id="linkBantuan" class="mt-8 text-[11px] text-gray-500">
+            Tidak bisa login?
+            <a href="#" data-panel="resetMinta" class="font-semibold text-[#002d62] hover:underline">Reset Password</a> /
+            <a href="#" data-panel="konfirmasi" class="font-semibold text-[#002d62] hover:underline">Belum Dapat Email Konfirmasi</a>
           </div>
         </div>
 
         <!-- Right Panel: Image Display -->
-<div class="hidden md:block w-1/2 relative overflow-hidden">
-  <img 
-    src="Aset 4.jpg" 
-    alt="Aset Customers" 
-    class="w-full h-full object-cover"
-  />
-</div>
+        <div class="hidden md:block w-1/2 relative overflow-hidden">
+          <img
+            src="Aset 4.jpg"
+            alt="Aset Customers"
+            class="w-full h-full object-cover"
+          />
         </div>
 
       </div>
     </main>
   </div>
 
-  <!-- BOTTOM FOOTER (Sesuai Gambar) -->
+  <!-- BOTTOM FOOTER -->
   <footer class="bg-[#1c2836] text-gray-300 text-center py-6 px-4 text-xs mt-8">
     <div class="max-w-4xl mx-auto space-y-3">
-      <!-- Judul Lembaga -->
       <p class="font-bold text-white">Customs Operations Dan Compliance Departemen.</p>
-      
-      <!-- Keterangan Penjelasan CEISA -->
+
       <p class="text-[11px] leading-relaxed text-gray-400 max-w-3xl mx-auto">
         ASTOM (Aset Pelanggan Control Management) adalah Sistem Internal yang dibuat oleh Customs Dept. untuk pengawasan aset pelanggan yang berada di PT Muramoto Elektronika Indonesia.
       </p>
-      
-            <!-- Copyright & Last Updated -->
+
       <div class="text-[10px] text-gray-400 pt-2 space-y-0.5">
         <p>&copy; 2026 Customs Operations Dan Compliance Dept.</p>
         <p>Last Updated on 24 Agustus 2026</p>
@@ -161,39 +295,62 @@
     </div>
   </footer>
 
-  <!-- Script Proses Login -->
-  <script>
-    function prosesLogin() {
-      const userBenar = "admin";
-      const passBenar = "123";
 
-      const userInput = document.getElementById('usernameInput').value.trim();
-      const passInput = document.getElementById('passwordInput').value.trim();
-      const alertBox = document.getElementById('alertMessage');
+  <!-- ==========================================================
+       POP-UP: PETUNJUK PENGGUNAAN
+       ========================================================== -->
+  <div id="modalManual" class="modal-latar hidden" role="dialog" aria-modal="true" aria-labelledby="judulManual">
+    <div class="modal-kotak">
 
-      if (userInput === "" || passInput === "") {
-        alertBox.className = "mb-4 p-3 rounded text-xs bg-amber-100 text-amber-800 border border-amber-300";
-        alertBox.innerText = "Isi username dan password terlebih dahulu!";
-        alertBox.classList.remove('hidden');
-        return;
-      }
+      <div class="flex items-start justify-between gap-4">
+        <h2 id="judulManual">Petunjuk Penggunaan ASTOM</h2>
+        <button type="button" id="tutupManual" aria-label="Tutup" class="text-gray-400 hover:text-gray-700 text-lg leading-none cursor-pointer">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
 
-      if (userInput === userBenar && passInput === passBenar) {
-        alertBox.className = "mb-4 p-3 rounded text-xs bg-emerald-100 text-emerald-700 border border-emerald-300";
-        alertBox.innerText = "Login Berhasil! Mengalihkan ke Dashboard...";
-        alertBox.classList.remove('hidden');
+      <h3>Masuk</h3>
+      <p>
+        Pilih tab sesuai jenis akun Anda (Public atau Personal), isi username (atau email)
+        dan password, lalu klik <strong>Log in</strong>.
+      </p>
 
-        setTimeout(function() {
-          window.location.href = "dashboard.html";
-        }, 1000);
+      <h3>Belum punya akun</h3>
+      <ol>
+        <li>Klik <strong>Daftar</strong>, lalu isi nama, email, username, dan password.</li>
+        <li>Masukkan kode 6 digit konfirmasi yang dikirim ke email Anda.</li>
+        <li>Setelah dikonfirmasi, login seperti biasa.</li>
+      </ol>
 
-      } else {
-        alertBox.className = "mb-4 p-3 rounded text-xs bg-red-100 text-red-700 border border-red-300";
-        alertBox.innerText = "Username atau Password salah!";
-        alertBox.classList.remove('hidden');
-      }
-    }
-  </script>
+      <h3>Tidak menerima email konfirmasi</h3>
+      <p>
+        Klik <strong>Belum Dapat Email Konfirmasi</strong>, isi email Anda, lalu klik
+        <strong>Kirim Ulang Kode</strong>. Periksa juga folder spam.
+      </p>
 
+      <h3>Lupa password</h3>
+      <ol>
+        <li>Klik <strong>Reset Password</strong> dan isi username atau email.</li>
+        <li>Masukkan kode 6 digit yang dikirim ke email, lalu buat password baru.</li>
+      </ol>
+
+      <h3>Setelah login</h3>
+      <ol>
+        <li><strong>Register &gt; New</strong>: rekam data barang yang dikirim.</li>
+        <li><strong>Register &gt; Receiving</strong>: pilih barang (Cari), isi dokumen BC (ADD BC), lalu catat barang masuk (GATE).</li>
+        <li><strong>Register &gt; Return</strong>: isi form pengembalian, pilih barang, lalu catat barang keluar (GATE).</li>
+        <li><strong>Dashboard</strong>: ringkasan jumlah aset, history pemasukan, dan pengembalian.</li>
+      </ol>
+
+      <div class="text-center mt-5">
+        <button type="button" id="tutupManual2" class="tombol-utama" style="width:auto; padding-left:2rem; padding-right:2rem; display:inline-block;">Tutup</button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <script src="js/session.js"></script>
+  <script src="js/login.js"></script>
 </body>
 </html>

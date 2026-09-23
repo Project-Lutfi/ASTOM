@@ -1,488 +1,200 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-butuh-login>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ASTOM - Asset Customers Control Management</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
-    body {
-      display: flex;
-      height: 100vh;
-      background-color: #e3ebf3;
-      overflow: hidden;
-    }
-
-    /* Sidebar Navigation */
-    .sidebar {
-      width: 210px;
-      background-color: #24588a;
-      color: #ffffff;
-      display: flex;
-      flex-direction: column;
-      padding: 12px 10px;
-      font-size: 11px;
-      flex-shrink: 0;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 18px;
-      font-weight: bold;
-      color: #f7a600;
-      margin-bottom: 8px;
-    }
-
-    .brand-logo {
-      width: 28px;
-      height: 28px;
-      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAFn0lEQVR4nO2bW2hcVRjHf3NmJtPcxCQ2iVabWJvU2l6qaROsRerF0gcv2EKEFvRF9MWH9s2H+gqCN0EQfBARxQfBgg9++FBQROxDK/WhtQ1Nmt6TNu29TdKkM5nMe/nOv002Z+dMkjZtkpl/WBYyWcvZe+3v+75v/845R0oJQoj/yVCSx2zbFjE+n++20xU8b4Wn287Ozs7eTq9i43e2jY3Z931tbm6+z1v91219b12N/f89evTo0b6+vqW/N40N05/61vdg61v30v3y3vVw4+31e++9989X1dfXx+fz+Wvb1i+A68A+4CSwB9ihd5sCjup7A3gbWNEyq+3/sH49B/ygdVf0v4F/tO4i8LreH1T7U8BbwHfAVT0vAkeAjy3LClqWNbxt3wJ4f+tbz7a+v0a/v1/71239O9+/Ruvb2u92330f6v7j+l7S93N6Lupz7+vzc3p+Qsv8qudZfV6n5c9q21XgoLZd0TIXgU+Ab4CXbNt2g4OD+7b1LwB4w/pG097Z2flWdXX1vdbS0tISa2xsDDU2Noabmpqizc3Noebm5lB7e3vQ8t///e7g4KA/GAz6ly9f7u3p6fG3trYGW1tb/T2t6+tra+u//38A4Btr6xt7e3tv6/j/BvhQv78d2A20AJu1b12b3h/Vusva76yee9o3oe0D2t+jZT7S37a+T2rd/bqu0nLd2teuZb60bfuE53m/3dYxACqsr4f9+voN8DXwIdAH1Gvf3Tq+3bKsz3w/39bX12d93/fHff/q2u3s7PxW1gD8sL7g9er1/lA8/gTogXy8N8Cfh3wP/e8A363q+X39A3mva29l3/e1rf0/Ife3s/S8A1L3s/3/A/9726Xm/W9l10//l8A31v9sS3s/+51f5/D//7f1vAefW3q6/c73s/sN/b+s2p++pS5Xz+n6X9s1f/A+xS5w4s36O3q6v/5+j9L2A/31/31p83mN3//0S8N8f///a10s3/t/+/f9r6A+/m53+L8c/fN2f5d/c5/4/j0P/f+x//bX//a3//f9S4AAAAASUVORK5CYR==');
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
-    }
-
-    .menu-item-main {
-      font-size: 13px;
-      font-weight: bold;
-      padding: 4px 0;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      color: #fff;
-      text-decoration: none;
-    }
-
-    .search-box {
-      margin: 8px 0 12px 0;
-    }
-
-    .search-box input {
-      width: 100%;
-      padding: 3px 6px;
-      border-radius: 2px;
-      border: 1px solid #ccc;
-      font-size: 11px;
-    }
-
-    .menu-group {
-      margin-bottom: 12px;
-    }
-
-    .menu-title {
-      font-weight: bold;
-      color: #ffffff;
-      margin-bottom: 2px;
-      text-transform: uppercase;
-      font-size: 11px;
-    }
-
-    .menu-link {
-      display: block;
-      color: #f7a600;
-      text-decoration: none;
-      padding: 1px 0;
-      font-size: 11px;
-      cursor: pointer;
-    }
-
-    .menu-link:hover, .menu-item-main:hover {
-      text-decoration: underline;
-    }
-
-    /* Main Content Area */
-    .main-content {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      overflow-y: auto;
-    }
-
-    /* Header */
-    .header {
-      background-color: #d2e1f0;
-      padding: 8px 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #a0b8d0;
-    }
-
-    .header-title {
-      font-size: 14px;
-      font-weight: bold;
-      color: #000;
-      letter-spacing: 0.5px;
-    }
-
-    .user-login-container {
-      font-size: 11px;
-      font-weight: bold;
-      color: #000;
-    }
-
-    /* Page Container */
-    .page-content {
-      padding: 15px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    /* SUMMARY CARDS */
-    .cards-container {
-      display: flex;
-      gap: 12px;
-    }
-
-    .card {
-      flex: 1;
-      color: #fff;
-      text-align: center;
-      padding: 8px 5px;
-      box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
-      cursor: pointer;
-    }
-
-    .card-title {
-      font-size: 11px;
-      text-decoration: underline;
-      font-weight: bold;
-      margin-bottom: 12px;
-    }
-
-    .card-value {
-      font-size: 10px;
-      font-weight: bold;
-    }
-
-    .card-blue { background-color: #00a0e9; }
-    .card-green { background-color: #58b036; }
-    .card-orange { background-color: #f37023; }
-    .card-red { background-color: #ff0000; }
-
-    /* DASHBOARD LAYOUT GRID */
-    .dashboard-row {
-      display: flex;
-      gap: 15px;
-      align-items: stretch;
-    }
-
-    .panel-table {
-      flex: 1.6;
-      border: 1px solid #000;
-      background-color: #fff;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .panel-chart {
-      flex: 1;
-      border: 1px solid #d0d0d0;
-      background-color: #fff;
-      padding: 10px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      box-shadow: 1px 1px 2px rgba(0,0,0,0.05);
-    }
-
-    .panel-header {
-      font-weight: bold;
-      font-size: 13px;
-      padding: 4px 8px;
-      border-bottom: 1px solid #000;
-      background-color: #fff;
-      color: #000;
-    }
-
-    .chart-title {
-      font-size: 13px;
-      font-weight: bold;
-      color: #666;
-      margin-bottom: 8px;
-      text-align: center;
-    }
-
-    .chart-container {
-      position: relative;
-      width: 100%;
-      max-width: 220px;
-      height: 170px;
-    }
-
-    /* TABLES */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 10px;
-    }
-
-    th, td {
-      border: 1px solid #000;
-      padding: 3px;
-      text-align: center;
-    }
-
-    th {
-      background-color: #fff;
-      font-weight: bold;
-    }
-
-    .empty-row {
-      height: 18px;
-    }
-
-    .empty-row td {
-      border-style: dashed solid dashed solid;
-    }
-
-    /* Footer */
-    .footer {
-      background-color: #4387c8;
-      color: #fff;
-      padding: 6px 15px;
-      font-size: 11px;
-      font-weight: bold;
-      margin-top: auto;
-    }
-
-    .footer-sub {
-      font-size: 9px;
-      font-weight: normal;
-    }
-  </style>
+  <link rel="stylesheet" href="css/astom.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <script src="js/session.js"></script>
 </head>
 <body>
 
-  <!-- Sidebar -->
-  <div class="sidebar">
+  <!-- ============================================================
+       SIDEBAR
+       ============================================================ -->
+  <aside class="sidebar">
+
     <div class="brand">
       <div class="brand-logo"></div>
       <span>ASTOM</span>
     </div>
 
-    <a href="dashboard.html" class="menu-item-main"><span>🏠</span> DASHBOARD</a>
+    <a href="dashboard.html" class="menu-item-main">
+      <span class="ico ico-home"></span>
+      DASHBOARD
+    </a>
 
     <div class="search-box">
-      <input type="text" placeholder="🔍 Cari menu">
+      <span class="ico ico-search"></span>
+      <input type="text" id="cari-menu" placeholder="Cari menu">
     </div>
 
     <div class="menu-group">
       <div class="menu-title">REGISTER</div>
-      <a href="register-new.html" class="menu-link">NEW</a>
-      <a href="receiving.html" class="menu-link">RECEIVING</a>
-      <a href="#" class="menu-link">RETURN</a>
+      <a href="register.html#new" class="menu-link">NEW</a>
+      <a href="register.html#receiving" class="menu-link">RECEIVING</a>
+      <a href="register.html#return" class="menu-link">RETURN</a>
     </div>
 
     <div class="menu-group">
       <div class="menu-title">MONITORING</div>
-      <a href="#" class="menu-link">GATE</a>
+      <a href="gate.html" class="menu-link">GATE</a>
     </div>
 
     <div class="menu-group">
       <div class="menu-title">REPORT & DOWNLOAD</div>
-      <a href="#" class="menu-link">ALL ASSET</a>
-      <a href="#" class="menu-link">RETURN ASSET</a>
+      <a href="report.html#all" class="menu-link">ALL ASSET</a>
+      <a href="report.html#return" class="menu-link">RETURN ASSET</a>
     </div>
 
     <div class="menu-group">
       <div class="menu-title">SETTING</div>
-      <a href="#" class="menu-link">MASTER USER</a>
-      <a href="#" class="menu-link">MASTER CUSTOMER</a>
-      <a href="#" class="menu-link">MASTER BARANG</a>
+      <a href="master-user.html" class="menu-link">MASTER USER</a>
+      <a href="master-customer.html" class="menu-link">MASTER CUSTOMER</a>
+      <a href="master-barang.html" class="menu-link">MASTER BARANG</a>
     </div>
 
     <div class="menu-group" style="margin-top: 10px;">
       <div class="menu-title">LOG HISTORY</div>
-      <div class="menu-title" style="margin-top: 4px;">LOGOUT</div>
+      <div id="menu-logout" class="menu-title" style="margin-top: 5px; cursor: pointer;">LOGOUT</div>
     </div>
-  </div>
 
-  <!-- Main Content -->
-  <div class="main-content">
+  </aside>
 
-    <!-- Top Header -->
-    <div class="header">
+
+  <!-- ============================================================
+       MAIN CONTENT
+       ============================================================ -->
+  <main class="main-content">
+
+    <!-- HEADER -->
+    <header class="header">
+      <button type="button" id="tombol-menu" class="btn-menu" aria-label="Buka menu" title="Menu"><span class="ico ico-menu"></span></button>
       <div class="header-title">ASSET CUSTOMERS CONTROL MANAGEMENT</div>
       <div class="user-login-container">USER LOGIN</div>
-    </div>
+    </header>
 
-    <!-- Page Content -->
-    <div class="page-content">
 
-      <!-- Summary Cards -->
+    <!-- PAGE -->
+    <section class="page-content">
+
+      <!-- KARTU RINGKASAN (klik untuk membuka menu terkait) -->
       <div class="cards-container">
-        <div class="card card-blue" onclick="window.location.href='receiving.html'">
+
+        <a href="register.html#receiving" class="card card-blue">
           <div class="card-title">ASSET CUSTOMER</div>
+          <div class="card-number" id="card-asset">0</div>
           <div class="card-value">JUMLAH</div>
-        </div>
-        <div class="card card-green">
+        </a>
+
+        <a href="register.html#receiving" class="card card-green">
           <div class="card-title">BC 2.7</div>
+          <div class="card-number" id="card-bc1">0</div>
           <div class="card-value">JUMLAH</div>
-        </div>
-        <div class="card card-orange">
+        </a>
+
+        <a href="register.html#receiving" class="card card-orange">
           <div class="card-title">BC 4.0</div>
+          <div class="card-number" id="card-bc2">0</div>
           <div class="card-value">JUMLAH</div>
-        </div>
-        <div class="card card-red">
+        </a>
+
+        <a href="register.html#return" class="card card-red">
           <div class="card-title">RETURN ASSET</div>
+          <div class="card-number" id="card-return">0</div>
           <div class="card-value">JUMLAH</div>
-        </div>
+        </a>
+
       </div>
 
-      <!-- Section 1: History Pemasukan + Pie Chart Asset Customers -->
+
+      <!-- BARIS 1: History Pemasukan + Pie Chart Asset Customers -->
       <div class="dashboard-row">
+
         <div class="panel-table">
           <div class="panel-header">History Pemasukan</div>
-          <table>
-            <thead>
-              <tr>
-                <th style="width: 6%;">No</th>
-                <th>Dokumen</th>
-                <th>Nama Barang</th>
-                <th>Kode Barang</th>
-                <th>Nomor Pendaftar</th>
-                <th>Tgl. Pendaftar</th>
-                <th>Aset No.</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-              <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-              <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-              <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-              <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-              <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-              <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-            </tbody>
-          </table>
+
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 6%;">No</th>
+                  <th>Dokumen</th>
+                  <th>Nama Barang</th>
+                  <th>Kode Barang</th>
+                  <th>Nomor Pendaftar</th>
+                  <th>Tgl. Pendaftar</th>
+                  <th>Aset No.</th>
+                </tr>
+              </thead>
+              <tbody id="tabel-pemasukan"></tbody>
+            </table>
+          </div>
         </div>
 
         <div class="panel-chart">
           <div class="chart-title">ASSET CUSTOMERS</div>
           <div class="chart-container">
             <canvas id="assetCustomersChart"></canvas>
+            <div class="chart-pesan"></div>
           </div>
         </div>
+
       </div>
 
-      <!-- Section 2: Pie Chart Return Asset + History Pengembalian -->
+
+      <!-- BARIS 2: Pie Chart Return Asset + History Pengembalian -->
       <div class="dashboard-row">
+
         <div class="panel-chart">
           <div class="chart-title">RETURN ASSET</div>
           <div class="chart-container">
             <canvas id="returnAssetChart"></canvas>
+            <div class="chart-pesan"></div>
           </div>
         </div>
 
         <div class="panel-table">
           <div class="panel-header">History Pengembalian</div>
-          <table>
-            <thead>
-              <tr>
-                <th style="width: 6%;">No</th>
-                <th>Dokumen</th>
-                <th>Nama Barang</th>
-                <th>Kode Barang</th>
-                <th>BC No.</th>
-                <th>Tgl. BC</th>
-                <th>Aset No.</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-              <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-              <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-              <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-              <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-              <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-              <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-            </tbody>
-          </table>
+
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 6%;">No</th>
+                  <th>Dokumen</th>
+                  <th>Nama Barang</th>
+                  <th>Kode Barang</th>
+                  <th>BC No.</th>
+                  <th>Tgl. BC</th>
+                  <th>Aset No.</th>
+                </tr>
+              </thead>
+              <tbody id="tabel-pengembalian"></tbody>
+            </table>
+          </div>
         </div>
+
       </div>
 
-    </div>
+    </section>
 
-    <!-- Footer -->
-    <div class="footer">
+
+    <!-- FOOTER -->
+    <footer class="footer">
       PT MURAMOTO ELEKTRONIKA INDONESIA
       <div class="footer-sub">CUSTOMS OPERATIONS & COMPLIANCE DEPT.</div>
-    </div>
+    </footer>
 
-  </div>
+  </main>
 
-  <!-- Chart Configuration Script -->
-  <script>
-    // Chart 1: ASSET CUSTOMERS
-    const ctx1 = document.getElementById('assetCustomersChart').getContext('2d');
-    new Chart(ctx1, {
-      type: 'pie',
-      data: {
-        labels: ['BC 2.7', 'BC 4.0'],
-        datasets: [{
-          data: [94, 6],
-          backgroundColor: ['#175d84', '#e66632'],
-          borderWidth: 0
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            position: 'bottom',
-            labels: {
-              boxWidth: 8,
-              boxHeight: 8,
-              font: { size: 9 },
-              usePointStyle: false
-            }
-          }
-        }
-      }
-    });
 
-    // Chart 2: RETURN ASSET
-    const ctx2 = document.getElementById('returnAssetChart').getContext('2d');
-    new Chart(ctx2, {
-      type: 'pie',
-      data: {
-        labels: ['BC 2.7', 'BC 4.1'],
-        datasets: [{
-          data: [35, 65],
-          backgroundColor: ['#e66632', '#175d84'],
-          borderWidth: 0
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            position: 'bottom',
-            labels: {
-              boxWidth: 8,
-              boxHeight: 8,
-              font: { size: 9 },
-              usePointStyle: false
-            }
-          }
-        }
-      }
-    });
-  </script>
+  <!-- Chart.js (versi dikunci supaya tidak berubah sendiri) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+
+  <!-- JAVASCRIPT -->
+  <script src="js/menu.js"></script>
+  <script src="js/dashboard.js"></script>
 </body>
 </html>

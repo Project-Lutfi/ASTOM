@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="id" data-butuh-login>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ASTOM - Master Customer</title>
+
+  <link rel="stylesheet" href="css/astom.css">
+  <link rel="stylesheet" href="css/master.css">
+
+  <script src="js/session.js"></script>
+</head>
+
+
+<body>
+
+  <!-- =========================================================
+       SIDEBAR
+  ========================================================== -->
+
+  <aside class="sidebar">
+
+    <div class="brand">
+      <div class="brand-logo"></div>
+      <span>ASTOM</span>
+    </div>
+
+    <a href="dashboard.html" class="menu-item-main">
+      <span class="ico ico-home"></span>
+      DASHBOARD
+    </a>
+
+    <div class="search-box">
+      <span class="ico ico-search"></span>
+      <input type="text" id="cari-menu" placeholder="Cari menu">
+    </div>
+
+    <div class="menu-group">
+      <div class="menu-title">REGISTER</div>
+      <a href="register.html#new" class="menu-link">NEW</a>
+      <a href="register.html#receiving" class="menu-link">RECEIVING</a>
+      <a href="register.html#return" class="menu-link">RETURN</a>
+    </div>
+
+    <div class="menu-group">
+      <div class="menu-title">MONITORING</div>
+      <a href="gate.html" class="menu-link">GATE</a>
+    </div>
+
+    <div class="menu-group">
+      <div class="menu-title">REPORT & DOWNLOAD</div>
+      <a href="report.html#all" class="menu-link">ALL ASSET</a>
+      <a href="report.html#return" class="menu-link">RETURN ASSET</a>
+    </div>
+
+    <div class="menu-group">
+      <div class="menu-title">SETTING</div>
+      <a href="master-user.html" class="menu-link">MASTER USER</a>
+      <a href="master-customer.html" class="menu-link">MASTER CUSTOMER</a>
+      <a href="master-barang.html" class="menu-link">MASTER BARANG</a>
+    </div>
+
+    <div class="menu-group" style="margin-top: 10px;">
+      <div class="menu-title">LOG HISTORY</div>
+      <div id="menu-logout" class="menu-title" style="margin-top: 5px; cursor: pointer;">LOGOUT</div>
+    </div>
+
+  </aside>
+
+
+
+  <!-- =========================================================
+       MAIN
+  ========================================================== -->
+
+  <main class="main-content">
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+      <button type="button" id="tombol-menu" class="btn-menu" aria-label="Buka menu" title="Menu">
+        <span class="ico ico-menu"></span>
+      </button>
+
+      <div class="header-title">
+        ASSET CUSTOMERS CONTROL MANAGEMENT
+      </div>
+
+      <div class="user-login-container">
+        USER LOGIN
+      </div>
+
+    </header>
+
+
+
+    <!-- =======================================================
+         PAGE
+    ======================================================== -->
+
+    <section class="page-content master-page">
+
+      <div class="master-page-title">
+        SETTING - MASTER CUSTOMER
+      </div>
+
+
+      <!-- TOOLBAR -->
+
+      <div class="master-toolbar">
+
+        <button type="button" class="master-btn-tambah" onclick="bukaFormTambah()">
+          <span class="ico ico-plus"></span>
+          Tambah
+        </button>
+
+        <div class="master-show-entries">
+          Show
+          <select id="master-show">
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
+          entries
+        </div>
+
+        <div class="master-search">
+          <input type="text" id="master-cari" placeholder="Cari nama / alamat / NPWP...">
+          <button type="button" class="master-search-btn" onclick="renderTabel()">
+            <span class="ico ico-search"></span>
+            Cari
+          </button>
+        </div>
+
+      </div>
+
+
+      <!-- PANEL + TABLE -->
+
+      <div class="master-panel">
+
+        <div class="master-table-wrapper">
+
+          <table id="tabel-customer" class="master-table">
+
+            <thead>
+              <tr>
+                <th>NAMA</th>
+                <th>ALAMAT</th>
+                <th>NPWP</th>
+                <th>STATUS</th>
+                <th>AKSI</th>
+              </tr>
+            </thead>
+
+            <tbody id="tabel-customer-body">
+            </tbody>
+
+          </table>
+
+        </div>
+
+        <div class="master-footer-tabel">
+          <div id="master-info">Menampilkan 0 data</div>
+          <div class="master-pagination" id="master-pagination"></div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+      PT MURAMOTO ELEKTRONIKA INDONESIA
+      <div class="footer-sub">
+        CUSTOMS OPERATIONS & COMPLIANCE DEPT.
+      </div>
+    </footer>
+
+  </main>
+
+
+
+  <!-- =========================================================
+       FORM TAMBAH / EDIT (POPUP)
+  ========================================================== -->
+
+  <div id="customer-form-overlay" class="master-form-overlay" onclick="klikLuarForm(event)">
+
+    <div class="master-form-box">
+
+      <div class="master-form-header">
+        <span id="customer-form-judul">Tambah Customer</span>
+        <button type="button" class="master-form-close" onclick="tutupForm()">
+          <span class="ico ico-x"></span>
+        </button>
+      </div>
+
+      <div class="master-form-body">
+
+        <div class="master-form-field">
+          <label for="customer-nama">Nama</label>
+          <input type="text" id="customer-nama" placeholder="Nama customer">
+        </div>
+
+        <div class="master-form-field">
+          <label for="customer-alamat">Alamat</label>
+          <input type="text" id="customer-alamat" placeholder="Alamat lengkap">
+        </div>
+
+        <div class="master-form-field">
+          <label for="customer-npwp">Npwp</label>
+          <input type="text" id="customer-npwp" placeholder="00.000.000.0-000.000">
+        </div>
+
+        <div class="master-form-field">
+          <label for="customer-status">Status</label>
+          <select id="customer-status">
+            <option value="KB">KB</option>
+            <option value="TLDDP">TLDDP</option>
+          </select>
+        </div>
+
+        <div class="master-form-error" id="customer-form-error"></div>
+
+      </div>
+
+      <div class="master-form-actions">
+        <button type="button" class="master-btn-batal" onclick="tutupForm()">Batal</button>
+        <button type="button" class="master-btn-simpan" onclick="simpanCustomer()">
+          <span class="ico ico-save"></span>
+          Simpan
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =========================================================
+       KONFIRMASI HAPUS
+  ========================================================== -->
+
+  <div id="customer-confirm-overlay" class="master-confirm-overlay">
+
+    <div class="master-confirm-box">
+
+      <div class="master-confirm-text" id="customer-confirm-text">
+        Hapus data customer ini?
+      </div>
+
+      <div class="master-confirm-actions">
+        <button type="button" class="master-btn-batal" onclick="tutupKonfirmasi()">Batal</button>
+        <button type="button" class="master-btn-hapus" style="width:auto; padding:0 16px; font-size:10px; font-weight:bold;" onclick="konfirmasiHapus()">Hapus</button>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <script src="js/menu.js"></script>
+  <script src="js/master-customer.js"></script>
+
+</body>
+
+</html>

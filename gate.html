@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="id" data-butuh-login>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ASTOM - Monitoring Gate</title>
+
+  <link rel="stylesheet" href="css/astom.css">
+  <link rel="stylesheet" href="css/gate.css">
+
+  <script src="js/session.js"></script>
+</head>
+
+
+<body>
+
+  <!-- =========================================================
+       SIDEBAR
+  ========================================================== -->
+
+  <aside class="sidebar">
+
+    <div class="brand">
+      <div class="brand-logo"></div>
+      <span>ASTOM</span>
+    </div>
+
+
+    <a
+      href="dashboard.html"
+      class="menu-item-main">
+
+      <span class="ico ico-home"></span>
+
+      DASHBOARD
+
+    </a>
+
+
+    <div class="search-box">
+
+      <span class="ico ico-search"></span>
+
+      <input
+        type="text"
+        id="cari-menu"
+        placeholder="Cari menu">
+
+    </div>
+
+
+    <div class="menu-group">
+
+      <div class="menu-title">
+        REGISTER
+      </div>
+
+      <a
+        href="register.html#new"
+        class="menu-link">
+        NEW
+      </a>
+
+      <a
+        href="register.html#receiving"
+        class="menu-link">
+        RECEIVING
+      </a>
+
+      <a
+        href="register.html#return"
+        class="menu-link">
+        RETURN
+      </a>
+
+    </div>
+
+
+    <div class="menu-group">
+
+      <div class="menu-title">
+        MONITORING
+      </div>
+
+      <a
+        href="gate.html"
+        class="menu-link">
+        GATE
+      </a>
+
+    </div>
+
+
+    <div class="menu-group">
+
+      <div class="menu-title">
+        REPORT & DOWNLOAD
+      </div>
+
+      <a
+        href="report.html#all"
+        class="menu-link">
+        ALL ASSET
+      </a>
+
+      <a
+        href="report.html#return"
+        class="menu-link">
+        RETURN ASSET
+      </a>
+
+    </div>
+
+
+    <div class="menu-group">
+
+      <div class="menu-title">
+        SETTING
+      </div>
+
+      <a
+        href="master-user.html"
+        class="menu-link">
+        MASTER USER
+      </a>
+
+      <a
+        href="master-customer.html"
+        class="menu-link">
+        MASTER CUSTOMER
+      </a>
+
+      <a
+        href="master-barang.html"
+        class="menu-link">
+        MASTER BARANG
+      </a>
+
+    </div>
+
+
+    <div
+      class="menu-group"
+      style="margin-top:10px;">
+
+      <div class="menu-title">
+        LOG HISTORY
+      </div>
+
+      <div
+        id="menu-logout"
+        class="menu-title"
+        style="margin-top:5px; cursor:pointer;">
+
+        LOGOUT
+
+      </div>
+
+    </div>
+
+  </aside>
+
+
+
+  <!-- =========================================================
+       MAIN
+  ========================================================== -->
+
+  <main class="main-content">
+
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+      <button
+        type="button"
+        id="tombol-menu"
+        class="btn-menu"
+        aria-label="Buka menu"
+        title="Menu">
+
+        <span class="ico ico-menu"></span>
+
+      </button>
+
+
+      <div class="header-title">
+        ASSET CUSTOMERS CONTROL MANAGEMENT
+      </div>
+
+
+      <div class="user-login-container">
+        USER LOGIN
+      </div>
+
+    </header>
+
+
+
+    <!-- =======================================================
+         PAGE
+    ======================================================== -->
+
+    <section class="page-content gate-page">
+
+
+      <!-- JUDUL -->
+
+      <div class="gate-page-title">
+        MONITORING - GATE
+      </div>
+
+
+
+      <!-- =====================================================
+           LIST DOKUMEN
+      ====================================================== -->
+
+      <div class="gate-panel">
+
+
+        <!-- HEADER PANEL -->
+
+        <div class="gate-panel-header">
+
+          <div>
+            LIST DOKUMEN
+          </div>
+
+
+          <button
+            type="button"
+            class="gate-filter-button"
+            onclick="bukaFilter()">
+
+            <span class="gate-filter-icon">⚑</span>
+
+            FILTER
+
+          </button>
+
+        </div>
+
+
+
+        <!-- ===================================================
+             TABLE
+        ==================================================== -->
+
+        <div class="gate-table-wrapper">
+
+          <table
+            id="table-gate"
+            class="gate-table">
+
+
+            <thead>
+
+              <tr>
+
+                <th>SERI</th>
+
+                <th>REG</th>
+
+                <th>KODE DOC</th>
+
+                <th>NOMOR AJU</th>
+
+                <th>RESPON</th>
+
+                <th>NOMOR DAFTAR</th>
+
+                <th>TGL.DAFTAR</th>
+
+                <th>JALUR</th>
+
+                <th>PERUSAHAAN</th>
+
+                <th>STATUS</th>
+
+                <th>AKSI</th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody id="gate-table-body">
+
+            </tbody>
+
+
+          </table>
+
+        </div>
+
+
+      </div>
+
+
+
+    </section>
+
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+      PT MURAMOTO ELEKTRONIKA INDONESIA
+
+      <div class="footer-sub">
+        CUSTOMS OPERATIONS & COMPLIANCE DEPT.
+      </div>
+
+    </footer>
+
+
+  </main>
+
+
+
+  <!-- =========================================================
+       FILTER POPUP
+  ========================================================== -->
+
+  <div
+    id="gate-filter-overlay"
+    class="gate-filter-overlay"
+    onclick="klikLuarFilter(event)">
+
+
+    <div class="gate-filter-box">
+
+
+      <div class="gate-filter-title">
+        Filter Dokumen
+      </div>
+
+
+      <div class="gate-filter-form">
+
+
+        <!-- JENIS DOKUMEN -->
+
+        <div class="gate-filter-field">
+
+          <label for="filter-jenis">
+            Jenis Dokumen
+          </label>
+
+          <input
+            type="text"
+            id="filter-jenis"
+            placeholder="">
+
+        </div>
+
+
+
+        <!-- NOMOR AJU -->
+
+        <div class="gate-filter-field">
+
+          <label for="filter-nomor-aju">
+            Nomor Aju
+          </label>
+
+          <input
+            type="text"
+            id="filter-nomor-aju">
+
+        </div>
+
+
+
+        <!-- NOMOR DAFTAR + TANGGAL -->
+
+        <div class="gate-filter-row">
+
+
+          <div class="gate-filter-field">
+
+            <label for="filter-nomor-daftar">
+              Nomor Daftar
+            </label>
+
+            <input
+              type="text"
+              id="filter-nomor-daftar">
+
+          </div>
+
+
+          <div class="gate-filter-field">
+
+            <label for="filter-tanggal-daftar">
+              Tanggal Daftar
+            </label>
+
+            <input
+              type="date"
+              id="filter-tanggal-daftar">
+
+          </div>
+
+
+        </div>
+
+
+
+        <!-- PERUSAHAAN -->
+
+        <div class="gate-filter-field">
+
+          <label for="filter-perusahaan">
+            Nama Perusahaan
+          </label>
+
+          <input
+            type="text"
+            id="filter-perusahaan">
+
+        </div>
+
+
+
+      </div>
+
+
+
+      <div class="gate-filter-actions">
+
+        <button
+          type="button"
+          class="gate-filter-submit"
+          onclick="terapkanFilter()">
+
+          Submit
+
+        </button>
+
+
+        <button
+          type="button"
+          class="gate-filter-reset"
+          onclick="resetFilter()">
+
+          Reset
+
+        </button>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =========================================================
+       MODAL DOC
+  ========================================================== -->
+
+  <div
+    id="gate-doc-overlay"
+    class="gate-doc-overlay"
+    onclick="klikLuarDoc(event)">
+
+
+    <div class="gate-doc-box">
+
+
+      <div class="gate-doc-header">
+
+        <div id="gate-doc-title">
+          DOCUMENT
+        </div>
+
+
+        <button
+          type="button"
+          class="gate-doc-close"
+          onclick="tutupDoc()">
+
+          ×
+
+        </button>
+
+      </div>
+
+
+      <div
+        id="gate-doc-content"
+        class="gate-doc-content">
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =========================================================
+       JAVASCRIPT
+  ========================================================== -->
+
+  <script src="js/menu.js"></script>
+  <script src="js/gate.js"></script>
+
+</body>
+
+</html>
