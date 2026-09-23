@@ -1,0 +1,97 @@
+/* ==========================================================
+   REPORT & DOWNLOAD (ALL ASSET / RETURN ASSET)
+   Dipakai bersama dengan css/astom.css
+   ========================================================== */
+
+/* Ikon download (tombol Excel) */
+.ico-download {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4'/%3E%3Cpolyline points='7 10 12 15 17 10'/%3E%3Cline x1='12' y1='15' x2='12' y2='3'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4'/%3E%3Cpolyline points='7 10 12 15 17 10'/%3E%3Cline x1='12' y1='15' x2='12' y2='3'/%3E%3C/svg%3E");
+}
+
+/* Tombol hijau (Excel) */
+.btn-green {
+  background: #3f9142;
+}
+
+.btn-green:hover {
+  background: #327836;
+}
+
+/* Baris toolbar: Periode Tanggal + Excel (kiri) - Cari (kanan) */
+.report-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.report-toolbar .periode-group {
+  flex-wrap: wrap;
+}
+
+.periode-sd {
+  font-size: 11px;
+  font-weight: bold;
+}
+
+/* Kolom Uraian Barang disorot, meniru tampilan Excel yang dilampirkan */
+th.kolom-sorot {
+  background: #fdf6b2;
+}
+
+/* Baris tabel ikut disorot lembut supaya konsisten dengan header */
+#table-all tbody td:nth-child(5),
+#table-return tbody td:nth-child(5) {
+  background: #fffceb;
+}
+
+/* Baris yang sedang disembunyikan oleh filter periode / pencarian */
+.tersembunyi-periode,
+.tersembunyi-cari {
+  display: none;
+}
+
+.report-footer {
+  margin-top: 8px;
+  font-size: 10px;
+  color: #555;
+  text-align: right;
+}
+
+/* Batas tinggi tabel supaya bisa scroll saat datanya banyak */
+.table-scroll {
+  max-height: 62vh;
+  overflow-y: auto;
+}
+
+.table-scroll thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+@media (max-width: 768px) {
+
+  .report-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .report-toolbar .search-group {
+    justify-content: stretch;
+  }
+
+  .report-toolbar .search-group input {
+    flex: 1;
+    width: auto;
+  }
+
+}

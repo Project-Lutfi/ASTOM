@@ -1,0 +1,937 @@
+/* ==========================================================
+   GATE PAGE
+========================================================== */
+
+.gate-page {
+  position: relative;
+  overflow: visible;
+}
+
+
+.gate-page-title {
+  display: inline-block;
+
+  background: #edf1ee;
+
+  font-size: 13px;
+  font-weight: bold;
+
+  padding: 2px 5px;
+
+  margin-bottom: 38px;
+}
+
+
+
+/* ==========================================================
+   PANEL
+========================================================== */
+
+.gate-panel {
+  width: 100%;
+  background: #fff;
+}
+
+
+.gate-panel-header {
+
+  height: 33px;
+
+  background: #d2e1f0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 0 14px 0 5px;
+
+  font-size: 10px;
+
+  font-weight: bold;
+}
+
+
+
+/* ==========================================================
+   FILTER BUTTON
+========================================================== */
+
+.gate-filter-button {
+
+  height: 26px;
+
+  min-width: 54px;
+
+  background: #fff;
+
+  border: 1px solid #c7c7c7;
+
+  border-radius: 3px;
+
+  font-size: 8px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  padding: 0 8px;
+}
+
+
+.gate-filter-button:hover {
+  background: #f2f2f2;
+}
+
+
+.gate-filter-icon {
+  font-size: 9px;
+  margin-right: 3px;
+}
+
+
+
+/* ==========================================================
+   TABLE
+========================================================== */
+
+.gate-table-wrapper {
+
+  width: 100%;
+
+  overflow-x: auto;
+
+  background: #fff;
+}
+
+
+.gate-table {
+
+  width: 100%;
+
+  min-width: 1050px;
+
+  border-collapse: collapse;
+
+  table-layout: auto;
+
+  font-size: 9px;
+
+  background: #fff;
+}
+
+
+.gate-table th {
+
+  height: 40px;
+
+  padding: 5px 7px;
+
+  border: none;
+
+  background: #fff;
+
+  font-size: 8px;
+
+  font-weight: normal;
+
+  white-space: nowrap;
+
+  text-align: center;
+
+  vertical-align: middle;
+}
+
+
+.gate-table td {
+
+  height: 32px;
+
+  padding: 4px 7px;
+
+  border: none;
+
+  border-top: 1px solid #edf0ed;
+
+  background: #fff;
+
+  text-align: center;
+
+  white-space: nowrap;
+
+  vertical-align: middle;
+}
+
+
+.gate-table tbody tr:first-child td {
+  background: #edf1ee;
+}
+
+
+.gate-table tbody tr:hover td {
+  background: #f4f8fb;
+}
+
+
+
+/* ==========================================================
+   COLUMN WIDTH
+========================================================== */
+
+.gate-table th:nth-child(1),
+.gate-table td:nth-child(1) {
+  width: 45px;
+}
+
+
+.gate-table th:nth-child(2),
+.gate-table td:nth-child(2) {
+  width: 45px;
+}
+
+
+.gate-table th:nth-child(3),
+.gate-table td:nth-child(3) {
+  min-width: 85px;
+}
+
+
+.gate-table th:nth-child(4),
+.gate-table td:nth-child(4) {
+  min-width: 110px;
+}
+
+
+.gate-table th:nth-child(5),
+.gate-table td:nth-child(5) {
+  min-width: 100px;
+}
+
+
+.gate-table th:nth-child(6),
+.gate-table td:nth-child(6) {
+  min-width: 110px;
+}
+
+
+.gate-table th:nth-child(7),
+.gate-table td:nth-child(7) {
+  min-width: 90px;
+}
+
+
+.gate-table th:nth-child(8),
+.gate-table td:nth-child(8) {
+  min-width: 65px;
+}
+
+
+.gate-table th:nth-child(9),
+.gate-table td:nth-child(9) {
+  min-width: 130px;
+}
+
+
+.gate-table th:nth-child(10),
+.gate-table td:nth-child(10) {
+  min-width: 75px;
+}
+
+
+.gate-table th:nth-child(11),
+.gate-table td:nth-child(11) {
+  min-width: 80px;
+}
+
+
+
+/* ==========================================================
+   RESPONSE
+========================================================== */
+
+.gate-respon {
+
+  display: inline-block;
+
+  padding: 4px 8px;
+
+  border-radius: 3px;
+
+  font-size: 8px;
+
+  font-weight: bold;
+}
+
+
+.gate-respon-belum {
+  background: #edf1ee;
+  color: #555;
+}
+
+
+.gate-respon-sesuai {
+  background: #d9f3d1;
+  color: #28731c;
+}
+
+
+.gate-respon-tidak {
+  background: #ffd6d6;
+  color: #c00000;
+}
+
+
+
+/* ==========================================================
+   JALUR
+========================================================== */
+
+.gate-jalur {
+
+  display: inline-block;
+
+  min-width: 38px;
+
+  padding: 4px 7px;
+
+  border-radius: 3px;
+
+  color: #fff;
+
+  font-size: 8px;
+
+  font-weight: bold;
+}
+
+
+.gate-jalur-hijau {
+  background: #2e8b1e;
+}
+
+
+.gate-jalur-kuning {
+  background: #e4b800;
+  color: #000;
+}
+
+
+.gate-jalur-merah {
+  background: #c00000;
+}
+
+
+
+/* ==========================================================
+   STATUS ICON
+========================================================== */
+
+.gate-status-button {
+
+  width: 45px;
+
+  height: 42px;
+
+  border: 1px solid #7c8c8e;
+
+  border-radius: 5px;
+
+  background: #fff;
+
+  cursor: pointer;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-direction: column;
+
+  gap: 1px;
+}
+
+
+.gate-status-button:hover {
+  background: #eef5fa;
+}
+
+.gate-status-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+  background: #f4f4f4;
+}
+
+
+.gate-sync-icon {
+
+  font-size: 21px;
+
+  line-height: 20px;
+}
+
+
+.gate-status-button span:last-child {
+
+  font-size: 7px;
+
+  font-weight: bold;
+}
+
+
+
+/* ==========================================================
+   DOC BUTTON
+========================================================== */
+
+.gate-doc-button {
+
+  min-width: 43px;
+
+  height: 24px;
+
+  border: none;
+
+  border-radius: 4px;
+
+  background: #e00000;
+
+  color: #fff;
+
+  font-size: 9px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+
+.gate-doc-button:hover {
+  background: #b90000;
+}
+
+
+
+/* ==========================================================
+   EMPTY
+========================================================== */
+
+.gate-empty {
+
+  height: 80px !important;
+
+  color: #888;
+
+  font-size: 10px;
+
+  text-align: center !important;
+}
+
+
+
+/* ==========================================================
+   FILTER OVERLAY
+========================================================== */
+
+.gate-filter-overlay {
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 1000;
+
+  display: none;
+
+  background: transparent;
+}
+
+
+.gate-filter-overlay.active {
+  display: block;
+}
+
+
+.gate-filter-box {
+
+  position: absolute;
+
+  top: 183px;
+
+  right: 68px;
+
+  width: 230px;
+
+  background: #fff;
+
+  border: 1px solid #d1d1d1;
+
+  border-radius: 32px;
+
+  padding: 22px 9px 18px;
+
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+
+
+.gate-filter-title {
+
+  font-size: 11px;
+
+  font-weight: bold;
+
+  margin-bottom: 18px;
+}
+
+
+.gate-filter-form {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+}
+
+
+.gate-filter-field {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+
+.gate-filter-field label {
+
+  font-size: 9px;
+
+  font-weight: normal;
+}
+
+
+.gate-filter-field input {
+
+  width: 100%;
+
+  height: 25px;
+
+  border: 1px solid #bfc5c8;
+
+  border-radius: 3px;
+
+  padding: 3px 6px;
+
+  font-size: 9px;
+
+  outline: none;
+}
+
+
+.gate-filter-field input:focus {
+  border-color: #179bd7;
+}
+
+
+.gate-filter-row {
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 4px;
+}
+
+
+.gate-filter-actions {
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 6px;
+
+  margin-top: 17px;
+}
+
+
+.gate-filter-submit {
+
+  min-width: 58px;
+
+  height: 27px;
+
+  border: none;
+
+  border-radius: 5px;
+
+  background: #179bd7;
+
+  color: #fff;
+
+  font-size: 9px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+
+.gate-filter-submit:hover {
+  background: #0c85bd;
+}
+
+
+.gate-filter-reset {
+
+  min-width: 58px;
+
+  height: 27px;
+
+  border: 1px solid #aaa;
+
+  border-radius: 5px;
+
+  background: #fff;
+
+  color: #555;
+
+  font-size: 9px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+
+
+/* ==========================================================
+   DOC POPUP
+========================================================== */
+
+.gate-doc-overlay {
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 1100;
+
+  display: none;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: rgba(0,0,0,.35);
+}
+
+
+.gate-doc-overlay.active {
+  display: flex;
+}
+
+
+.gate-doc-box {
+
+  width: 760px;
+
+  max-width: 92vw;
+
+  max-height: 88vh;
+
+  overflow-y: auto;
+
+  background: #fff;
+
+  border: 2px solid #24588a;
+
+  box-shadow: 0 5px 18px rgba(0,0,0,.25);
+}
+
+
+.gate-doc-header {
+
+  height: 40px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 0 12px;
+
+  background: #d2e1f0;
+
+  color: #24588a;
+
+  font-size: 12px;
+
+  font-weight: bold;
+}
+
+
+.gate-doc-close {
+
+  width: 28px;
+
+  height: 28px;
+
+  border: none;
+
+  background: #e00000;
+
+  color: #fff;
+
+  border-radius: 3px;
+
+  font-size: 20px;
+
+  line-height: 20px;
+
+  cursor: pointer;
+}
+
+
+.gate-doc-content {
+
+  padding: 15px;
+
+  font-size: 10px;
+}
+
+
+.gate-doc-section-title {
+
+  margin: 12px 0 7px;
+
+  padding: 6px 8px;
+
+  background: #d2e1f0;
+
+  color: #173b5c;
+
+  font-weight: bold;
+}
+
+
+.gate-doc-grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 7px;
+}
+
+
+.gate-doc-field {
+
+  min-width: 0;
+}
+
+
+.gate-doc-label {
+
+  font-size: 8px;
+
+  color: #555;
+
+  margin-bottom: 3px;
+}
+
+
+.gate-doc-value {
+
+  min-height: 27px;
+
+  padding: 5px 6px;
+
+  border: 1px solid #c8d1d8;
+
+  background: #fff;
+
+  font-size: 9px;
+
+  word-break: break-word;
+}
+
+
+.gate-doc-note {
+
+  margin-top: 10px;
+
+  padding: 8px;
+
+  background: #f5f7f9;
+
+  border: 1px solid #d9e0e5;
+
+  line-height: 1.5;
+}
+
+
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width: 900px) {
+
+  .gate-page-title {
+    margin-bottom: 25px;
+  }
+
+
+  .gate-panel-header {
+    padding-right: 8px;
+  }
+
+
+  .gate-filter-box {
+
+    top: 100px;
+
+    right: 15px;
+
+    width: 280px;
+
+    max-width: calc(100vw - 30px);
+
+  }
+
+
+  .gate-doc-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .gate-page {
+    padding: 10px;
+  }
+
+
+  .gate-page-title {
+    font-size: 12px;
+  }
+
+
+  .gate-table {
+    min-width: 1050px;
+  }
+
+
+  .gate-filter-box {
+
+    top: 80px;
+
+    right: 10px;
+
+    left: 10px;
+
+    width: auto;
+
+  }
+
+
+  .gate-doc-box {
+    max-width: 95vw;
+  }
+
+
+  .gate-doc-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+/* ==========================================================
+   CEISA 4.0 STATUS & BADGES
+========================================================== */
+
+/* Status Badge CEISA pada Tabel Gate */
+.gate-ceisa-badge {
+  display: inline-block;
+  padding: 3px 6px;
+  border-radius: 3px;
+  font-size: 8px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* CEISA Verified (Sesuai/Terdaftar) */
+.gate-ceisa-verified {
+  background: #d9f3d1;
+  color: #28731c;
+  border: 1px solid #b2e2a4;
+}
+
+/* CEISA Rejected / Mismatch */
+.gate-ceisa-rejected {
+  background: #ffd6d6;
+  color: #c00000;
+  border: 1px solid #f2a8a8;
+}
+
+/* CEISA Pending / Menunggu Verifikasi */
+.gate-ceisa-pending {
+  background: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeeba;
+}
+
+
+/* ==========================================================
+   CEISA ACTION BUTTON & LOADING
+========================================================== */
+
+/* Tombol Cek CEISA di Kolom Aksi */
+.gate-btn-ceisa {
+  height: 22px;
+  padding: 0 7px;
+  border: 1px solid #179bd7;
+  border-radius: 3px;
+  background: #fff;
+  color: #179bd7;
+  font-size: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.gate-btn-ceisa:hover {
+  background: #179bd7;
+  color: #fff;
+}
+
+.gate-btn-ceisa:disabled {
+  border-color: #ccc;
+  background: #eee;
+  color: #888;
+  cursor: not-allowed;
+}
+
+/* Indikator Loading Spinner Halus */
+.gate-loading-spinner {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border: 2px solid rgba(23, 155, 215, 0.3);
+  border-radius: 50%;
+  border-top-color: #179bd7;
+  animation: spin 0.8s linear infinite;
+  vertical-align: middle;
+  margin-right: 3px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

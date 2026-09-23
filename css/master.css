@@ -1,0 +1,561 @@
+/* ==========================================================
+   MASTER PAGE (dipakai bersama oleh master-user.html,
+   master-customer.html, master-barang.html)
+   ========================================================== */
+
+.master-page {
+  position: relative;
+}
+
+.master-page-title {
+  display: inline-block;
+  background: #edf1ee;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 2px 5px;
+  margin-bottom: 15px;
+}
+
+
+/* ==========================================================
+   TOOLBAR (tombol Tambah, Show entries, Cari)
+   ========================================================== */
+
+.master-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.master-btn-tambah {
+  height: 30px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 4px;
+  background: #2e8b1e;
+  color: #fff;
+  font-size: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.master-btn-tambah:hover {
+  background: #256f18;
+}
+
+.master-btn-tambah .ico {
+  width: 11px;
+  height: 11px;
+}
+
+.master-show-entries {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+}
+
+.master-show-entries select {
+  height: 26px;
+  border: 1px solid #bfc5c8;
+  border-radius: 3px;
+  padding: 0 6px;
+  font-size: 10px;
+  outline: none;
+}
+
+.master-search {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.master-search input {
+  height: 26px;
+  width: 190px;
+  max-width: 55vw;
+  border: 1px solid #bfc5c8;
+  border-radius: 3px;
+  padding: 0 8px;
+  font-size: 10px;
+  outline: none;
+}
+
+.master-search input:focus {
+  border-color: #179bd7;
+}
+
+.master-search-btn {
+  height: 26px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 3px;
+  background: #179bd7;
+  color: #fff;
+  font-size: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.master-search-btn:hover {
+  background: #0c85bd;
+}
+
+.master-search-btn .ico {
+  width: 11px;
+  height: 11px;
+}
+
+
+/* ==========================================================
+   PANEL & TABLE
+   ========================================================== */
+
+.master-panel {
+  width: 100%;
+  background: #fff;
+}
+
+.master-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  background: #fff;
+  border: 1px solid #e3e8ec;
+}
+
+.master-table {
+  width: 100%;
+  min-width: 620px;
+  border-collapse: collapse;
+  font-size: 10px;
+  background: #fff;
+}
+
+.master-table th {
+  height: 36px;
+  padding: 6px 8px;
+  background: #d2e1f0;
+  color: #173b5c;
+  font-size: 9px;
+  font-weight: bold;
+  white-space: nowrap;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.master-table td {
+  height: 34px;
+  padding: 5px 8px;
+  border-top: 1px solid #edf0ed;
+  background: #fff;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.master-table tbody tr:hover td {
+  background: #f4f8fb;
+}
+
+.master-table .kolom-kiri {
+  text-align: left;
+}
+
+.master-empty {
+  height: 70px !important;
+  color: #888;
+  font-size: 10px;
+  text-align: center !important;
+}
+
+
+/* ==========================================================
+   BADGE STATUS
+   ========================================================== */
+
+.master-badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 3px;
+  font-size: 8px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.master-badge-aktif {
+  background: #d9f3d1;
+  color: #28731c;
+}
+
+.master-badge-nonaktif {
+  background: #ffd6d6;
+  color: #c00000;
+}
+
+.master-badge-admin {
+  background: #d2e1f0;
+  color: #173b5c;
+}
+
+.master-badge-user {
+  background: #edf1ee;
+  color: #555;
+}
+
+
+/* ==========================================================
+   AKSI (EDIT / HAPUS)
+   ========================================================== */
+
+.master-aksi {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+}
+
+.master-btn-edit,
+.master-btn-hapus {
+  width: 26px;
+  height: 26px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.master-btn-edit {
+  background: #f2a900;
+}
+
+.master-btn-edit:hover {
+  background: #d99400;
+}
+
+.master-btn-hapus {
+  background: #e00000;
+}
+
+.master-btn-hapus:hover {
+  background: #b90000;
+}
+
+.master-btn-edit .ico,
+.master-btn-hapus .ico {
+  width: 12px;
+  height: 12px;
+}
+
+
+/* ==========================================================
+   PAGINATION & INFO
+   ========================================================== */
+
+.master-footer-tabel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+  font-size: 9px;
+  color: #555;
+}
+
+.master-pagination {
+  display: flex;
+  gap: 4px;
+}
+
+.master-pagination button {
+  min-width: 24px;
+  height: 24px;
+  border: 1px solid #bfc5c8;
+  border-radius: 3px;
+  background: #fff;
+  font-size: 9px;
+  cursor: pointer;
+}
+
+.master-pagination button:hover {
+  background: #f2f2f2;
+}
+
+.master-pagination button.aktif {
+  background: #179bd7;
+  border-color: #179bd7;
+  color: #fff;
+  font-weight: bold;
+}
+
+.master-pagination button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+
+/* ==========================================================
+   MODAL FORM (Tambah / Edit)
+   ========================================================== */
+
+.master-form-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, .35);
+}
+
+.master-form-overlay.active {
+  display: flex;
+}
+
+.master-form-box {
+  width: 440px;
+  max-width: 92vw;
+  max-height: 88vh;
+  overflow-y: auto;
+  background: #fff;
+  border: 2px solid #24588a;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, .25);
+}
+
+.master-form-header {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  background: #d2e1f0;
+  color: #24588a;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.master-form-close {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: #e00000;
+  color: #fff;
+  border-radius: 3px;
+  font-size: 16px;
+  line-height: 16px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.master-form-close:hover {
+  background: #b90000;
+}
+
+.master-form-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.master-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.master-form-field label {
+  font-size: 10px;
+  font-weight: bold;
+  color: #333;
+}
+
+.master-form-field .ket {
+  font-weight: normal;
+  color: #888;
+  font-size: 9px;
+}
+
+.master-form-field input[type="text"],
+.master-form-field input[type="email"],
+.master-form-field input[type="password"],
+.master-form-field select {
+  height: 30px;
+  border: 1px solid #bfc5c8;
+  border-radius: 3px;
+  padding: 0 8px;
+  font-size: 10px;
+  outline: none;
+  background: #fff;
+}
+
+.master-form-field input:disabled {
+  background: #f2f2f2;
+  color: #777;
+}
+
+.master-form-field input:focus,
+.master-form-field select:focus {
+  border-color: #179bd7;
+}
+
+.master-form-field .pw-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.master-form-field .pw-wrapper input {
+  width: 100%;
+  padding-right: 32px;
+}
+
+.master-pw-toggle {
+  position: absolute;
+  right: 6px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #777;
+  display: inline-flex;
+  padding: 4px;
+}
+
+.master-form-error {
+  font-size: 9px;
+  color: #c00000;
+  display: none;
+}
+
+.master-form-error.tampil {
+  display: block;
+}
+
+.master-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 12px 16px;
+  border-top: 1px solid #e3e8ec;
+}
+
+.master-btn-batal {
+  height: 30px;
+  padding: 0 16px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  background: #fff;
+  color: #555;
+  font-size: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.master-btn-batal:hover {
+  background: #f2f2f2;
+}
+
+.master-btn-simpan {
+  height: 30px;
+  padding: 0 18px;
+  border: none;
+  border-radius: 4px;
+  background: #179bd7;
+  color: #fff;
+  font-size: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.master-btn-simpan:hover {
+  background: #0c85bd;
+}
+
+.master-btn-simpan .ico {
+  width: 11px;
+  height: 11px;
+}
+
+
+/* ==========================================================
+   KONFIRMASI HAPUS
+   ========================================================== */
+
+.master-confirm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, .35);
+}
+
+.master-confirm-overlay.active {
+  display: flex;
+}
+
+.master-confirm-box {
+  width: 300px;
+  max-width: 90vw;
+  background: #fff;
+  border-radius: 6px;
+  padding: 18px;
+  text-align: center;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, .25);
+}
+
+.master-confirm-text {
+  font-size: 11px;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.master-confirm-actions {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+@media (max-width: 700px) {
+
+  .master-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .master-search {
+    width: 100%;
+  }
+
+  .master-search input {
+    width: 100%;
+    max-width: none;
+    flex: 1;
+  }
+
+  .master-form-box {
+    width: 94vw;
+  }
+
+}
